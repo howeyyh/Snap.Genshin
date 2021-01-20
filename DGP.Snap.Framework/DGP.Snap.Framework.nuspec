@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>DGP.Snap.Framework</title>
+    <authors>DGP Studio</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>Snap Framework</description>
+    <releaseNotes>Snap Framework base version</releaseNotes>
+    <copyright>$copyright$</copyright>
+  </metadata>
+</package>

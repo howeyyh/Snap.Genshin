@@ -1,0 +1,17 @@
+﻿<Page x:Class="DGP.Genshin.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DGP.Genshin.Pages" xmlns:controls="clr-namespace:DGP.Genshin.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+    <Page.Resources>
+        <ResourceDictionary Source="/DGP.Genshin;component/Data/CharacterDictionary.xaml"/>
+    </Page.Resources>
+    <Grid>
+        <TextBlock Text="{Binding DayOfWeekText}" Style="{StaticResource TitleTextBlockStyle}"/>
+        <controls:CharacterIcon Character="{StaticResource Albedo}"></controls:CharacterIcon>
+    </Grid>
+</Page>

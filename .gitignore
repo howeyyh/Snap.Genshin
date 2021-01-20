@@ -3,3 +3,12 @@
 ################################################################################
 
 /DGP.Genshin/bin/Debug
+/.vs
+/DGP.Snap.Framework/bin
+/DGP.Snap.GenshinImpact.GachaStatistics/bin
+/DGP.Snap.Test/bin
+/DGP.Snap.Test/obj
+/DGP.Snap.Launcher/obj
+/DGP.Genshin/obj
+/DGP.Snap.Framework/obj
+/DGP.Snap.GenshinImpact.GachaStatistics/obj

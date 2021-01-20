@@ -1,0 +1,49 @@
+﻿<Window x:Class="DGP.Genshin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DGP.Genshin"
+        xmlns:ui="http://schemas.modernwpf.com/2019" 
+        xmlns:helper="clr-namespace:DGP.Genshin.Helper" 
+        xmlns:pages="clr-namespace:DGP.Genshin.Pages"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        ui:TitleBar.ExtendViewIntoTitleBar="True"
+        mc:Ignorable="d"
+        Title="原神" 
+        MinWidth="1400"
+        MinHeight="786"
+        Height="786" 
+        Width="1400">
+    <Grid>
+        <Rectangle StrokeThickness="0"/>
+        <ui:NavigationView 
+            x:Name="NavView" 
+            OpenPaneLength="160" 
+            IsBackButtonVisible="Collapsed" 
+            PaneDisplayMode="Auto" 
+            ItemInvoked="OnItemInvoked">
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem Content="首页" Icon="Home" helper:NavHelper.NavigateTo="{x:Type pages:HomePage}"/>
+                <ui:NavigationViewItem Content="日常" helper:NavHelper.NavigateTo="{x:Type pages:DailyMaterialPage}">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="Data/Images/Materials/Talent/philosophies_of_ballad.png" ShowAsMonochrome="False"/>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+                <ui:NavigationViewItem Content="周常" helper:NavHelper.NavigateTo="{x:Type pages:WeeklyMaterialPage}">
+                    <ui:NavigationViewItem.Icon>
+                        <ui:BitmapIcon UriSource="Data/Images/Monsters/Bosses/childe.png" ShowAsMonochrome="False"/>
+                    </ui:NavigationViewItem.Icon>
+                </ui:NavigationViewItem>
+            </ui:NavigationView.MenuItems>
+            
+            <ui:Frame x:Name="ContentFrame">
+                <ui:Frame.ContentTransitions>
+                    <ui:TransitionCollection>
+                        <ui:NavigationThemeTransition/>
+                    </ui:TransitionCollection>
+                </ui:Frame.ContentTransitions>
+            </ui:Frame>
+        </ui:NavigationView>
+    </Grid>
+</Window>

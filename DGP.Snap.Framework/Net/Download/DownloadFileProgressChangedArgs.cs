@@ -1,0 +1,33 @@
+﻿using System.ComponentModel;
+
+namespace DGP.Snap.Framework.Net.Download
+{
+    /// <summary>
+    /// DownloadFileProgressChanged event args
+    /// </summary>
+    public class DownloadFileProgressChangedArgs : ProgressChangedEventArgs
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DownloadFileProgressChangedArgs" /> class.
+        /// </summary>
+        /// <param name="progressPercentage">Progress percentage</param>
+        /// <param name="bytesReceived">Bytes received so far</param>
+        /// <param name="totalBytesToReceive">Total bytes to receive</param>
+        public DownloadFileProgressChangedArgs(int progressPercentage, long bytesReceived, long totalBytesToReceive)
+            : base(progressPercentage, null)
+        {
+            this.BytesReceived = bytesReceived;
+            this.TotalBytesToReceive = totalBytesToReceive;
+        }
+
+        /// <summary>
+        /// Gets the bytes received so far
+        /// </summary>
+        public long BytesReceived { get; private set; }
+
+        /// <summary>
+        /// Gets the total bytes to receive
+        /// </summary>
+        public long TotalBytesToReceive { get; private set; }
+    }
+}
