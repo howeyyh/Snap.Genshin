@@ -48,7 +48,7 @@
         <Rectangle Grid.Column="8" Grid.RowSpan="10" Fill="#10F3CA12"/>
         <Rectangle Grid.Column="9" Grid.ColumnSpan="4" Grid.RowSpan="10" Fill="#1039F70E"/>
 
-        <controls:CharacterIcon Grid.Column="2" Grid.ColumnSpan="2" Source="/DGP.Genshin;component/Data/Images/Icons/claymore.png" Character="双手剑"/>
+        <!--<controls:CharacterIcon Grid.Column="2" Grid.ColumnSpan="2" Source="/DGP.Genshin;component/Data/Images/Icons/claymore.png" Character="双手剑"/>
         <controls:CharacterIcon Grid.Column="4" Grid.ColumnSpan="2" Source="/DGP.Genshin;component/Data/Images/Icons/sword.png" Character="单手剑"/>
         <controls:CharacterIcon Grid.Column="6" Grid.ColumnSpan="2" Source="/DGP.Genshin;component/Data/Images/Icons/bow.png" Character="弓"/>
         <controls:CharacterIcon Grid.Column="8" Source="/DGP.Genshin;component/Data/Images/Icons/polearm.png" Character="长柄武器"/>
@@ -110,6 +110,6 @@
 
         <controls:CharacterIcon Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="9" Source="/DGP.Genshin;component/Data/Images/Characters/xinyan.png" Character="辛焱" Star="4"/>
         <controls:CharacterIcon Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="9" Source="/DGP.Genshin;component/Data/Images/Characters/albedo.png" Character="阿贝多" Star="5"/>
-        <controls:CharacterIcon Grid.Column="8" Grid.Row="9" Source="/DGP.Genshin;component/Data/Images/Characters/zhongli.png" Character="钟离" Star="5"/>
+        <controls:CharacterIcon Grid.Column="8" Grid.Row="9" Source="/DGP.Genshin;component/Data/Images/Characters/zhongli.png" Character="钟离" Star="5"/>-->
     </Grid>
 </UserControl>

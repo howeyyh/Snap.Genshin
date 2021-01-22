@@ -9,5 +9,6 @@
       Title="DialyMaterialPage">
 
     <Grid>
+        <TextBlock Text="this is daily page"/>
     </Grid>
 </Page>

@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGP.Snap.Test", "DGP.Snap.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGP.Genshin", "DGP.Genshin\DGP.Genshin.csproj", "{FBD79451-A168-49A9-9E61-00F0E9C464D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DGP.Snap.Launcher", "DGP.Snap.Launcher\DGP.Snap.Launcher.csproj", "{9CD13793-E567-4DAA-B5FF-EC256E033B34}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{FBD79451-A168-49A9-9E61-00F0E9C464D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBD79451-A168-49A9-9E61-00F0E9C464D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBD79451-A168-49A9-9E61-00F0E9C464D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CD13793-E567-4DAA-B5FF-EC256E033B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CD13793-E567-4DAA-B5FF-EC256E033B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CD13793-E567-4DAA-B5FF-EC256E033B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CD13793-E567-4DAA-B5FF-EC256E033B34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

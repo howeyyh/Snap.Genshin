@@ -12,11 +12,11 @@ namespace DGP.Snap.Test
             // Attach to events of interest:
             FiddlerApplication.AfterSessionComplete += session => Console.WriteLine(session.fullUrl);
             // Start:
-            FiddlerApplication.Startup(8888,true,false);
+            FiddlerApplication.Startup(8888, true, false);
             Console.ReadLine();
             // Shutdown:
             FiddlerApplication.Shutdown();
-            
+
         }
     }
 }

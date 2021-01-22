@@ -19,7 +19,7 @@ namespace DGP.Snap.Framework.Device.File
         public async Task WriteAsync(string str)
         {
             using (StreamWriter sw = new StreamWriter(this.path))
-            {               
+            {
                 await sw.WriteAsync(str);
             }
         }

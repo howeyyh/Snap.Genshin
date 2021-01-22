@@ -1,6 +1,8 @@
-﻿namespace DGP.Genshin.Data
+﻿using System;
+
+namespace DGP.Genshin.Data
 {
-    internal class Weapon
+    public class Weapon
     {
         public uint ATK { get; set; }
         public SubStatType SubStat { get; set; }
@@ -8,10 +10,14 @@
         public MaterialGroup MaterialGroup { get; set; }
         public WeaponType Type { get; set; }
         public SpecialAbility SpecialAbility { get; set; }
-
+        public Uri ImageUri { get; set; }
+        public string WeaponName { get; set; }
+        public int Star { get; set; } = 1;
+        public WeaponMaterialType Material { get; set; }
+        public bool IsReleased { get; set; } = true;
     }
 
-    internal enum SubStatType
+    public enum SubStatType
     {
         None,
         ElementalMastery,
@@ -21,7 +27,7 @@
         DEFPercent,
         CRITDMGPercent,
         EnergyRechargePercent,
-        CRITRatePercent,	
+        CRITRatePercent,
     }
 
     public enum WeaponType
@@ -31,5 +37,16 @@
         Bow,
         Polearm,
         Catalyst,
+    }
+
+    public enum WeaponMaterialType
+    {
+        All=0,
+        Decarabians = 1,
+        Boreal = 2,
+        DandelionGladiator = 3,
+        Guyun = 4,
+        MistVeiled = 5,
+        Aerosiderite = 6
     }
 }

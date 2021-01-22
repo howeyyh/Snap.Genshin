@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,7 +62,18 @@
     </Compile>
     <Compile Include="Controls\Converters\StarToImageSourceConverter.cs" />
     <Compile Include="Controls\Converters\UriToImageSourceConverter.cs" />
+    <Compile Include="Controls\TalentMaterialPresenter.xaml.cs">
+      <DependentUpon>TalentMaterialPresenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WeaponIcon.xaml.cs">
+      <DependentUpon>WeaponIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WeaponMaterialPresenter.xaml.cs">
+      <DependentUpon>WeaponMaterialPresenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Element.cs" />
     <Compile Include="Helper\NavHelper.cs" />
+    <Compile Include="Helper\Observable.cs" />
     <Compile Include="Pages\DailyMaterialPage.xaml.cs">
       <DependentUpon>DailyMaterialPage.xaml</DependentUpon>
     </Compile>
@@ -73,6 +86,7 @@
     <Compile Include="Pages\WeeklyMaterialPage.xaml.cs">
       <DependentUpon>WeeklyMaterialPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Service\Setting.cs" />
     <Compile Include="Service\SettingService.cs" />
     <Compile Include="Views\Artifact\ArtifactView.xaml.cs">
@@ -91,7 +105,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\TalentMaterialPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WeaponIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WeaponMaterialPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Data\CharacterDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Data\WeaponDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

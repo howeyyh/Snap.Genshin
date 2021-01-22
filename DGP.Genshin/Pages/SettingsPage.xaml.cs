@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DGP.Genshin.Service;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DGP.Genshin.Pages
 {
@@ -22,7 +11,26 @@ namespace DGP.Genshin.Pages
     {
         public SettingsPage()
         {
+            DataContext = this;
             InitializeComponent();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            IsUnreleasedCharacterPresent = SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
+        }
+
+        public bool IsUnreleasedCharacterPresent
+        {
+            get { return (bool)GetValue(IsUnreleasedCharacterPresentProperty); }
+            set { SetValue(IsUnreleasedCharacterPresentProperty, value); }
+        }
+        public static readonly DependencyProperty IsUnreleasedCharacterPresentProperty =
+            DependencyProperty.Register("IsUnreleasedCharacterPresent", typeof(bool), typeof(SettingsPage), new PropertyMetadata(false));
+
+        private void UnreleasedCharacterToggled(object sender, RoutedEventArgs e)
+        {
+            SettingService.Instance[Setting.ShowUnreleasedCharacter] = IsUnreleasedCharacterPresent;
         }
     }
 }

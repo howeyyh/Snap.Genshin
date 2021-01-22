@@ -1,11 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DGP.Genshin.Service
 {
@@ -16,9 +12,21 @@ namespace DGP.Genshin.Service
 
         private Dictionary<string, object> settingDictionary = new Dictionary<string, object>();
 
+        public object GetOrDefault(string key, object defaultValue)
+        {
+            if (settingDictionary.TryGetValue(key, out object value))
+                return value;
+            else return defaultValue;
+        }
+        public T GetOrDefault<T>(string key, T defaultValue)
+        {
+            if (settingDictionary.TryGetValue(key, out object value))
+                return (T)value;
+            else return defaultValue;
+        }
         public object this[string key]
         {
-            get 
+            get
             {
                 if (settingDictionary.TryGetValue(key, out object value))
                     return value;

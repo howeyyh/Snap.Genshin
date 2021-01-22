@@ -11,7 +11,6 @@
              Height="70" Width="70">
     <UserControl.Resources>
         <converters:StarToImageSourceConverter x:Key="StarToImageSourceConverter"/>
-        <converters:UriToImageSourceConverter x:Key="UriToImageSourceConverter"/>
     </UserControl.Resources>
     <Grid>
         <Border CornerRadius="8">
@@ -21,7 +20,7 @@
         </Border>
         <Border CornerRadius="8">
             <Border.Background>
-                <ImageBrush ImageSource="{Binding Character.ImageUri, Converter={StaticResource UriToImageSourceConverter}}" Stretch="Uniform"/>
+                <ImageBrush ImageSource="{Binding Character.ImageUri}" Stretch="Uniform"/>
             </Border.Background>
         </Border>
         <Border CornerRadius="8" Background="#99000000" Opacity="0">
@@ -60,6 +59,5 @@
                 Text="{Binding Character.CharacterName}" 
                 SnapsToDevicePixels="True"/>
         </Border>
-        
     </Grid>
 </UserControl>

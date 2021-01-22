@@ -3,15 +3,73 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:DGP.Genshin.Pages" xmlns:controls="clr-namespace:DGP.Genshin.Controls"
+      xmlns:local="clr-namespace:DGP.Genshin.Pages" 
+      xmlns:controls="clr-namespace:DGP.Genshin.Controls"
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="800"
+      Loaded="Page_Loaded"
       Title="HomePage">
     <Page.Resources>
         <ResourceDictionary Source="/DGP.Genshin;component/Data/CharacterDictionary.xaml"/>
     </Page.Resources>
-    <Grid>
-        <TextBlock Text="{Binding DayOfWeekText}" Style="{StaticResource TitleTextBlockStyle}"/>
-        <controls:CharacterIcon Character="{StaticResource Albedo}"></controls:CharacterIcon>
-    </Grid>
+    <ui:ScrollViewerEx>
+        <StackPanel Margin="12,0">
+            <TextBlock Text="{Binding DayOfWeekText}" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+            <TextBlock Text="今日天赋材料" Margin="0,24,0,8" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="6,0">
+                <Border Visibility="{Binding Path=Visibility1,Mode=OneWay}">
+                    <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Freedom" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding Path=Visibility2,Mode=OneWay}">
+                    <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Resistance" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Border>
+                <Border Visibility="{Binding Path=Visibility3,Mode=OneWay}">
+                    <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Ballad" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding MondstadtCharacters}"/>
+
+            <StackPanel Orientation="Horizontal" Margin="6,0">
+                <Border Visibility="{Binding Visibility1}">
+                    <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Prosperity"/>
+                </Border>
+                <Border Visibility="{Binding Visibility2}">
+                    <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Diligence"/>
+                </Border>
+                <Border Visibility="{Binding Visibility3}">
+                    <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Gold"/>
+                </Border>
+            </StackPanel>
+            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding LiyueCharacters}"/>
+
+            <TextBlock Text="今日武器材料" Margin="0,8" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Margin="6,0">
+                <Border Visibility="{Binding Visibility1}">
+                    <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="Decarabians"/>
+                </Border>
+                <Border Visibility="{Binding Visibility2}">
+                    <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="Boreal"/>
+                </Border>
+                <Border Visibility="{Binding Visibility3}">
+                    <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="DandelionGladiator"/>
+                </Border>
+            </StackPanel>
+            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding MondstadtWeapons}"/>
+            <StackPanel Orientation="Horizontal" Margin="6,0">
+                <Border Visibility="{Binding Visibility1}">
+                    <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="Guyun"/>
+                </Border>
+                <Border Visibility="{Binding Visibility2}">
+                    <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="MistVeiled"/>
+                </Border>
+                <Border Visibility="{Binding Visibility3}">
+                    <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="Aerosiderite"/>
+                </Border>
+            </StackPanel>
+            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding LiyueWeapons}"/>
+        </StackPanel>
+    </ui:ScrollViewerEx>
+    
 </Page>

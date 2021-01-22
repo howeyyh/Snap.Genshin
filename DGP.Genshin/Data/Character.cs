@@ -7,7 +7,10 @@ namespace DGP.Genshin.Data
         public string Title { get; set; }
         public string CharacterName { get; set; }
         public Uri ImageUri { get; set; }
-        public int Star { get; set; }
+        public int Star { get; set; } = 4;
+        public bool IsReleased { get; set; } = true;
+        public Element Element { get; set; }
+        public TalentMaterialType TalentMaterial { get; set; }
 
         #region Attributes
         #region base Stats
@@ -49,10 +52,9 @@ namespace DGP.Genshin.Data
         public double PhysicalDMGBonus { get; set; }
         public double PhysicalRES { get; set; }
         #endregion
-
         #endregion
 
-        public WeaponType WeaponType { get; set; }
+        public WeaponType WeaponType { get; set; } = WeaponType.Sword;
         public Constelllation Constellation { get; set; }
         public TalentGroup Talents { get; set; }
         public MaterialGroup Materials { get; set; }

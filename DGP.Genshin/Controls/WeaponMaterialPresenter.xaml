@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="DGP.Genshin.Controls.WeaponMaterialPresenter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DGP.Genshin.Controls"
+             mc:Ignorable="d" 
+             Height="35" Width="80">
+    <UserControl.Resources>
+        <local:WeaponMaterialToNameConverter x:Key="WeaponMaterialToNameConverter"/>
+        
+        <local:WeaponMaterialTo1Converter x:Key="WeaponMaterialTo1Converter"/>
+        <local:WeaponMaterialTo2Converter x:Key="WeaponMaterialTo2Converter"/>
+        <local:WeaponMaterialTo3Converter x:Key="WeaponMaterialTo3Converter"/>
+        <local:WeaponMaterialTo4Converter x:Key="WeaponMaterialTo4Converter"/>
+    </UserControl.Resources>
+    <Grid Height="35" Width="80">
+        <Image Height="35" Width="35" Margin="0,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo1Converter}}"/>
+        <Image Height="35" Width="35" Margin="15,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo2Converter}}"/>
+        <Image Height="35" Width="35" Margin="30,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo3Converter}}"/>
+        <Image Height="35" Width="35" Margin="45,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo4Converter}}"/>
+        <Border Background="#99000000" Opacity="0">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.35" To="1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.35" To="0">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            <TextBlock 
+                Margin="6" 
+                TextWrapping="Wrap" 
+                TextAlignment="Center" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Foreground="White" 
+                Style="{StaticResource CaptionTextBlockStyle}" 
+                Text="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialToNameConverter}}" 
+                SnapsToDevicePixels="True"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,6 +1,6 @@
 ﻿namespace DGP.Genshin.Data
 {
-    internal class SpecialAbility
+    public class SpecialAbility
     {
     }
 }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DGP.Genshin.Data
 {
     internal class DataManager
     {
-        public Dictionary<string,Material> SpecialMaterials { get;private set; } = new Dictionary<string, Material>();
+        public Dictionary<string, Material> SpecialMaterials { get; private set; } = new Dictionary<string, Material>();
         public Dictionary<string, Material> MonsterMaterials { get; private set; } = new Dictionary<string, Material>();
         public Dictionary<string, Weapon> Weapons { get; private set; } = new Dictionary<string, Weapon>();
         public Dictionary<string, Character> Characters { get; private set; } = new Dictionary<string, Character>();
@@ -32,8 +31,8 @@ namespace DGP.Genshin.Data
         }
 
         private void InitializeWeapons() => this.Weapons = new Dictionary<string, Weapon>()
-            {
-            };
+        {
+        };
         private void InitializeCharacters()
         {
             this.Characters = new Dictionary<string, Character>();
@@ -49,13 +48,13 @@ namespace DGP.Genshin.Data
                     Material1 = SpecialMaterials["小灯草"],
                     Material2 = MonsterMaterials["箭镞"],
                 }
-            }); 
+            });
 
         }
 
         private void InitializeArtifacts()
         {
-           
+
         }
 
         #region 单例
@@ -67,7 +66,7 @@ namespace DGP.Genshin.Data
         }
         public static DataManager Instance
         {
-            get 
+            get
             {
                 if (instance == null)
                 {

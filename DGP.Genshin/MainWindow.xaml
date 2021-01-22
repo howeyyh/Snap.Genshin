@@ -9,22 +9,22 @@
         xmlns:pages="clr-namespace:DGP.Genshin.Pages"
         ui:WindowHelper.UseModernWindowStyle="True"
         ui:TitleBar.ExtendViewIntoTitleBar="True"
+        ui:TitleBar.IsBackButtonVisible="{Binding ElementName=ContentFrame,Path=CanGoBack,Mode=OneWay}"  
         mc:Ignorable="d"
-        Title="原神" 
-        MinWidth="1400"
-        MinHeight="786"
-        Height="786" 
-        Width="1400">
+        Title="Snap原神" 
+        MinWidth="800"
+        MinHeight="562"
+        Height="562" 
+        Width="800">
     <Grid>
-        <Rectangle StrokeThickness="0"/>
         <ui:NavigationView 
             x:Name="NavView" 
             OpenPaneLength="160" 
+            CompactPaneLength="48"
             IsBackButtonVisible="Collapsed" 
-            PaneDisplayMode="Auto" 
-            ItemInvoked="OnItemInvoked">
+            PaneDisplayMode="Auto">
             <ui:NavigationView.MenuItems>
-                <ui:NavigationViewItem Content="首页" Icon="Home" helper:NavHelper.NavigateTo="{x:Type pages:HomePage}"/>
+                <ui:NavigationViewItem Content="首页"  helper:NavHelper.NavigateTo="{x:Type pages:HomePage}" Icon="Home"/>
                 <ui:NavigationViewItem Content="日常" helper:NavHelper.NavigateTo="{x:Type pages:DailyMaterialPage}">
                     <ui:NavigationViewItem.Icon>
                         <ui:BitmapIcon UriSource="Data/Images/Materials/Talent/philosophies_of_ballad.png" ShowAsMonochrome="False"/>
@@ -36,7 +36,6 @@
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
-            
             <ui:Frame x:Name="ContentFrame">
                 <ui:Frame.ContentTransitions>
                     <ui:TransitionCollection>

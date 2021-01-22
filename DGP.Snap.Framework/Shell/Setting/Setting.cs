@@ -6,7 +6,7 @@ namespace DGP.Snap.Framework.Shell.Setting
     /// <summary>
     /// 在注册表中读写设置
     /// </summary>
-    public class Setting:IDisposable
+    public class Setting : IDisposable
     {
         public string ApplicationName { get; private set; }
         private readonly RegistryKey setting;
