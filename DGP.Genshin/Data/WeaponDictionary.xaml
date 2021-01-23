@@ -146,8 +146,7 @@
                   ImageUri="pack://application:,,,/Data/Images/Weapons/primordial_jade_cutter.png"
                   Star="5"
                   Type="Sword"
-                  Material="MistVeiled"
-                  IsReleased="False"/>
+                  Material="MistVeiled"/>
     <local:Weapon x:Key="BoreasPrecocity"
                   WeaponName="Boreas Precocity"
                   ImageUri="pack://application:,,,/Data/Images/Weapons/boreas_precocity.png"
@@ -382,11 +381,12 @@
                   Type="Polearm"
                   Material="MistVeiled"/>
     <local:Weapon x:Key="LithicSpear"
-                  WeaponName="千岩长矛"
+                  WeaponName="千岩长枪"
                   ImageUri="pack://application:,,,/Data/Images/Weapons/lithic_spear.png"
                   Star="4"
                   Type="Polearm"
-                  Material="Aerosiderite"/>
+                  Material="Aerosiderite"
+                  IsReleased="False"/>
     <local:Weapon x:Key="PrototypeStarglitter"
                   WeaponName="试作星镰"
                   ImageUri="pack://application:,,,/Data/Images/Weapons/prototype_starglitter.png"
@@ -441,8 +441,7 @@
                   ImageUri="pack://application:,,,/Data/Images/Weapons/staff_of_homa.png"
                   Star="5"
                   Type="Polearm"
-                  Material="Aerosiderite"
-                  IsReleased="False"/>
+                  Material="Aerosiderite"/>
     <!--弓-->
     <local:Weapon x:Key="HuntersBow"
                   WeaponName="猎弓"
@@ -612,7 +611,8 @@
                   ImageUri="pack://application:,,,/Data/Images/Weapons/amber_bead.png"
                   Star="3"
                   Type="Catalyst"
-                  Material="Aerosiderite"/>
+                  Material="Aerosiderite"
+                  IsReleased="False"/>
     <local:Weapon x:Key="EmeraldOrb"
                   WeaponName="翡玉法球"
                   ImageUri="pack://application:,,,/Data/Images/Weapons/emerald_orb.png"

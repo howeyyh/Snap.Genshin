@@ -29,7 +29,7 @@
                     <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Ballad" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Border>
             </StackPanel>
-            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding MondstadtCharacters}"/>
+            <ui:GridView Padding="4" Margin="0,4" IsSelectionEnabled="False" ItemsSource="{Binding MondstadtCharacters}"/>
 
             <StackPanel Orientation="Horizontal" Margin="6,0">
                 <Border Visibility="{Binding Visibility1}">
@@ -42,7 +42,7 @@
                     <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Gold"/>
                 </Border>
             </StackPanel>
-            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding LiyueCharacters}"/>
+            <ui:GridView Padding="4" Margin="0,4" IsSelectionEnabled="False" ItemsSource="{Binding LiyueCharacters}"/>
 
             <TextBlock Text="今日武器材料" Margin="0,8" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Left"/>
             <StackPanel Orientation="Horizontal" Margin="6,0">
@@ -56,7 +56,7 @@
                     <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="DandelionGladiator"/>
                 </Border>
             </StackPanel>
-            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding MondstadtWeapons}"/>
+            <ui:GridView Padding="4" Margin="0,4" IsSelectionEnabled="False" ItemsSource="{Binding MondstadtWeapons}"/>
             <StackPanel Orientation="Horizontal" Margin="6,0">
                 <Border Visibility="{Binding Visibility1}">
                     <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="Guyun"/>
@@ -68,8 +68,7 @@
                     <controls:WeaponMaterialPresenter Margin="6,0" WeaponMaterial="Aerosiderite"/>
                 </Border>
             </StackPanel>
-            <ui:GridView Padding="4" Margin="0,4" ItemsSource="{Binding LiyueWeapons}"/>
+            <ui:GridView Padding="4" Margin="0,4" IsSelectionEnabled="False" ItemsSource="{Binding LiyueWeapons}"/>
         </StackPanel>
     </ui:ScrollViewerEx>
-    
 </Page>

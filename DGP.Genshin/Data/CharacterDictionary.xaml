@@ -180,8 +180,7 @@
     <local:Character x:Key="Xiao" 
                      CharacterName="魈" 
                      ImageUri="pack://application:,,,/Data/Images/Characters/xiao.png" 
-                     Star="5" WeaponType="Polearm" 
-                     IsReleased="False"
+                     Star="5" WeaponType="Polearm"
                      TalentMaterial="Prosperity"/>
     <local:Character x:Key="Xingqiu" 
                      CharacterName="行秋" 

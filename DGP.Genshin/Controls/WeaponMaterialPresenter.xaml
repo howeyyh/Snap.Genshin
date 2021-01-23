@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DGP.Genshin.Controls"
              mc:Ignorable="d" 
-             Height="35" Width="80">
+             Height="35" Width="65">
     <UserControl.Resources>
         <local:WeaponMaterialToNameConverter x:Key="WeaponMaterialToNameConverter"/>
         
@@ -14,11 +14,11 @@
         <local:WeaponMaterialTo3Converter x:Key="WeaponMaterialTo3Converter"/>
         <local:WeaponMaterialTo4Converter x:Key="WeaponMaterialTo4Converter"/>
     </UserControl.Resources>
-    <Grid Height="35" Width="80">
+    <Grid Height="35" Width="65">
         <Image Height="35" Width="35" Margin="0,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo1Converter}}"/>
-        <Image Height="35" Width="35" Margin="15,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo2Converter}}"/>
-        <Image Height="35" Width="35" Margin="30,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo3Converter}}"/>
-        <Image Height="35" Width="35" Margin="45,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo4Converter}}"/>
+        <Image Height="35" Width="35" Margin="10,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo2Converter}}"/>
+        <Image Height="35" Width="35" Margin="20,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo3Converter}}"/>
+        <Image Height="35" Width="35" Margin="30,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo4Converter}}"/>
         <Border Background="#99000000" Opacity="0">
             <Border.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">

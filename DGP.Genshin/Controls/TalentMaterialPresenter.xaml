@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DGP.Genshin.Controls"
              mc:Ignorable="d" 
-             Height="35" Width="65">
+             Height="35" Width="55">
     <UserControl.Resources>
         <local:TalentMaterialToNameConverter x:Key="TalentMaterialToNameConverter"/>
         
@@ -13,10 +13,10 @@
         <local:TalentMaterialToTeachingConverter x:Key="TalentMaterialToTeachingConverter"/>
         <local:TalentMaterialToPhilosophiesConverter x:Key="TalentMaterialToPhilosophiesConverter"/>
     </UserControl.Resources>
-    <Grid Height="35" Width="65">
+    <Grid Height="35" Width="55">
         <Image Height="35" Width="35" Margin="0,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding TalentMaterial,Converter={StaticResource TalentMaterialToGuideConverter}}"/>
-        <Image Height="35" Width="35" Margin="15,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding TalentMaterial,Converter={StaticResource TalentMaterialToTeachingConverter}}"/>
-        <Image Height="35" Width="35" Margin="30,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding TalentMaterial,Converter={StaticResource TalentMaterialToPhilosophiesConverter}}"/>
+        <Image Height="35" Width="35" Margin="10,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding TalentMaterial,Converter={StaticResource TalentMaterialToTeachingConverter}}"/>
+        <Image Height="35" Width="35" Margin="20,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding TalentMaterial,Converter={StaticResource TalentMaterialToPhilosophiesConverter}}"/>
         <Border Background="#99000000" Opacity="0">
             <Border.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">

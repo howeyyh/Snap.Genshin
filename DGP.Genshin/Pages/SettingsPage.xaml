@@ -6,25 +6,34 @@
       xmlns:local="clr-namespace:DGP.Genshin.Pages"
       xmlns:ui="http://schemas.modernwpf.com/2019" 
       mc:Ignorable="d" 
-      d:DesignHeight="450" 
+      d:DesignHeight="1600" 
       d:DesignWidth="800"
       Loaded="Page_Loaded"
       Title="SettingsPage">
     <Grid>
         <ScrollViewer Margin="12,0,0,0">
             <StackPanel>
-                <TextBlock Text="信息" Margin="0,12,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                <ui:ToggleSwitch Margin="6,12,0,0" Header="在页面中显示未发布角色的信息" OnContent="显示" OffContent="隐藏" IsOn="{Binding IsUnreleasedCharacterPresent,Mode=TwoWay,NotifyOnTargetUpdated=True}" Toggled="UnreleasedCharacterToggled"/>
-                <TextBlock Text="*未发布角色的信息可能随时会被更改" Foreground="Red" Margin="6,0,0,0" Style="{StaticResource CaptionTextBlockStyle}"/>
-                <TextBlock Text="关于" Margin="0,12,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                <TextBlock Text="Genshin Impact™, 原神™ 是 MiHoYo Co., Ltd.的注册商标。" Margin="6,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Text="数据 © MiHoYo Co., Ltd." Margin="6,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Text="Snap 原神" Margin="6,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
-                <TextBlock Text="DGP.Genshin. version 2021.1.21, build 1" Margin="6,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Text="© 2021 DGP Studio. All right reserved." Margin="6,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Text="Honey Impact" Margin="6,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBlock Text="信息" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                
+                <TextBlock Text="在页面上展示未发布的角色和武器" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <ui:ToggleSwitch OnContent="显示" OffContent="隐藏" IsOn="{Binding IsUnreleasedCharacterPresent,Mode=TwoWay,NotifyOnTargetUpdated=True}" Toggled="UnreleasedCharacterToggled"/>
+                <TextBlock Text="*未发布角色或武器为开发中内容，请以正式服上线为准" Foreground="Red" Style="{StaticResource CaptionTextBlockStyle}"/>
+                
+                <TextBlock Text="在页面上展示的旅行者形象" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <ui:RadioButtons >
+                    <RadioButton Content="荧(风)" IsChecked="True"/>
+                    <RadioButton Content="空(岩)"/>
+                </ui:RadioButtons>
+                <TextBlock Text="关于" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                
+                <TextBlock Text="Genshin Impact™, 原神™ 是 MiHoYo Co., Ltd.的注册商标" Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="数据 © MiHoYo Co., Ltd." Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="Snap 原神" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBlock Text="DGP.Genshin. version 2021.1.21, build 1" Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="© 2021 DGP Studio. All right reserved." Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="Honey Impact" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
 
-                <TextBlock Text="© 2021 Honey Impact - Genshin Impact DB and Tools." Margin="6,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="© 2021 Honey Impact - Genshin Impact DB and Tools." Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

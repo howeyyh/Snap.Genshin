@@ -27,12 +27,12 @@
                 <ui:NavigationViewItem Content="首页"  helper:NavHelper.NavigateTo="{x:Type pages:HomePage}" Icon="Home"/>
                 <ui:NavigationViewItem Content="日常" helper:NavHelper.NavigateTo="{x:Type pages:DailyMaterialPage}">
                     <ui:NavigationViewItem.Icon>
-                        <ui:BitmapIcon UriSource="Data/Images/Materials/Talent/philosophies_of_ballad.png" ShowAsMonochrome="False"/>
+                        <ui:BitmapIcon UriSource="Data/Images/Icons/UI/char.png"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
                 <ui:NavigationViewItem Content="周常" helper:NavHelper.NavigateTo="{x:Type pages:WeeklyMaterialPage}">
                     <ui:NavigationViewItem.Icon>
-                        <ui:BitmapIcon UriSource="Data/Images/Monsters/Bosses/childe.png" ShowAsMonochrome="False"/>
+                        <ui:BitmapIcon UriSource="Data/Images/Icons/UI/talent.png"/>
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>

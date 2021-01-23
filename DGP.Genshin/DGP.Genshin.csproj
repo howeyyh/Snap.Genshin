@@ -488,5 +488,9 @@
     <Resource Include="Data\Images\Icons\polearm.png" />
     <Resource Include="Data\Images\Icons\sword.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Images\Icons\UI\char.png" />
+    <Resource Include="Data\Images\Icons\UI\talent.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
