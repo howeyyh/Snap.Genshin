@@ -2,10 +2,10 @@
 {
     internal class Logger
     {
-        private bool isLoggingtoFile = true;
+        private readonly bool isLoggingtoFile = true;
         public void Log(object o)
         {
-            if (this.isLoggingtoFile)
+            if (isLoggingtoFile)
             {
                 //StreamReader
             }

@@ -12,8 +12,8 @@ namespace DGP.Genshin.Controls.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Uri imageUri = (Uri)value;/*new Uri("pack://application:,,,/Data/"+(string)value);*/
-            return new BitmapImage(imageUri);
+            /*new Uri("pack://application:,,,/Data/"+(string)value);*/
+            return new BitmapImage((Uri)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();

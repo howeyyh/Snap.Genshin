@@ -16,15 +16,23 @@ namespace DGP.Snap.Framework.Extensions
         public static T Invoke<T>(this DispatcherObject dispatcherObject, Func<T> func)
         {
             if (dispatcherObject == null)
+            {
                 throw new ArgumentNullException(nameof(dispatcherObject));
+            }
 
             if (func == null)
+            {
                 throw new ArgumentNullException(nameof(func));
+            }
 
             if (dispatcherObject.Dispatcher.CheckAccess())
+            {
                 return func();
+            }
             else
+            {
                 return dispatcherObject.Dispatcher.Invoke(func);
+            }
         }
 
         /// <summary>
@@ -35,16 +43,23 @@ namespace DGP.Snap.Framework.Extensions
         public static void Invoke(this DispatcherObject dispatcherObject, Action invokeAction)
         {
             if (dispatcherObject == null)
+            {
                 throw new ArgumentNullException(nameof(dispatcherObject));
+            }
 
             if (invokeAction == null)
+            {
                 throw new ArgumentNullException(nameof(invokeAction));
-
+            }
 
             if (dispatcherObject.Dispatcher.CheckAccess())
+            {
                 invokeAction();
+            }
             else
+            {
                 dispatcherObject.Dispatcher.Invoke(invokeAction);
+            }
         }
 
         /// <summary> 
@@ -56,10 +71,14 @@ namespace DGP.Snap.Framework.Extensions
         public static void BeginInvoke(this DispatcherObject dispatcherObject, Action invokeAction, DispatcherPriority priority = DispatcherPriority.Background)
         {
             if (dispatcherObject == null)
+            {
                 throw new ArgumentNullException(nameof(dispatcherObject));
+            }
 
             if (invokeAction == null)
+            {
                 throw new ArgumentNullException(nameof(invokeAction));
+            }
 
             dispatcherObject.Dispatcher.BeginInvoke(priority, invokeAction);
         }
@@ -75,10 +94,14 @@ namespace DGP.Snap.Framework.Extensions
             where T : DispatcherObject
         {
             if (dispatcherObject == null)
+            {
                 throw new ArgumentNullException(nameof(dispatcherObject));
+            }
 
             if (invokeAction == null)
+            {
                 throw new ArgumentNullException(nameof(invokeAction));
+            }
 
             dispatcherObject.Dispatcher?.BeginInvoke(priority, new Action(() => invokeAction(dispatcherObject)));
         }

@@ -1,4 +1,5 @@
 ﻿using DGP.Genshin.Data;
+using DGP.Genshin.Data.Talent;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -19,33 +20,33 @@ namespace DGP.Genshin.Controls
             InitializeComponent();
         }
 
-        public TalentMaterialType TalentMaterial
+        public TalentMaterial TalentMaterial
         {
-            get { return (TalentMaterialType)GetValue(TalentMaterialProperty); }
+            get { return (TalentMaterial)GetValue(TalentMaterialProperty); }
             set { SetValue(TalentMaterialProperty, value); }
         }
         public static readonly DependencyProperty TalentMaterialProperty =
-            DependencyProperty.Register("TalentMaterial", typeof(TalentMaterialType), typeof(TalentMaterialPresenter), new PropertyMetadata(TalentMaterialType.Ballad));
+            DependencyProperty.Register("TalentMaterial", typeof(TalentMaterial), typeof(TalentMaterialPresenter), new PropertyMetadata(TalentMaterial.Ballad));
 
     }
     public class TalentMaterialToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TalentMaterialType material = (TalentMaterialType)value;
+            TalentMaterial material = (TalentMaterial)value;
             switch (material)
             {
-                case TalentMaterialType.Ballad:
+                case TalentMaterial.Ballad:
                     return "诗文";
-                case TalentMaterialType.Diligence:
+                case TalentMaterial.Diligence:
                     return "勤劳";
-                case TalentMaterialType.Freedom:
+                case TalentMaterial.Freedom:
                     return "自由";
-                case TalentMaterialType.Gold:
+                case TalentMaterial.Gold:
                     return "黄金";
-                case TalentMaterialType.Prosperity:
+                case TalentMaterial.Prosperity:
                     return "繁荣";
-                case TalentMaterialType.Resistance:
+                case TalentMaterial.Resistance:
                     return "抗争";
                 default:
                     return "";
@@ -61,7 +62,7 @@ namespace DGP.Genshin.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TalentMaterialType material = (TalentMaterialType)value;
+            TalentMaterial material = (TalentMaterial)value;
             return new BitmapImage(new Uri("/Data/Images/Materials/Talent/guide_to_" + material.ToString() + ".png", UriKind.Relative));
         }
 
@@ -74,7 +75,7 @@ namespace DGP.Genshin.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TalentMaterialType material = (TalentMaterialType)value;
+            TalentMaterial material = (TalentMaterial)value;
             return new BitmapImage(new Uri("/Data/Images/Materials/Talent/philosophies_of_" + material.ToString() + ".png", UriKind.Relative));
         }
 
@@ -87,7 +88,7 @@ namespace DGP.Genshin.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TalentMaterialType material = (TalentMaterialType)value;
+            TalentMaterial material = (TalentMaterial)value;
             return new BitmapImage(new Uri("/Data/Images/Materials/Talent/teaching_of_" + material.ToString() + ".png", UriKind.Relative));
         }
 

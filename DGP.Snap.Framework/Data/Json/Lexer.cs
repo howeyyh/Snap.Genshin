@@ -15,12 +15,12 @@ namespace DGP.Snap.Framework.Data.Json
         private bool allow_comments;
         private bool allow_single_quoted_strings;
         private bool end_of_input;
-        private FsmContext fsm_context;
+        private readonly FsmContext fsm_context;
         private int input_buffer;
         private int input_char;
-        private TextReader reader;
+        private readonly TextReader reader;
         private int state;
-        private StringBuilder string_buffer;
+        private readonly StringBuilder string_buffer;
         private string string_value;
         private int token;
         private int unichar;
@@ -30,21 +30,21 @@ namespace DGP.Snap.Framework.Data.Json
         #region Properties
         public bool AllowComments
         {
-            get => this.allow_comments;
-            set => this.allow_comments = value;
+            get => allow_comments;
+            set => allow_comments = value;
         }
 
         public bool AllowSingleQuotedStrings
         {
-            get => this.allow_single_quoted_strings;
-            set => this.allow_single_quoted_strings = value;
+            get => allow_single_quoted_strings;
+            set => allow_single_quoted_strings = value;
         }
 
-        public bool EndOfInput => this.end_of_input;
+        public bool EndOfInput => end_of_input;
 
-        public int Token => this.token;
+        public int Token => token;
 
-        public string StringValue => this.string_value;
+        public string StringValue => string_value;
         #endregion
 
 
@@ -53,17 +53,17 @@ namespace DGP.Snap.Framework.Data.Json
 
         public Lexer(TextReader reader)
         {
-            this.allow_comments = true;
-            this.allow_single_quoted_strings = true;
+            allow_comments = true;
+            allow_single_quoted_strings = true;
 
-            this.input_buffer = 0;
-            this.string_buffer = new StringBuilder(128);
-            this.state = 1;
-            this.end_of_input = false;
+            input_buffer = 0;
+            string_buffer = new StringBuilder(128);
+            state = 1;
+            end_of_input = false;
             this.reader = reader;
 
-            this.fsm_context = new FsmContext();
-            this.fsm_context.L = this;
+            fsm_context = new FsmContext();
+            fsm_context.L = this;
         }
         #endregion
 
@@ -258,7 +258,9 @@ namespace DGP.Snap.Framework.Data.Json
 
                     case '\'':
                         if (!ctx.L.allow_single_quoted_strings)
+                        {
                             return false;
+                        }
 
                         ctx.L.input_char = '"';
                         ctx.NextState = 23;
@@ -267,7 +269,9 @@ namespace DGP.Snap.Framework.Data.Json
 
                     case '/':
                         if (!ctx.L.allow_comments)
+                        {
                             return false;
+                        }
 
                         ctx.NextState = 25;
                         return true;
@@ -859,7 +863,9 @@ namespace DGP.Snap.Framework.Data.Json
             while (ctx.L.GetChar())
             {
                 if (ctx.L.input_char == '*')
+                {
                     continue;
+                }
 
                 if (ctx.L.input_char == '/')
                 {
@@ -878,59 +884,67 @@ namespace DGP.Snap.Framework.Data.Json
 
         private bool GetChar()
         {
-            if ((this.input_char = this.NextChar()) != -1)
+            if ((input_char = NextChar()) != -1)
+            {
                 return true;
+            }
 
-            this.end_of_input = true;
+            end_of_input = true;
             return false;
         }
 
         private int NextChar()
         {
-            if (this.input_buffer != 0)
+            if (input_buffer != 0)
             {
-                int tmp = this.input_buffer;
-                this.input_buffer = 0;
+                int tmp = input_buffer;
+                input_buffer = 0;
 
                 return tmp;
             }
 
-            return this.reader.Read();
+            return reader.Read();
         }
 
         public bool NextToken()
         {
             StateHandler handler;
-            this.fsm_context.Return = false;
+            fsm_context.Return = false;
 
             while (true)
             {
-                handler = fsm_handler_table[this.state - 1];
+                handler = fsm_handler_table[state - 1];
 
-                if (!handler(this.fsm_context))
-                    throw new JsonException(this.input_char);
-
-                if (this.end_of_input)
-                    return false;
-
-                if (this.fsm_context.Return)
+                if (!handler(fsm_context))
                 {
-                    this.string_value = this.string_buffer.ToString();
-                    this.string_buffer.Remove(0, this.string_buffer.Length);
-                    this.token = fsm_return_table[this.state - 1];
+                    throw new JsonException(input_char);
+                }
 
-                    if (this.token == (int)ParserToken.Char)
-                        this.token = this.input_char;
+                if (end_of_input)
+                {
+                    return false;
+                }
 
-                    this.state = this.fsm_context.NextState;
+                if (fsm_context.Return)
+                {
+                    string_value = string_buffer.ToString();
+                    string_buffer.Remove(0, string_buffer.Length);
+                    token = fsm_return_table[state - 1];
+
+                    if (token == (int)ParserToken.Char)
+                    {
+                        token = input_char;
+                    }
+
+                    state = fsm_context.NextState;
 
                     return true;
                 }
 
-                this.state = this.fsm_context.NextState;
+                state = fsm_context.NextState;
             }
         }
 
-        private void UngetChar() => this.input_buffer = this.input_char;
+        private void UngetChar() => input_buffer = input_char;
     }
 }

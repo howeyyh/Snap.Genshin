@@ -4,12 +4,21 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DGP.Genshin.Pages"
-      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:controls="clr-namespace:DGP.Genshin.Controls" xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="1600" 
       d:DesignWidth="800"
       Loaded="Page_Loaded"
       Title="SettingsPage">
+    <Page.Resources>
+        <ResourceDictionary Source="/DGP.Genshin;component/Data/CharacterDictionary.xaml">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <converters:ElementToIndexConverter x:Key="ElementToIndexConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
         <ScrollViewer Margin="12,0,0,0">
             <StackPanel>
@@ -18,15 +27,20 @@
                 <TextBlock Text="在页面上展示未发布的角色和武器" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <ui:ToggleSwitch OnContent="显示" OffContent="隐藏" IsOn="{Binding IsUnreleasedCharacterPresent,Mode=TwoWay,NotifyOnTargetUpdated=True}" Toggled="UnreleasedCharacterToggled"/>
                 <TextBlock Text="*未发布角色或武器为开发中内容，请以正式服上线为准" Foreground="Red" Style="{StaticResource CaptionTextBlockStyle}"/>
-                
+
                 <TextBlock Text="在页面上展示的旅行者形象" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <ui:RadioButtons >
-                    <RadioButton Content="荧(风)" IsChecked="True"/>
-                    <RadioButton Content="空(岩)"/>
-                </ui:RadioButtons>
-                <TextBlock Text="关于" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <StackPanel x:Name="TravelerOptions" Orientation="Horizontal">
+                    <RadioButton local:ElementHelper.Element="Anemo" GroupName="Traveler" Checked="RadioButton_Checked">
+                        <controls:CharacterIcon Character="{StaticResource TravelerAnemo}"/>
+                    </RadioButton>
+                    <RadioButton local:ElementHelper.Element="Geo" GroupName="Traveler" Checked="RadioButton_Checked">
+                        <controls:CharacterIcon Character="{StaticResource TravelerGeo}"/>
+                    </RadioButton>
+                </StackPanel>
                 
-                <TextBlock Text="Genshin Impact™, 原神™ 是 MiHoYo Co., Ltd.的注册商标" Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="关于" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
+
+                <TextBlock Text="Genshin Impact™, 原神™ 是 MiHoYo Co., Ltd.的注册商标" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="数据 © MiHoYo Co., Ltd." Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Snap 原神" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
                 <TextBlock Text="DGP.Genshin. version 2021.1.21, build 1" Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>

@@ -5,31 +5,31 @@ namespace DGP.Snap.Framework.Data.Json
 {
     internal class OrderedDictionaryEnumerator : IDictionaryEnumerator
     {
-        private IEnumerator<KeyValuePair<string, JsonData>> list_enumerator;
+        private readonly IEnumerator<KeyValuePair<string, JsonData>> list_enumerator;
 
 
-        public object Current => this.Entry;
+        public object Current => Entry;
 
         public DictionaryEntry Entry
         {
             get
             {
-                KeyValuePair<string, JsonData> curr = this.list_enumerator.Current;
+                KeyValuePair<string, JsonData> curr = list_enumerator.Current;
                 return new DictionaryEntry(curr.Key, curr.Value);
             }
         }
 
-        public object Key => this.list_enumerator.Current.Key;
+        public object Key => list_enumerator.Current.Key;
 
-        public object Value => this.list_enumerator.Current.Value;
+        public object Value => list_enumerator.Current.Value;
 
 
         public OrderedDictionaryEnumerator(
-            IEnumerator<KeyValuePair<string, JsonData>> enumerator) => this.list_enumerator = enumerator;
+            IEnumerator<KeyValuePair<string, JsonData>> enumerator) => list_enumerator = enumerator;
 
 
-        public bool MoveNext() => this.list_enumerator.MoveNext();
+        public bool MoveNext() => list_enumerator.MoveNext();
 
-        public void Reset() => this.list_enumerator.Reset();
+        public void Reset() => list_enumerator.Reset();
     }
 }

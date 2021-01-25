@@ -5,7 +5,7 @@ using System.IO;
 
 namespace DGP.Genshin.Service
 {
-    class SettingService
+    internal class SettingService
     {
         private const string settingsFileName = "settings.json";
         private readonly string settingFile = AppDomain.CurrentDomain.BaseDirectory + settingsFileName;
@@ -15,23 +15,38 @@ namespace DGP.Genshin.Service
         public object GetOrDefault(string key, object defaultValue)
         {
             if (settingDictionary.TryGetValue(key, out object value))
+            {
                 return value;
-            else return defaultValue;
+            }
+            else
+            {
+                return defaultValue;
+            }
         }
         public T GetOrDefault<T>(string key, T defaultValue)
         {
             if (settingDictionary.TryGetValue(key, out object value))
+            {
                 return (T)value;
-            else return defaultValue;
+            }
+            else
+            {
+                return defaultValue;
+            }
+        }
+        public T GetOrDefault<T>(string key, T defaultValue, Func<object, T> converter)
+        {
+            if (settingDictionary.TryGetValue(key, out object value))
+            {
+                return converter.Invoke(value);
+            }
+            else
+            {
+                return defaultValue;
+            }
         }
         public object this[string key]
         {
-            get
-            {
-                if (settingDictionary.TryGetValue(key, out object value))
-                    return value;
-                else return null;
-            }
             set
             {
                 settingDictionary[key] = value;
@@ -43,7 +58,7 @@ namespace DGP.Genshin.Service
             if (File.Exists(settingFile))
             {
                 string json;
-                using (StreamReader sr = new StreamReader(this.settingFile))
+                using (StreamReader sr = new StreamReader(settingFile))
                 {
                     json = sr.ReadToEnd();
                 }
@@ -70,7 +85,7 @@ namespace DGP.Genshin.Service
             };
             string json = JsonConvert.SerializeObject(settingDictionary, jsonSerializerSettings);
 
-            using (StreamWriter sw = new StreamWriter(this.settingFile))
+            using (StreamWriter sw = new StreamWriter(settingFile))
             {
                 sw.Write(json);
             }

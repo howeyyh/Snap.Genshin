@@ -48,7 +48,9 @@ namespace DGP.Genshin.Service
         public bool Navigate(Type pageType, bool isSyncTabRequested = false, object data = null, NavigationTransitionInfo info = null)
         {
             if (isSyncTabRequested)
+            {
                 SyncTabWith(pageType);
+            }
 
             backItemStack.Push(selected);
             Debug.WriteLine(backItemStack.Count);
@@ -66,9 +68,13 @@ namespace DGP.Genshin.Service
         {
             selected = navigationView.SelectedItem as NavigationViewItem;
             if (args.IsSettingsInvoked)
+            {
                 Navigate<SettingsPage>();
+            }
             else
+            {
                 Navigate(selected.GetValue(NavHelper.NavigateToProperty) as Type);
+            }
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs args)

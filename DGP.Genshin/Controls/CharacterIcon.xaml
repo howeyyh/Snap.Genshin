@@ -8,22 +8,25 @@
              xmlns:ui="http://schemas.modernwpf.com/2019" 
              x:Class="DGP.Genshin.Controls.CharacterIcon"
              mc:Ignorable="d" 
-             Height="70" Width="70">
+             Height="70" 
+    Width="70"
+    MouseUp="UserControl_MouseUp"
+    >
     <UserControl.Resources>
         <converters:StarToImageSourceConverter x:Key="StarToImageSourceConverter"/>
     </UserControl.Resources>
     <Grid>
-        <Border CornerRadius="8">
+        <Border CornerRadius="{StaticResource IconCornerRadius}">
             <Border.Background>
                 <ImageBrush ImageSource="{Binding Character.Star, Converter={StaticResource StarToImageSourceConverter}}" Stretch="UniformToFill"/>
             </Border.Background>
         </Border>
-        <Border CornerRadius="8">
+        <Border CornerRadius="{StaticResource IconCornerRadius}">
             <Border.Background>
                 <ImageBrush ImageSource="{Binding Character.ImageUri}" Stretch="Uniform"/>
             </Border.Background>
         </Border>
-        <Border CornerRadius="8" Background="#99000000" Opacity="0">
+        <Border CornerRadius="{StaticResource IconCornerRadius}" Background="#99000000" Opacity="0">
             <Border.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>

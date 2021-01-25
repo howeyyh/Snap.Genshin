@@ -10,33 +10,33 @@ namespace DGP.Snap.Framework.Data.Json
     public class JsonMapper
     {
         #region Fields
-        private static int max_nesting_depth;
+        private static readonly int max_nesting_depth;
 
-        private static IFormatProvider datetime_format;
+        private static readonly IFormatProvider datetime_format;
 
-        private static IDictionary<Type, ExporterFunc> base_exporters_table;
-        private static IDictionary<Type, ExporterFunc> custom_exporters_table;
+        private static readonly IDictionary<Type, ExporterFunc> base_exporters_table;
+        private static readonly IDictionary<Type, ExporterFunc> custom_exporters_table;
 
-        private static IDictionary<Type,
+        private static readonly IDictionary<Type,
                 IDictionary<Type, ImporterFunc>> base_importers_table;
-        private static IDictionary<Type,
+        private static readonly IDictionary<Type,
                 IDictionary<Type, ImporterFunc>> custom_importers_table;
 
-        private static IDictionary<Type, ArrayMetadata> array_metadata;
+        private static readonly IDictionary<Type, ArrayMetadata> array_metadata;
         private static readonly object array_metadata_lock = new object();
 
-        private static IDictionary<Type,
+        private static readonly IDictionary<Type,
                 IDictionary<Type, MethodInfo>> conv_ops;
         private static readonly object conv_ops_lock = new object();
 
-        private static IDictionary<Type, ObjectMetadata> object_metadata;
+        private static readonly IDictionary<Type, ObjectMetadata> object_metadata;
         private static readonly object object_metadata_lock = new object();
 
-        private static IDictionary<Type,
+        private static readonly IDictionary<Type,
                 IList<PropertyMetadata>> type_properties;
         private static readonly object type_properties_lock = new object();
 
-        private static JsonWriter static_writer;
+        private static readonly JsonWriter static_writer;
         private static readonly object static_writer_lock = new object();
         #endregion
 
@@ -74,27 +74,37 @@ namespace DGP.Snap.Framework.Data.Json
         private static void AddArrayMetadata(Type type)
         {
             if (array_metadata.ContainsKey(type))
+            {
                 return;
+            }
 
             ArrayMetadata data = new ArrayMetadata();
 
             data.IsArray = type.IsArray;
 
             if (type.GetInterface("System.Collections.IList") != null)
+            {
                 data.IsList = true;
+            }
 
             foreach (PropertyInfo p_info in type.GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 if (p_info.Name != "Item")
+                {
                     continue;
+                }
 
                 ParameterInfo[] parameters = p_info.GetIndexParameters();
 
                 if (parameters.Length != 1)
+                {
                     continue;
+                }
 
                 if (parameters[0].ParameterType == typeof(int))
+                {
                     data.ElementType = p_info.PropertyType;
+                }
             }
 
             lock (array_metadata_lock)
@@ -113,12 +123,16 @@ namespace DGP.Snap.Framework.Data.Json
         private static void AddObjectMetadata(Type type)
         {
             if (object_metadata.ContainsKey(type))
+            {
                 return;
+            }
 
             ObjectMetadata data = new ObjectMetadata();
 
             if (type.GetInterface("System.Collections.IDictionary") != null)
+            {
                 data.IsDictionary = true;
+            }
 
             data.Properties = new Dictionary<string, PropertyMetadata>();
 
@@ -131,13 +145,17 @@ namespace DGP.Snap.Framework.Data.Json
                     if (parameters.Length == 1)
                     {
                         if (parameters[0].ParameterType == typeof(string))
+                        {
                             data.ElementType = p_info.PropertyType;
+                        }
 
                         continue;
                     }
 
                     if (parameters.Length > 1)
+                    {
                         continue;
+                    }
                 }
 
                 PropertyMetadata p_data = new PropertyMetadata();
@@ -189,7 +207,9 @@ namespace DGP.Snap.Framework.Data.Json
         private static void AddTypeProperties(Type type)
         {
             if (type_properties.ContainsKey(type))
+            {
                 return;
+            }
 
             IList<PropertyMetadata> props = new List<PropertyMetadata>();
 
@@ -198,7 +218,9 @@ namespace DGP.Snap.Framework.Data.Json
                 if (p_info.Name == "Item")
                 {
                     if (p_info.GetIndexParameters().Length > 0)
+                    {
                         continue;
+                    }
                 }
 
                 PropertyMetadata p_data = new PropertyMetadata();
@@ -251,11 +273,15 @@ namespace DGP.Snap.Framework.Data.Json
             lock (conv_ops_lock)
             {
                 if (!conv_ops.ContainsKey(t1))
+                {
                     conv_ops.Add(t1, new Dictionary<Type, MethodInfo>());
+                }
             }
 
             if (conv_ops[t1].ContainsKey(t2))
+            {
                 return conv_ops[t1][t2];
+            }
 
             MethodInfo op = t1.GetMethod(
                 "op_Implicit", new Type[] { t2 });
@@ -280,7 +306,9 @@ namespace DGP.Snap.Framework.Data.Json
             reader.Read();
 
             if (reader.Token == JsonToken.ArrayEnd)
+            {
                 return null;
+            }
 
             if (reader.Token == JsonToken.Null)
             {
@@ -305,7 +333,9 @@ namespace DGP.Snap.Framework.Data.Json
                 Type json_type = reader.Value.GetType();
 
                 if (inst_type.IsAssignableFrom(json_type))
+                {
                     return reader.Value;
+                }
 
                 // If there's a custom importer that fits, use it
                 if (custom_importers_table.ContainsKey(json_type) &&
@@ -333,7 +363,9 @@ namespace DGP.Snap.Framework.Data.Json
 
                 // Maybe it's an enum
                 if (inst_type.IsEnum)
+                {
                     return Enum.ToObject(inst_type, reader.Value);
+                }
 
                 // Try using an implicit conversion operator
                 MethodInfo conv_op = GetConvOp(inst_type, json_type);
@@ -383,7 +415,9 @@ namespace DGP.Snap.Framework.Data.Json
                 {
                     object item = ReadValue(elem_type, reader);
                     if (item == null && reader.Token == JsonToken.ArrayEnd)
+                    {
                         break;
+                    }
 
                     list.Add(item);
                 }
@@ -394,7 +428,9 @@ namespace DGP.Snap.Framework.Data.Json
                     instance = Array.CreateInstance(elem_type, n);
 
                     for (int i = 0; i < n; i++)
+                    {
                         ((Array)instance).SetValue(list[i], i);
+                    }
                 }
                 else
                 {
@@ -414,7 +450,9 @@ namespace DGP.Snap.Framework.Data.Json
                     reader.Read();
 
                     if (reader.Token == JsonToken.ObjectEnd)
+                    {
                         break;
+                    }
 
                     string property = (string)reader.Value;
 
@@ -529,7 +567,9 @@ namespace DGP.Snap.Framework.Data.Json
                 {
                     IJsonWrapper item = ReadValue(factory, reader);
                     if (item == null && reader.Token == JsonToken.ArrayEnd)
+                    {
                         break;
+                    }
 
                     instance.Add(item);
                 }
@@ -543,7 +583,9 @@ namespace DGP.Snap.Framework.Data.Json
                     reader.Read();
 
                     if (reader.Token == JsonToken.ObjectEnd)
+                    {
                         break;
+                    }
 
                     string property = (string)reader.Value;
 
@@ -712,7 +754,9 @@ namespace DGP.Snap.Framework.Data.Json
             Type json_type, Type value_type, ImporterFunc importer)
         {
             if (!table.ContainsKey(json_type))
+            {
                 table.Add(json_type, new Dictionary<Type, ImporterFunc>());
+            }
 
             table[json_type][value_type] = importer;
         }
@@ -738,9 +782,13 @@ namespace DGP.Snap.Framework.Data.Json
             if (obj is IJsonWrapper)
             {
                 if (writer_is_private)
+                {
                     writer.TextWriter.Write(((IJsonWrapper)obj).ToJson());
+                }
                 else
+                {
                     ((IJsonWrapper)obj).ToJson(writer);
+                }
 
                 return;
             }
@@ -780,7 +828,9 @@ namespace DGP.Snap.Framework.Data.Json
                 writer.WriteArrayStart();
 
                 foreach (object elem in (Array)obj)
+                {
                     WriteValue(elem, writer, writer_is_private, depth + 1);
+                }
 
                 writer.WriteArrayEnd();
 
@@ -791,7 +841,10 @@ namespace DGP.Snap.Framework.Data.Json
             {
                 writer.WriteArrayStart();
                 foreach (object elem in (IList)obj)
+                {
                     WriteValue(elem, writer, writer_is_private, depth + 1);
+                }
+
                 writer.WriteArrayEnd();
 
                 return;

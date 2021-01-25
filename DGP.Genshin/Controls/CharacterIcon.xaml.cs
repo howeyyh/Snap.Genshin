@@ -1,8 +1,7 @@
 ﻿using DGP.Genshin.Data;
-using System.Diagnostics;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace DGP.Genshin.Controls
 {
@@ -25,5 +24,12 @@ namespace DGP.Genshin.Controls
         }
         public static readonly DependencyProperty CharacterProperty =
             DependencyProperty.Register("Character", typeof(Character), typeof(CharacterIcon), new PropertyMetadata(null));
+
+        public EventHandler IconClickedEventHandler;
+
+        private void UserControl_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            IconClickedEventHandler?.Invoke(this, null);
+        }
     }
 }

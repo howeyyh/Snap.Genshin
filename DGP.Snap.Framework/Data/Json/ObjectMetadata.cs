@@ -15,25 +15,27 @@ namespace DGP.Snap.Framework.Data.Json
         {
             get
             {
-                if (this.element_type == null)
+                if (element_type == null)
+                {
                     return typeof(JsonData);
+                }
 
-                return this.element_type;
+                return element_type;
             }
 
-            set => this.element_type = value;
+            set => element_type = value;
         }
 
         public bool IsDictionary
         {
-            get => this.is_dictionary;
-            set => this.is_dictionary = value;
+            get => is_dictionary;
+            set => is_dictionary = value;
         }
 
         public IDictionary<string, PropertyMetadata> Properties
         {
-            get => this.properties;
-            set => this.properties = value;
+            get => properties;
+            set => properties = value;
         }
     }
 }

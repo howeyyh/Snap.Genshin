@@ -1,4 +1,4 @@
-﻿namespace DGP.Genshin.Data
+﻿namespace DGP.Genshin.Data.Talent
 {
     public class TalentGroup
     {

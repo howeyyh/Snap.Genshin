@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DGP.Genshin.Data.Talent;
+using DGP.Genshin.Data.Weapon;
+using System;
 
 namespace DGP.Genshin.Data
 {
@@ -10,7 +12,10 @@ namespace DGP.Genshin.Data
         public int Star { get; set; } = 4;
         public bool IsReleased { get; set; } = true;
         public Element Element { get; set; }
-        public TalentMaterialType TalentMaterial { get; set; }
+        public TalentMaterial TalentMaterial { get; set; }
+
+        public Stat AscensionStat { get; set; } = Stat.None;
+        public double AscensionStatValue { get; set; } = 0;
 
         #region Attributes
         #region base Stats
@@ -18,6 +23,7 @@ namespace DGP.Genshin.Data
         /// 生命值上限
         /// </summary>
         public uint MaxHP { get; set; }
+        public double HPPercent { get; set; }
         public uint ATK { get; set; }
         public double ATKPercent { get; set; }
         public uint DEF { get; set; }
@@ -52,6 +58,7 @@ namespace DGP.Genshin.Data
         public double PhysicalDMGBonus { get; set; }
         public double PhysicalRES { get; set; }
         #endregion
+
         #endregion
 
         public WeaponType WeaponType { get; set; } = WeaponType.Sword;

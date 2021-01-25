@@ -1,54 +1,67 @@
-﻿<Application x:Class="DGP.Genshin.App"
+﻿<Application
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.modernwpf.com/2019"
              xmlns:local="clr-namespace:DGP.Genshin"
+             xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="DGP.Genshin.App"
              StartupUri="MainWindow.xaml"
              Startup="Application_Startup"
              >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemeResources />
-                <ui:XamlControlsResources />
+                <ui:ThemeResources/>
+                <ui:XamlControlsResources/>
+                <ui:IntellisenseResources/>
+                <ResourceDictionary x:Name="Color">
+                    <ImageSource x:Key="1star">pack://application:,,,/Data/Images/Icons/1star.png</ImageSource>
+                    <ImageSource x:Key="2star">pack://application:,,,/Data/Images/Icons/2star.png</ImageSource>
+                    <ImageSource x:Key="3star">pack://application:,,,/Data/Images/Icons/3star.png</ImageSource>
+                    <ImageSource x:Key="4star">pack://application:,,,/Data/Images/Icons/4star.png</ImageSource>
+                    <ImageSource x:Key="5star">pack://application:,,,/Data/Images/Icons/5star.png</ImageSource>
+
+                    <SolidColorBrush x:Key="Star1Brush" Color="#FF72778b"/>
+                    <SolidColorBrush x:Key="Star2Brush" Color="#FF299072"/>
+                    <SolidColorBrush x:Key="Star3Brush" Color="#FF5181cd"/>
+                    <SolidColorBrush x:Key="Star4Brush" Color="#FFa356e2"/>
+                    <SolidColorBrush x:Key="Star5Brush" Color="#FFbc6a32"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Name="Weapon">
+                    <ImageSource x:Key="Decarabians1">pack://application:,,,/Data/Images/Materials/Weapon/tile_of_decarabians_tower.png</ImageSource>
+                    <ImageSource x:Key="Decarabians2">pack://application:,,,/Data/Images/Materials/Weapon/debris_of_decarabians_city.png</ImageSource>
+                    <ImageSource x:Key="Decarabians3">pack://application:,,,/Data/Images/Materials/Weapon/fragment_of_decarabians_epic.png</ImageSource>
+                    <ImageSource x:Key="Decarabians4">pack://application:,,,/Data/Images/Materials/Weapon/scattered_piece_of_decarabianss_dream.png</ImageSource>
+
+                    <ImageSource x:Key="Boreal1">pack://application:,,,/Data/Images/Materials/Weapon/boreal_wolfs_milk_tooth.png</ImageSource>
+                    <ImageSource x:Key="Boreal2">pack://application:,,,/Data/Images/Materials/Weapon/boreal_wolfs_cracked_tooth.png</ImageSource>
+                    <ImageSource x:Key="Boreal3">pack://application:,,,/Data/Images/Materials/Weapon/boreal_wolfs_broken_fang.png</ImageSource>
+                    <ImageSource x:Key="Boreal4">pack://application:,,,/Data/Images/Materials/Weapon/boreal_wolfs_nostalgia.png</ImageSource>
+
+                    <ImageSource x:Key="DandelionGladiator1">pack://application:,,,/Data/Images/Materials/Weapon/fetters_of_the_dandelion_gladiator.png</ImageSource>
+                    <ImageSource x:Key="DandelionGladiator2">pack://application:,,,/Data/Images/Materials/Weapon/chains_of_the_dandelion_gladiator.png</ImageSource>
+                    <ImageSource x:Key="DandelionGladiator3">pack://application:,,,/Data/Images/Materials/Weapon/shackles_of_the_dandelion_gladiator.png</ImageSource>
+                    <ImageSource x:Key="DandelionGladiator4">pack://application:,,,/Data/Images/Materials/Weapon/dream_of_the_dandelion_gladiator.png</ImageSource>
+
+                    <ImageSource x:Key="Guyun1">pack://application:,,,/Data/Images/Materials/Weapon/luminous_sands_from_guyun.png</ImageSource>
+                    <ImageSource x:Key="Guyun2">pack://application:,,,/Data/Images/Materials/Weapon/lustrous_stone_from_guyun.png</ImageSource>
+                    <ImageSource x:Key="Guyun3">pack://application:,,,/Data/Images/Materials/Weapon/relic_from_guyun.png</ImageSource>
+                    <ImageSource x:Key="Guyun4">pack://application:,,,/Data/Images/Materials/Weapon/divine_body_from_guyun.png</ImageSource>
+
+                    <ImageSource x:Key="MistVeiled1">pack://application:,,,/Data/Images/Materials/Weapon/mist_veiled_lead_elixir.png</ImageSource>
+                    <ImageSource x:Key="MistVeiled2">pack://application:,,,/Data/Images/Materials/Weapon/mist_veiled_mercury_elixir.png</ImageSource>
+                    <ImageSource x:Key="MistVeiled3">pack://application:,,,/Data/Images/Materials/Weapon/mist_veiled_gold_elixir.png</ImageSource>
+                    <ImageSource x:Key="MistVeiled4">pack://application:,,,/Data/Images/Materials/Weapon/mist_veiled_primo_elixir.png</ImageSource>
+
+                    <ImageSource x:Key="Aerosiderite1">pack://application:,,,/Data/Images/Materials/Weapon/grain_of_aerosiderite.png</ImageSource>
+                    <ImageSource x:Key="Aerosiderite2">pack://application:,,,/Data/Images/Materials/Weapon/piece_of_aerosiderite.png</ImageSource>
+                    <ImageSource x:Key="Aerosiderite3">pack://application:,,,/Data/Images/Materials/Weapon/bit_of_aerosiderite.png</ImageSource>
+                    <ImageSource x:Key="Aerosiderite4">pack://application:,,,/Data/Images/Materials/Weapon/chunk_of_aerosiderite.png</ImageSource>
+                </ResourceDictionary>
                 <!-- Other merged dictionaries here -->
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
-            <ImageSource x:Key="1star" >/DGP.Genshin;component/Data/Images/Icons/1star.png</ImageSource>
-            <ImageSource x:Key="2star" >/DGP.Genshin;component/Data/Images/Icons/2star.png</ImageSource>
-            <ImageSource x:Key="3star" >/DGP.Genshin;component/Data/Images/Icons/3star.png</ImageSource>
-            <ImageSource x:Key="4star" >/DGP.Genshin;component/Data/Images/Icons/4star.png</ImageSource>
-            <ImageSource x:Key="5star" >/DGP.Genshin;component/Data/Images/Icons/5star.png</ImageSource>
-
-            <BitmapImage x:Key="Decarabians1" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/tile_of_decarabians_tower.png"/>
-            <BitmapImage x:Key="Decarabians2" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/debris_of_decarabians_city.png"/>
-            <BitmapImage x:Key="Decarabians3" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/fragment_of_decarabians_epic.png"/>
-            <BitmapImage x:Key="Decarabians4" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/scattered_piece_of_decarabianss_dream.png"/>
-
-            <BitmapImage x:Key="Boreal1" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/boreal_wolfs_milk_tooth.png"/>
-            <BitmapImage x:Key="Boreal2" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/boreal_wolfs_cracked_tooth.png"/>
-            <BitmapImage x:Key="Boreal3" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/boreal_wolfs_broken_fang.png"/>
-            <BitmapImage x:Key="Boreal4" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/boreal_wolfs_nostalgia.png"/>
-
-            <BitmapImage x:Key="DandelionGladiator1" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/fetters_of_the_dandelion_gladiator.png"/>
-            <BitmapImage x:Key="DandelionGladiator2" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/chains_of_the_dandelion_gladiator.png"/>
-            <BitmapImage x:Key="DandelionGladiator3" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/shackles_of_the_dandelion_gladiator.png"/>
-            <BitmapImage x:Key="DandelionGladiator4" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/dream_of_the_dandelion_gladiator.png"/>
-
-            <BitmapImage x:Key="Guyun1" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/luminous_sands_from_guyun.png"/>
-            <BitmapImage x:Key="Guyun2" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/lustrous_stone_from_guyun.png"/>
-            <BitmapImage x:Key="Guyun3" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/relic_from_guyun.png"/>
-            <BitmapImage x:Key="Guyun4" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/divine_body_from_guyun.png"/>
-
-            <BitmapImage x:Key="MistVeiled1" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/mist_veiled_lead_elixir.png"/>
-            <BitmapImage x:Key="MistVeiled2" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/mist_veiled_mercury_elixir.png"/>
-            <BitmapImage x:Key="MistVeiled3" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/mist_veiled_gold_elixir.png"/>
-            <BitmapImage x:Key="MistVeiled4" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/mist_veiled_primo_elixir.png"/>
-
-            <BitmapImage x:Key="Aerosiderite1" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/grain_of_aerosiderite.png"/>
-            <BitmapImage x:Key="Aerosiderite2" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/piece_of_aerosiderite.png"/>
-            <BitmapImage x:Key="Aerosiderite3" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/bit_of_aerosiderite.png"/>
-            <BitmapImage x:Key="Aerosiderite4" UriSource="/DGP.Genshin;component/Data/Images/Materials/Weapon/chunk_of_aerosiderite.png"/>
+            <CornerRadius x:Key="IconCornerRadius">4</CornerRadius>
+            <System:Double x:Key="ContentDialogMinWidth">280</System:Double>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

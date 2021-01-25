@@ -15,8 +15,8 @@ namespace DGP.Genshin.Data
 
         public Material(string name, Uri uri)
         {
-            this.Name = name;
-            this.ImageUri = uri;
+            Name = name;
+            ImageUri = uri;
         }
     }
 }

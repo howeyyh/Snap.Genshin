@@ -15,7 +15,10 @@ namespace DGP.Snap.Framework.Extensions
         public static void AddOrSet<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
         {
             if (dictionary.ContainsKey(key))
+            {
                 dictionary.Remove(key);
+            }
+
             dictionary.Add(key, value);
         }
     }

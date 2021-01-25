@@ -15,26 +15,26 @@ namespace DGP.Snap.Framework.Net.Download
 
         private TimeSpan timeout = TimeSpan.FromMinutes(2);
 
-        public bool HasResponse => this.webResponse != null;
+        public bool HasResponse => webResponse != null;
 
-        public bool IsPartialResponse => this.webResponse is HttpWebResponse response && response.StatusCode == HttpStatusCode.PartialContent;
+        public bool IsPartialResponse => webResponse is HttpWebResponse response && response.StatusCode == HttpStatusCode.PartialContent;
 
         public void OpenReadAsync(Uri address, long newPosition)
         {
-            this.position = newPosition;
-            this.OpenReadAsync(address);
+            position = newPosition;
+            OpenReadAsync(address);
         }
 
         public string GetOriginalFileNameFromDownload()
         {
-            if (this.webResponse == null)
+            if (webResponse == null)
             {
                 return null;
             }
 
             try
             {
-                var contentDisposition = this.webResponse.Headers.GetContentDisposition();
+                var contentDisposition = webResponse.Headers.GetContentDisposition();
                 if (contentDisposition != null)
                 {
                     var filename = contentDisposition.FileName;
@@ -43,7 +43,7 @@ namespace DGP.Snap.Framework.Net.Download
                         return Path.GetFileName(filename);
                     }
                 }
-                return Path.GetFileName(this.webResponse.ResponseUri.LocalPath);
+                return Path.GetFileName(webResponse.ResponseUri.LocalPath);
             }
             catch (Exception)
             {
@@ -54,14 +54,14 @@ namespace DGP.Snap.Framework.Net.Download
         protected override WebResponse GetWebResponse(WebRequest request)
         {
             var response = base.GetWebResponse(request);
-            this.webResponse = response;
+            webResponse = response;
             return response;
         }
 
         protected override WebResponse GetWebResponse(WebRequest request, IAsyncResult result)
         {
             var response = base.GetWebResponse(request, result);
-            this.webResponse = response;
+            webResponse = response;
 
             return response;
         }
@@ -72,7 +72,7 @@ namespace DGP.Snap.Framework.Net.Download
 
             if (request != null)
             {
-                request.Timeout = (int)this.timeout.TotalMilliseconds;
+                request.Timeout = (int)timeout.TotalMilliseconds;
             }
 
             var webRequest = request as HttpWebRequest;
@@ -81,14 +81,14 @@ namespace DGP.Snap.Framework.Net.Download
                 return request;
             }
 
-            webRequest.ReadWriteTimeout = (int)this.timeout.TotalMilliseconds;
-            webRequest.Timeout = (int)this.timeout.TotalMilliseconds;
-            if (this.position != 0)
+            webRequest.ReadWriteTimeout = (int)timeout.TotalMilliseconds;
+            webRequest.Timeout = (int)timeout.TotalMilliseconds;
+            if (position != 0)
             {
-                webRequest.AddRange((int)this.position);
+                webRequest.AddRange((int)position);
                 webRequest.Accept = "*/*";
             }
-            webRequest.CookieContainer = this.cookieContainer;
+            webRequest.CookieContainer = cookieContainer;
             return request;
         }
     }

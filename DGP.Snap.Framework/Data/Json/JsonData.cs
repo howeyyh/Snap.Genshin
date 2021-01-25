@@ -25,52 +25,52 @@ namespace DGP.Snap.Framework.Data.Json
 
 
         #region Properties
-        public int Count => this.EnsureCollection().Count;
+        public int Count => EnsureCollection().Count;
 
-        public bool IsArray => this.type == JsonType.Array;
+        public bool IsArray => type == JsonType.Array;
 
-        public bool IsBoolean => this.type == JsonType.Boolean;
+        public bool IsBoolean => type == JsonType.Boolean;
 
-        public bool IsDouble => this.type == JsonType.Double;
+        public bool IsDouble => type == JsonType.Double;
 
-        public bool IsInt => this.type == JsonType.Int;
+        public bool IsInt => type == JsonType.Int;
 
-        public bool IsLong => this.type == JsonType.Long;
+        public bool IsLong => type == JsonType.Long;
 
-        public bool IsObject => this.type == JsonType.Object;
+        public bool IsObject => type == JsonType.Object;
 
-        public bool IsString => this.type == JsonType.String;
+        public bool IsString => type == JsonType.String;
 
         public ICollection<string> Keys
         {
-            get { this.EnsureDictionary(); return this.inst_object.Keys; }
+            get { EnsureDictionary(); return inst_object.Keys; }
         }
         #endregion
 
 
         #region ICollection Properties
-        int ICollection.Count => this.Count;
+        int ICollection.Count => Count;
 
-        bool ICollection.IsSynchronized => this.EnsureCollection().IsSynchronized;
+        bool ICollection.IsSynchronized => EnsureCollection().IsSynchronized;
 
-        object ICollection.SyncRoot => this.EnsureCollection().SyncRoot;
+        object ICollection.SyncRoot => EnsureCollection().SyncRoot;
         #endregion
 
 
         #region IDictionary Properties
-        bool IDictionary.IsFixedSize => this.EnsureDictionary().IsFixedSize;
+        bool IDictionary.IsFixedSize => EnsureDictionary().IsFixedSize;
 
-        bool IDictionary.IsReadOnly => this.EnsureDictionary().IsReadOnly;
+        bool IDictionary.IsReadOnly => EnsureDictionary().IsReadOnly;
 
         ICollection IDictionary.Keys
         {
             get
             {
-                this.EnsureDictionary();
+                EnsureDictionary();
                 IList<string> keys = new List<string>();
 
                 foreach (KeyValuePair<string, JsonData> entry in
-                         this.object_list)
+                         object_list)
                 {
                     keys.Add(entry.Key);
                 }
@@ -83,11 +83,11 @@ namespace DGP.Snap.Framework.Data.Json
         {
             get
             {
-                this.EnsureDictionary();
+                EnsureDictionary();
                 IList<JsonData> values = new List<JsonData>();
 
                 foreach (KeyValuePair<string, JsonData> entry in
-                         this.object_list)
+                         object_list)
                 {
                     values.Add(entry.Value);
                 }
@@ -100,33 +100,33 @@ namespace DGP.Snap.Framework.Data.Json
 
 
         #region IJsonWrapper Properties
-        bool IJsonWrapper.IsArray => this.IsArray;
+        bool IJsonWrapper.IsArray => IsArray;
 
-        bool IJsonWrapper.IsBoolean => this.IsBoolean;
+        bool IJsonWrapper.IsBoolean => IsBoolean;
 
-        bool IJsonWrapper.IsDouble => this.IsDouble;
+        bool IJsonWrapper.IsDouble => IsDouble;
 
-        bool IJsonWrapper.IsInt => this.IsInt;
+        bool IJsonWrapper.IsInt => IsInt;
 
-        bool IJsonWrapper.IsLong => this.IsLong;
+        bool IJsonWrapper.IsLong => IsLong;
 
-        bool IJsonWrapper.IsObject => this.IsObject;
+        bool IJsonWrapper.IsObject => IsObject;
 
-        bool IJsonWrapper.IsString => this.IsString;
+        bool IJsonWrapper.IsString => IsString;
         #endregion
 
 
         #region IList Properties
-        bool IList.IsFixedSize => this.EnsureList().IsFixedSize;
+        bool IList.IsFixedSize => EnsureList().IsFixedSize;
 
-        bool IList.IsReadOnly => this.EnsureList().IsReadOnly;
+        bool IList.IsReadOnly => EnsureList().IsReadOnly;
         #endregion
 
 
         #region IDictionary Indexer
         object IDictionary.this[object key]
         {
-            get => this.EnsureDictionary()[key];
+            get => EnsureDictionary()[key];
 
             set
             {
@@ -136,7 +136,7 @@ namespace DGP.Snap.Framework.Data.Json
                         "The key has to be a string");
                 }
 
-                JsonData data = this.ToJsonData(value);
+                JsonData data = ToJsonData(value);
 
                 this[(string)key] = data;
             }
@@ -149,23 +149,23 @@ namespace DGP.Snap.Framework.Data.Json
         {
             get
             {
-                this.EnsureDictionary();
-                return this.object_list[idx].Value;
+                EnsureDictionary();
+                return object_list[idx].Value;
             }
 
             set
             {
-                this.EnsureDictionary();
-                JsonData data = this.ToJsonData(value);
+                EnsureDictionary();
+                JsonData data = ToJsonData(value);
 
-                KeyValuePair<string, JsonData> old_entry = this.object_list[idx];
+                KeyValuePair<string, JsonData> old_entry = object_list[idx];
 
-                this.inst_object[old_entry.Key] = data;
+                inst_object[old_entry.Key] = data;
 
                 KeyValuePair<string, JsonData> entry =
                     new KeyValuePair<string, JsonData>(old_entry.Key, data);
 
-                this.object_list[idx] = entry;
+                object_list[idx] = entry;
             }
         }
         #endregion
@@ -174,12 +174,12 @@ namespace DGP.Snap.Framework.Data.Json
         #region IList Indexer
         object IList.this[int index]
         {
-            get => this.EnsureList()[index];
+            get => EnsureList()[index];
 
             set
             {
-                this.EnsureList();
-                JsonData data = this.ToJsonData(value);
+                EnsureList();
+                JsonData data = ToJsonData(value);
 
                 this[index] = data;
             }
@@ -192,36 +192,36 @@ namespace DGP.Snap.Framework.Data.Json
         {
             get
             {
-                this.EnsureDictionary();
-                return this.inst_object[prop_name];
+                EnsureDictionary();
+                return inst_object[prop_name];
             }
 
             set
             {
-                this.EnsureDictionary();
+                EnsureDictionary();
 
                 KeyValuePair<string, JsonData> entry =
                     new KeyValuePair<string, JsonData>(prop_name, value);
 
-                if (this.inst_object.ContainsKey(prop_name))
+                if (inst_object.ContainsKey(prop_name))
                 {
-                    for (int i = 0; i < this.object_list.Count; i++)
+                    for (int i = 0; i < object_list.Count; i++)
                     {
-                        if (this.object_list[i].Key == prop_name)
+                        if (object_list[i].Key == prop_name)
                         {
-                            this.object_list[i] = entry;
+                            object_list[i] = entry;
                             break;
                         }
                     }
                 }
                 else
                 {
-                    this.object_list.Add(entry);
+                    object_list.Add(entry);
                 }
 
-                this.inst_object[prop_name] = value;
+                inst_object[prop_name] = value;
 
-                this.json = null;
+                json = null;
             }
         }
 
@@ -229,33 +229,35 @@ namespace DGP.Snap.Framework.Data.Json
         {
             get
             {
-                this.EnsureCollection();
+                EnsureCollection();
 
-                if (this.type == JsonType.Array)
-                    return this.inst_array[index];
+                if (type == JsonType.Array)
+                {
+                    return inst_array[index];
+                }
 
-                return this.object_list[index].Value;
+                return object_list[index].Value;
             }
 
             set
             {
-                this.EnsureCollection();
+                EnsureCollection();
 
-                if (this.type == JsonType.Array)
+                if (type == JsonType.Array)
                 {
-                    this.inst_array[index] = value;
+                    inst_array[index] = value;
                 }
                 else
                 {
-                    KeyValuePair<string, JsonData> entry = this.object_list[index];
+                    KeyValuePair<string, JsonData> entry = object_list[index];
                     KeyValuePair<string, JsonData> new_entry =
                         new KeyValuePair<string, JsonData>(entry.Key, value);
 
-                    this.object_list[index] = new_entry;
-                    this.inst_object[entry.Key] = value;
+                    object_list[index] = new_entry;
+                    inst_object[entry.Key] = value;
                 }
 
-                this.json = null;
+                json = null;
             }
         }
         #endregion
@@ -268,62 +270,62 @@ namespace DGP.Snap.Framework.Data.Json
 
         public JsonData(bool boolean)
         {
-            this.type = JsonType.Boolean;
-            this.inst_boolean = boolean;
+            type = JsonType.Boolean;
+            inst_boolean = boolean;
         }
 
         public JsonData(double number)
         {
-            this.type = JsonType.Double;
-            this.inst_double = number;
+            type = JsonType.Double;
+            inst_double = number;
         }
 
         public JsonData(int number)
         {
-            this.type = JsonType.Int;
-            this.inst_int = number;
+            type = JsonType.Int;
+            inst_int = number;
         }
 
         public JsonData(long number)
         {
-            this.type = JsonType.Long;
-            this.inst_long = number;
+            type = JsonType.Long;
+            inst_long = number;
         }
 
         public JsonData(object obj)
         {
             if (obj is bool)
             {
-                this.type = JsonType.Boolean;
-                this.inst_boolean = (bool)obj;
+                type = JsonType.Boolean;
+                inst_boolean = (bool)obj;
                 return;
             }
 
             if (obj is double)
             {
-                this.type = JsonType.Double;
-                this.inst_double = (double)obj;
+                type = JsonType.Double;
+                inst_double = (double)obj;
                 return;
             }
 
             if (obj is int)
             {
-                this.type = JsonType.Int;
-                this.inst_int = (int)obj;
+                type = JsonType.Int;
+                inst_int = (int)obj;
                 return;
             }
 
             if (obj is long)
             {
-                this.type = JsonType.Long;
-                this.inst_long = (long)obj;
+                type = JsonType.Long;
+                inst_long = (long)obj;
                 return;
             }
 
             if (obj is string)
             {
-                this.type = JsonType.String;
-                this.inst_string = (string)obj;
+                type = JsonType.String;
+                inst_string = (string)obj;
                 return;
             }
 
@@ -333,8 +335,8 @@ namespace DGP.Snap.Framework.Data.Json
 
         public JsonData(string str)
         {
-            this.type = JsonType.String;
-            this.inst_string = str;
+            type = JsonType.String;
+            inst_string = str;
         }
         #endregion
 
@@ -411,184 +413,184 @@ namespace DGP.Snap.Framework.Data.Json
 
 
         #region ICollection Methods
-        void ICollection.CopyTo(Array array, int index) => this.EnsureCollection().CopyTo(array, index);
+        void ICollection.CopyTo(Array array, int index) => EnsureCollection().CopyTo(array, index);
         #endregion
 
 
         #region IDictionary Methods
         void IDictionary.Add(object key, object value)
         {
-            JsonData data = this.ToJsonData(value);
+            JsonData data = ToJsonData(value);
 
-            this.EnsureDictionary().Add(key, data);
+            EnsureDictionary().Add(key, data);
 
             KeyValuePair<string, JsonData> entry =
                 new KeyValuePair<string, JsonData>((string)key, data);
-            this.object_list.Add(entry);
+            object_list.Add(entry);
 
-            this.json = null;
+            json = null;
         }
 
         void IDictionary.Clear()
         {
-            this.EnsureDictionary().Clear();
-            this.object_list.Clear();
-            this.json = null;
+            EnsureDictionary().Clear();
+            object_list.Clear();
+            json = null;
         }
 
-        bool IDictionary.Contains(object key) => this.EnsureDictionary().Contains(key);
+        bool IDictionary.Contains(object key) => EnsureDictionary().Contains(key);
 
         IDictionaryEnumerator IDictionary.GetEnumerator() => ((IOrderedDictionary)this).GetEnumerator();
 
         void IDictionary.Remove(object key)
         {
-            this.EnsureDictionary().Remove(key);
+            EnsureDictionary().Remove(key);
 
-            for (int i = 0; i < this.object_list.Count; i++)
+            for (int i = 0; i < object_list.Count; i++)
             {
-                if (this.object_list[i].Key == (string)key)
+                if (object_list[i].Key == (string)key)
                 {
-                    this.object_list.RemoveAt(i);
+                    object_list.RemoveAt(i);
                     break;
                 }
             }
 
-            this.json = null;
+            json = null;
         }
         #endregion
 
 
         #region IEnumerable Methods
-        IEnumerator IEnumerable.GetEnumerator() => this.EnsureCollection().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => EnsureCollection().GetEnumerator();
         #endregion
 
 
         #region IJsonWrapper Methods
         bool IJsonWrapper.GetBoolean()
         {
-            if (this.type != JsonType.Boolean)
+            if (type != JsonType.Boolean)
             {
                 throw new InvalidOperationException(
                     "JsonData instance doesn't hold a boolean");
             }
 
-            return this.inst_boolean;
+            return inst_boolean;
         }
 
         double IJsonWrapper.GetDouble()
         {
-            if (this.type != JsonType.Double)
+            if (type != JsonType.Double)
             {
                 throw new InvalidOperationException(
                     "JsonData instance doesn't hold a double");
             }
 
-            return this.inst_double;
+            return inst_double;
         }
 
         int IJsonWrapper.GetInt()
         {
-            if (this.type != JsonType.Int)
+            if (type != JsonType.Int)
             {
                 throw new InvalidOperationException(
                     "JsonData instance doesn't hold an int");
             }
 
-            return this.inst_int;
+            return inst_int;
         }
 
         long IJsonWrapper.GetLong()
         {
-            if (this.type != JsonType.Long)
+            if (type != JsonType.Long)
             {
                 throw new InvalidOperationException(
                     "JsonData instance doesn't hold a long");
             }
 
-            return this.inst_long;
+            return inst_long;
         }
 
         string IJsonWrapper.GetString()
         {
-            if (this.type != JsonType.String)
+            if (type != JsonType.String)
             {
                 throw new InvalidOperationException(
                     "JsonData instance doesn't hold a string");
             }
 
-            return this.inst_string;
+            return inst_string;
         }
 
         void IJsonWrapper.SetBoolean(bool val)
         {
-            this.type = JsonType.Boolean;
-            this.inst_boolean = val;
-            this.json = null;
+            type = JsonType.Boolean;
+            inst_boolean = val;
+            json = null;
         }
 
         void IJsonWrapper.SetDouble(double val)
         {
-            this.type = JsonType.Double;
-            this.inst_double = val;
-            this.json = null;
+            type = JsonType.Double;
+            inst_double = val;
+            json = null;
         }
 
         void IJsonWrapper.SetInt(int val)
         {
-            this.type = JsonType.Int;
-            this.inst_int = val;
-            this.json = null;
+            type = JsonType.Int;
+            inst_int = val;
+            json = null;
         }
 
         void IJsonWrapper.SetLong(long val)
         {
-            this.type = JsonType.Long;
-            this.inst_long = val;
-            this.json = null;
+            type = JsonType.Long;
+            inst_long = val;
+            json = null;
         }
 
         void IJsonWrapper.SetString(string val)
         {
-            this.type = JsonType.String;
-            this.inst_string = val;
-            this.json = null;
+            type = JsonType.String;
+            inst_string = val;
+            json = null;
         }
 
-        string IJsonWrapper.ToJson() => this.ToJson();
+        string IJsonWrapper.ToJson() => ToJson();
 
-        void IJsonWrapper.ToJson(JsonWriter writer) => this.ToJson(writer);
+        void IJsonWrapper.ToJson(JsonWriter writer) => ToJson(writer);
         #endregion
 
 
         #region IList Methods
-        int IList.Add(object value) => this.Add(value);
+        int IList.Add(object value) => Add(value);
 
         void IList.Clear()
         {
-            this.EnsureList().Clear();
-            this.json = null;
+            EnsureList().Clear();
+            json = null;
         }
 
-        bool IList.Contains(object value) => this.EnsureList().Contains(value);
+        bool IList.Contains(object value) => EnsureList().Contains(value);
 
-        int IList.IndexOf(object value) => this.EnsureList().IndexOf(value);
+        int IList.IndexOf(object value) => EnsureList().IndexOf(value);
 
         void IList.Insert(int index, object value)
         {
-            this.EnsureList().Insert(index, value);
-            this.json = null;
+            EnsureList().Insert(index, value);
+            json = null;
         }
 
         void IList.Remove(object value)
         {
-            this.EnsureList().Remove(value);
-            this.json = null;
+            EnsureList().Remove(value);
+            json = null;
         }
 
         void IList.RemoveAt(int index)
         {
-            this.EnsureList().RemoveAt(index);
-            this.json = null;
+            EnsureList().RemoveAt(index);
+            json = null;
         }
         #endregion
 
@@ -596,31 +598,31 @@ namespace DGP.Snap.Framework.Data.Json
         #region IOrderedDictionary Methods
         IDictionaryEnumerator IOrderedDictionary.GetEnumerator()
         {
-            this.EnsureDictionary();
+            EnsureDictionary();
 
             return new OrderedDictionaryEnumerator(
-                this.object_list.GetEnumerator());
+                object_list.GetEnumerator());
         }
 
         void IOrderedDictionary.Insert(int idx, object key, object value)
         {
             string property = (string)key;
-            JsonData data = this.ToJsonData(value);
+            JsonData data = ToJsonData(value);
 
             this[property] = data;
 
             KeyValuePair<string, JsonData> entry =
                 new KeyValuePair<string, JsonData>(property, data);
 
-            this.object_list.Insert(idx, entry);
+            object_list.Insert(idx, entry);
         }
 
         void IOrderedDictionary.RemoveAt(int idx)
         {
-            this.EnsureDictionary();
+            EnsureDictionary();
 
-            this.inst_object.Remove(this.object_list[idx].Key);
-            this.object_list.RemoveAt(idx);
+            inst_object.Remove(object_list[idx].Key);
+            object_list.RemoveAt(idx);
         }
         #endregion
 
@@ -628,11 +630,15 @@ namespace DGP.Snap.Framework.Data.Json
         #region Private Methods
         private ICollection EnsureCollection()
         {
-            if (this.type == JsonType.Array)
-                return (ICollection)this.inst_array;
+            if (type == JsonType.Array)
+            {
+                return (ICollection)inst_array;
+            }
 
-            if (this.type == JsonType.Object)
-                return (ICollection)this.inst_object;
+            if (type == JsonType.Object)
+            {
+                return (ICollection)inst_object;
+            }
 
             throw new InvalidOperationException(
                 "The JsonData instance has to be initialized first");
@@ -640,46 +646,54 @@ namespace DGP.Snap.Framework.Data.Json
 
         private IDictionary EnsureDictionary()
         {
-            if (this.type == JsonType.Object)
-                return (IDictionary)this.inst_object;
+            if (type == JsonType.Object)
+            {
+                return (IDictionary)inst_object;
+            }
 
-            if (this.type != JsonType.None)
+            if (type != JsonType.None)
             {
                 throw new InvalidOperationException(
                     "Instance of JsonData is not a dictionary");
             }
 
-            this.type = JsonType.Object;
-            this.inst_object = new Dictionary<string, JsonData>();
-            this.object_list = new List<KeyValuePair<string, JsonData>>();
+            type = JsonType.Object;
+            inst_object = new Dictionary<string, JsonData>();
+            object_list = new List<KeyValuePair<string, JsonData>>();
 
-            return (IDictionary)this.inst_object;
+            return (IDictionary)inst_object;
         }
 
         private IList EnsureList()
         {
-            if (this.type == JsonType.Array)
-                return (IList)this.inst_array;
+            if (type == JsonType.Array)
+            {
+                return (IList)inst_array;
+            }
 
-            if (this.type != JsonType.None)
+            if (type != JsonType.None)
             {
                 throw new InvalidOperationException(
                     "Instance of JsonData is not a list");
             }
 
-            this.type = JsonType.Array;
-            this.inst_array = new List<JsonData>();
+            type = JsonType.Array;
+            inst_array = new List<JsonData>();
 
-            return (IList)this.inst_array;
+            return (IList)inst_array;
         }
 
         private JsonData ToJsonData(object obj)
         {
             if (obj == null)
+            {
                 return null;
+            }
 
             if (obj is JsonData)
+            {
                 return (JsonData)obj;
+            }
 
             return new JsonData(obj);
         }
@@ -726,7 +740,10 @@ namespace DGP.Snap.Framework.Data.Json
             {
                 writer.WriteArrayStart();
                 foreach (object elem in (IList)obj)
+                {
                     WriteJson((JsonData)elem, writer);
+                }
+
                 writer.WriteArrayEnd();
 
                 return;
@@ -751,22 +768,22 @@ namespace DGP.Snap.Framework.Data.Json
 
         public int Add(object value)
         {
-            JsonData data = this.ToJsonData(value);
+            JsonData data = ToJsonData(value);
 
-            this.json = null;
+            json = null;
 
-            return this.EnsureList().Add(data);
+            return EnsureList().Add(data);
         }
 
         public void Clear()
         {
-            if (this.IsObject)
+            if (IsObject)
             {
                 ((IDictionary)this).Clear();
                 return;
             }
 
-            if (this.IsArray)
+            if (IsArray)
             {
                 ((IList)this).Clear();
                 return;
@@ -776,47 +793,53 @@ namespace DGP.Snap.Framework.Data.Json
         public bool Equals(JsonData x)
         {
             if (x == null)
+            {
                 return false;
+            }
 
-            if (x.type != this.type)
+            if (x.type != type)
+            {
                 return false;
+            }
 
-            switch (this.type)
+            switch (type)
             {
                 case JsonType.None:
                     return true;
 
                 case JsonType.Object:
-                    return this.inst_object.Equals(x.inst_object);
+                    return inst_object.Equals(x.inst_object);
 
                 case JsonType.Array:
-                    return this.inst_array.Equals(x.inst_array);
+                    return inst_array.Equals(x.inst_array);
 
                 case JsonType.String:
-                    return this.inst_string.Equals(x.inst_string);
+                    return inst_string.Equals(x.inst_string);
 
                 case JsonType.Int:
-                    return this.inst_int.Equals(x.inst_int);
+                    return inst_int.Equals(x.inst_int);
 
                 case JsonType.Long:
-                    return this.inst_long.Equals(x.inst_long);
+                    return inst_long.Equals(x.inst_long);
 
                 case JsonType.Double:
-                    return this.inst_double.Equals(x.inst_double);
+                    return inst_double.Equals(x.inst_double);
 
                 case JsonType.Boolean:
-                    return this.inst_boolean.Equals(x.inst_boolean);
+                    return inst_boolean.Equals(x.inst_boolean);
             }
 
             return false;
         }
 
-        public JsonType GetJsonType() => this.type;
+        public JsonType GetJsonType() => type;
 
         public void SetJsonType(JsonType type)
         {
             if (this.type == type)
+            {
                 return;
+            }
 
             switch (type)
             {
@@ -824,32 +847,32 @@ namespace DGP.Snap.Framework.Data.Json
                     break;
 
                 case JsonType.Object:
-                    this.inst_object = new Dictionary<string, JsonData>();
-                    this.object_list = new List<KeyValuePair<string, JsonData>>();
+                    inst_object = new Dictionary<string, JsonData>();
+                    object_list = new List<KeyValuePair<string, JsonData>>();
                     break;
 
                 case JsonType.Array:
-                    this.inst_array = new List<JsonData>();
+                    inst_array = new List<JsonData>();
                     break;
 
                 case JsonType.String:
-                    this.inst_string = default(string);
+                    inst_string = default(string);
                     break;
 
                 case JsonType.Int:
-                    this.inst_int = default(int);
+                    inst_int = default(int);
                     break;
 
                 case JsonType.Long:
-                    this.inst_long = default(long);
+                    inst_long = default(long);
                     break;
 
                 case JsonType.Double:
-                    this.inst_double = default(double);
+                    inst_double = default(double);
                     break;
 
                 case JsonType.Boolean:
-                    this.inst_boolean = default(bool);
+                    inst_boolean = default(bool);
                     break;
             }
 
@@ -858,17 +881,19 @@ namespace DGP.Snap.Framework.Data.Json
 
         public string ToJson()
         {
-            if (this.json != null)
-                return this.json;
+            if (json != null)
+            {
+                return json;
+            }
 
             StringWriter sw = new StringWriter();
             JsonWriter writer = new JsonWriter(sw);
             writer.Validate = false;
 
             WriteJson(this, writer);
-            this.json = sw.ToString();
+            json = sw.ToString();
 
-            return this.json;
+            return json;
         }
 
         public void ToJson(JsonWriter writer)
@@ -884,28 +909,28 @@ namespace DGP.Snap.Framework.Data.Json
 
         public override string ToString()
         {
-            switch (this.type)
+            switch (type)
             {
                 case JsonType.Array:
                     return "JsonData array";
 
                 case JsonType.Boolean:
-                    return this.inst_boolean.ToString();
+                    return inst_boolean.ToString();
 
                 case JsonType.Double:
-                    return this.inst_double.ToString();
+                    return inst_double.ToString();
 
                 case JsonType.Int:
-                    return this.inst_int.ToString();
+                    return inst_int.ToString();
 
                 case JsonType.Long:
-                    return this.inst_long.ToString();
+                    return inst_long.ToString();
 
                 case JsonType.Object:
                     return "JsonData object";
 
                 case JsonType.String:
-                    return this.inst_string;
+                    return inst_string;
             }
 
             return "Uninitialized JsonData";

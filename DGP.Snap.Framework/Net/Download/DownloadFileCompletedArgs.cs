@@ -19,13 +19,13 @@ namespace DGP.Snap.Framework.Net.Download
         /// <param name="error">Exception object</param>
         public DownloadFileCompletedArgs(CompletedState state, string fileName, Uri fileSource, TimeSpan downloadTime, long bytesTotal, long bytesReceived, System.Exception error)
         {
-            this.State = state;
-            this.FileName = fileName;
-            this.FileSource = fileSource;
-            this.Error = error;
-            this.DownloadTime = downloadTime;
-            this.BytesTotal = bytesTotal;
-            this.BytesReceived = bytesReceived;
+            State = state;
+            FileName = fileName;
+            FileSource = fileSource;
+            Error = error;
+            DownloadTime = downloadTime;
+            BytesTotal = bytesTotal;
+            BytesReceived = bytesReceived;
         }
 
         /// <summary>
@@ -70,11 +70,11 @@ namespace DGP.Snap.Framework.Net.Download
         {
             get
             {
-                if (this.BytesTotal <= 0 || this.BytesReceived <= 0)
+                if (BytesTotal <= 0 || BytesReceived <= 0)
                 {
                     return 0;
                 }
-                return Convert.ToInt32((float)this.BytesReceived / this.BytesTotal * 100);
+                return Convert.ToInt32((float)BytesReceived / BytesTotal * 100);
             }
         }
 
@@ -85,14 +85,14 @@ namespace DGP.Snap.Framework.Net.Download
         {
             get
             {
-                if (this.DownloadTime == TimeSpan.Zero || this.BytesReceived == 0)
+                if (DownloadTime == TimeSpan.Zero || BytesReceived == 0)
                 {
                     return 0;
                 }
 
-                var kiloBytesReceived = this.BytesReceived / 1024.0;
+                var kiloBytesReceived = BytesReceived / 1024.0;
 
-                return Convert.ToInt32(kiloBytesReceived / this.DownloadTime.TotalSeconds);
+                return Convert.ToInt32(kiloBytesReceived / DownloadTime.TotalSeconds);
             }
         }
     }

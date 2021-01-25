@@ -9,7 +9,7 @@ namespace DGP.Snap.Framework.Data.Json
     public class JsonWriter
     {
         #region Fields
-        private static NumberFormatInfo number_format;
+        private static readonly NumberFormatInfo number_format;
 
         private WriterContext context;
         private Stack<WriterContext> ctx_stack;
@@ -17,36 +17,36 @@ namespace DGP.Snap.Framework.Data.Json
         private char[] hex_seq;
         private int indentation;
         private int indent_value;
-        private StringBuilder inst_string_builder;
+        private readonly StringBuilder inst_string_builder;
         private bool pretty_print;
         private bool validate;
-        private TextWriter writer;
+        private readonly TextWriter writer;
         #endregion
 
 
         #region Properties
         public int IndentValue
         {
-            get => this.indent_value;
+            get => indent_value;
             set
             {
-                this.indentation = (this.indentation / this.indent_value) * value;
-                this.indent_value = value;
+                indentation = (indentation / indent_value) * value;
+                indent_value = value;
             }
         }
 
         public bool PrettyPrint
         {
-            get => this.pretty_print;
-            set => this.pretty_print = value;
+            get => pretty_print;
+            set => pretty_print = value;
         }
 
-        public TextWriter TextWriter => this.writer;
+        public TextWriter TextWriter => writer;
 
         public bool Validate
         {
-            get => this.validate;
-            set => this.validate = value;
+            get => validate;
+            set => validate = value;
         }
         #endregion
 
@@ -56,10 +56,10 @@ namespace DGP.Snap.Framework.Data.Json
 
         public JsonWriter()
         {
-            this.inst_string_builder = new StringBuilder();
-            this.writer = new StringWriter(this.inst_string_builder);
+            inst_string_builder = new StringBuilder();
+            writer = new StringWriter(inst_string_builder);
 
-            this.Init();
+            Init();
         }
 
         public JsonWriter(StringBuilder sb) :
@@ -70,11 +70,13 @@ namespace DGP.Snap.Framework.Data.Json
         public JsonWriter(TextWriter writer)
         {
             if (writer == null)
+            {
                 throw new ArgumentNullException("writer");
+            }
 
             this.writer = writer;
 
-            this.Init();
+            Init();
         }
         #endregion
 
@@ -82,13 +84,17 @@ namespace DGP.Snap.Framework.Data.Json
         #region Private Methods
         private void DoValidation(Condition cond)
         {
-            if (!this.context.ExpectingValue)
-                this.context.Count++;
+            if (!context.ExpectingValue)
+            {
+                context.Count++;
+            }
 
-            if (!this.validate)
+            if (!validate)
+            {
                 return;
+            }
 
-            if (this.has_reached_end)
+            if (has_reached_end)
             {
                 throw new JsonException(
                     "A complete JSON symbol has already been written");
@@ -97,7 +103,7 @@ namespace DGP.Snap.Framework.Data.Json
             switch (cond)
             {
                 case Condition.InArray:
-                    if (!this.context.InArray)
+                    if (!context.InArray)
                     {
                         throw new JsonException(
                             "Can't close an array here");
@@ -106,7 +112,7 @@ namespace DGP.Snap.Framework.Data.Json
                     break;
 
                 case Condition.InObject:
-                    if (!this.context.InObject || this.context.ExpectingValue)
+                    if (!context.InObject || context.ExpectingValue)
                     {
                         throw new JsonException(
                             "Can't close an object here");
@@ -115,7 +121,7 @@ namespace DGP.Snap.Framework.Data.Json
                     break;
 
                 case Condition.NotAProperty:
-                    if (this.context.InObject && !this.context.ExpectingValue)
+                    if (context.InObject && !context.ExpectingValue)
                     {
                         throw new JsonException(
                             "Expected a property");
@@ -124,7 +130,7 @@ namespace DGP.Snap.Framework.Data.Json
                     break;
 
                 case Condition.Property:
-                    if (!this.context.InObject || this.context.ExpectingValue)
+                    if (!context.InObject || context.ExpectingValue)
                     {
                         throw new JsonException(
                             "Can't add a property here");
@@ -133,8 +139,8 @@ namespace DGP.Snap.Framework.Data.Json
                     break;
 
                 case Condition.Value:
-                    if (!this.context.InArray &&
-                        (!this.context.InObject || !this.context.ExpectingValue))
+                    if (!context.InArray &&
+                        (!context.InObject || !context.ExpectingValue))
                     {
                         throw new JsonException(
                             "Can't add a value here");
@@ -146,16 +152,16 @@ namespace DGP.Snap.Framework.Data.Json
 
         private void Init()
         {
-            this.has_reached_end = false;
-            this.hex_seq = new char[4];
-            this.indentation = 0;
-            this.indent_value = 4;
-            this.pretty_print = false;
-            this.validate = true;
+            has_reached_end = false;
+            hex_seq = new char[4];
+            indentation = 0;
+            indent_value = 4;
+            pretty_print = false;
+            validate = true;
 
-            this.ctx_stack = new Stack<WriterContext>();
-            this.context = new WriterContext();
-            this.ctx_stack.Push(this.context);
+            ctx_stack = new Stack<WriterContext>();
+            context = new WriterContext();
+            ctx_stack.Push(context);
         }
 
         private static void IntToHex(int n, char[] hex)
@@ -167,9 +173,13 @@ namespace DGP.Snap.Framework.Data.Json
                 num = n % 16;
 
                 if (num < 10)
+                {
                     hex[3 - i] = (char)('0' + num);
+                }
                 else
+                {
                     hex[3 - i] = (char)('A' + (num - 10));
+                }
 
                 n >>= 4;
             }
@@ -177,41 +187,47 @@ namespace DGP.Snap.Framework.Data.Json
 
         private void Indent()
         {
-            if (this.pretty_print)
-                this.indentation += this.indent_value;
+            if (pretty_print)
+            {
+                indentation += indent_value;
+            }
         }
 
 
         private void Put(string str)
         {
-            if (this.pretty_print && !this.context.ExpectingValue)
+            if (pretty_print && !context.ExpectingValue)
             {
-                for (int i = 0; i < this.indentation; i++)
-                    this.writer.Write(' ');
+                for (int i = 0; i < indentation; i++)
+                {
+                    writer.Write(' ');
+                }
             }
 
-            this.writer.Write(str);
+            writer.Write(str);
         }
 
-        private void PutNewline() => this.PutNewline(true);
+        private void PutNewline() => PutNewline(true);
 
         private void PutNewline(bool add_comma)
         {
-            if (add_comma && !this.context.ExpectingValue &&
-                this.context.Count > 1)
+            if (add_comma && !context.ExpectingValue &&
+                context.Count > 1)
             {
-                this.writer.Write(',');
+                writer.Write(',');
             }
 
-            if (this.pretty_print && !this.context.ExpectingValue)
-                this.writer.Write('\n');
+            if (pretty_print && !context.ExpectingValue)
+            {
+                writer.Write('\n');
+            }
         }
 
         private void PutString(string str)
         {
-            this.Put(String.Empty);
+            Put(String.Empty);
 
-            this.writer.Write('"');
+            writer.Write('"');
 
             int n = str.Length;
             for (int i = 0; i < n; i++)
@@ -219,249 +235,261 @@ namespace DGP.Snap.Framework.Data.Json
                 switch (str[i])
                 {
                     case '\n':
-                        this.writer.Write("\\n");
+                        writer.Write("\\n");
                         continue;
 
                     case '\r':
-                        this.writer.Write("\\r");
+                        writer.Write("\\r");
                         continue;
 
                     case '\t':
-                        this.writer.Write("\\t");
+                        writer.Write("\\t");
                         continue;
 
                     case '"':
                     case '\\':
-                        this.writer.Write('\\');
-                        this.writer.Write(str[i]);
+                        writer.Write('\\');
+                        writer.Write(str[i]);
                         continue;
 
                     case '\f':
-                        this.writer.Write("\\f");
+                        writer.Write("\\f");
                         continue;
 
                     case '\b':
-                        this.writer.Write("\\b");
+                        writer.Write("\\b");
                         continue;
                 }
 
                 if (str[i] >= 32 && str[i] <= 126)
                 {
-                    this.writer.Write(str[i]);
+                    writer.Write(str[i]);
                     continue;
                 }
 
                 // Default, turn into a \uXXXX sequence
-                IntToHex(str[i], this.hex_seq);
-                this.writer.Write("\\u");
-                this.writer.Write(this.hex_seq);
+                IntToHex(str[i], hex_seq);
+                writer.Write("\\u");
+                writer.Write(hex_seq);
             }
 
-            this.writer.Write('"');
+            writer.Write('"');
         }
 
         private void Unindent()
         {
-            if (this.pretty_print)
-                this.indentation -= this.indent_value;
+            if (pretty_print)
+            {
+                indentation -= indent_value;
+            }
         }
         #endregion
 
 
         public override string ToString()
         {
-            if (this.inst_string_builder == null)
+            if (inst_string_builder == null)
+            {
                 return String.Empty;
+            }
 
-            return this.inst_string_builder.ToString();
+            return inst_string_builder.ToString();
         }
 
         public void Reset()
         {
-            this.has_reached_end = false;
+            has_reached_end = false;
 
-            this.ctx_stack.Clear();
-            this.context = new WriterContext();
-            this.ctx_stack.Push(this.context);
+            ctx_stack.Clear();
+            context = new WriterContext();
+            ctx_stack.Push(context);
 
-            if (this.inst_string_builder != null)
-                this.inst_string_builder.Remove(0, this.inst_string_builder.Length);
+            if (inst_string_builder != null)
+            {
+                inst_string_builder.Remove(0, inst_string_builder.Length);
+            }
         }
 
         public void Write(bool boolean)
         {
-            this.DoValidation(Condition.Value);
-            this.PutNewline();
+            DoValidation(Condition.Value);
+            PutNewline();
 
-            this.Put(boolean ? "true" : "false");
+            Put(boolean ? "true" : "false");
 
-            this.context.ExpectingValue = false;
+            context.ExpectingValue = false;
         }
 
         public void Write(decimal number)
         {
-            this.DoValidation(Condition.Value);
-            this.PutNewline();
+            DoValidation(Condition.Value);
+            PutNewline();
 
-            this.Put(Convert.ToString(number, number_format));
+            Put(Convert.ToString(number, number_format));
 
-            this.context.ExpectingValue = false;
+            context.ExpectingValue = false;
         }
 
         public void Write(double number)
         {
-            this.DoValidation(Condition.Value);
-            this.PutNewline();
+            DoValidation(Condition.Value);
+            PutNewline();
 
             string str = Convert.ToString(number, number_format);
-            this.Put(str);
+            Put(str);
 
             if (str.IndexOf('.') == -1 &&
                 str.IndexOf('E') == -1)
             {
-                this.writer.Write(".0");
+                writer.Write(".0");
             }
 
-            this.context.ExpectingValue = false;
+            context.ExpectingValue = false;
         }
 
         public void Write(int number)
         {
-            this.DoValidation(Condition.Value);
-            this.PutNewline();
+            DoValidation(Condition.Value);
+            PutNewline();
 
-            this.Put(Convert.ToString(number, number_format));
+            Put(Convert.ToString(number, number_format));
 
-            this.context.ExpectingValue = false;
+            context.ExpectingValue = false;
         }
 
         public void Write(long number)
         {
-            this.DoValidation(Condition.Value);
-            this.PutNewline();
+            DoValidation(Condition.Value);
+            PutNewline();
 
-            this.Put(Convert.ToString(number, number_format));
+            Put(Convert.ToString(number, number_format));
 
-            this.context.ExpectingValue = false;
+            context.ExpectingValue = false;
         }
 
         public void Write(string str)
         {
-            this.DoValidation(Condition.Value);
-            this.PutNewline();
+            DoValidation(Condition.Value);
+            PutNewline();
 
             if (str == null)
-                this.Put("null");
+            {
+                Put("null");
+            }
             else
-                this.PutString(str);
+            {
+                PutString(str);
+            }
 
-            this.context.ExpectingValue = false;
+            context.ExpectingValue = false;
         }
 
         public void Write(ulong number)
         {
-            this.DoValidation(Condition.Value);
-            this.PutNewline();
+            DoValidation(Condition.Value);
+            PutNewline();
 
-            this.Put(Convert.ToString(number, number_format));
+            Put(Convert.ToString(number, number_format));
 
-            this.context.ExpectingValue = false;
+            context.ExpectingValue = false;
         }
 
         public void WriteArrayEnd()
         {
-            this.DoValidation(Condition.InArray);
-            this.PutNewline(false);
+            DoValidation(Condition.InArray);
+            PutNewline(false);
 
-            this.ctx_stack.Pop();
-            if (this.ctx_stack.Count == 1)
+            ctx_stack.Pop();
+            if (ctx_stack.Count == 1)
             {
-                this.has_reached_end = true;
+                has_reached_end = true;
             }
             else
             {
-                this.context = this.ctx_stack.Peek();
-                this.context.ExpectingValue = false;
+                context = ctx_stack.Peek();
+                context.ExpectingValue = false;
             }
 
-            this.Unindent();
-            this.Put("]");
+            Unindent();
+            Put("]");
         }
 
         public void WriteArrayStart()
         {
-            this.DoValidation(Condition.NotAProperty);
-            this.PutNewline();
+            DoValidation(Condition.NotAProperty);
+            PutNewline();
 
-            this.Put("[");
+            Put("[");
 
-            this.context = new WriterContext();
-            this.context.InArray = true;
-            this.ctx_stack.Push(this.context);
+            context = new WriterContext();
+            context.InArray = true;
+            ctx_stack.Push(context);
 
-            this.Indent();
+            Indent();
         }
 
         public void WriteObjectEnd()
         {
-            this.DoValidation(Condition.InObject);
-            this.PutNewline(false);
+            DoValidation(Condition.InObject);
+            PutNewline(false);
 
-            this.ctx_stack.Pop();
-            if (this.ctx_stack.Count == 1)
+            ctx_stack.Pop();
+            if (ctx_stack.Count == 1)
             {
-                this.has_reached_end = true;
+                has_reached_end = true;
             }
             else
             {
-                this.context = this.ctx_stack.Peek();
-                this.context.ExpectingValue = false;
+                context = ctx_stack.Peek();
+                context.ExpectingValue = false;
             }
 
-            this.Unindent();
-            this.Put("}");
+            Unindent();
+            Put("}");
         }
 
         public void WriteObjectStart()
         {
-            this.DoValidation(Condition.NotAProperty);
-            this.PutNewline();
+            DoValidation(Condition.NotAProperty);
+            PutNewline();
 
-            this.Put("{");
+            Put("{");
 
-            this.context = new WriterContext();
-            this.context.InObject = true;
-            this.ctx_stack.Push(this.context);
+            context = new WriterContext();
+            context.InObject = true;
+            ctx_stack.Push(context);
 
-            this.Indent();
+            Indent();
         }
 
         public void WritePropertyName(string property_name)
         {
-            this.DoValidation(Condition.Property);
-            this.PutNewline();
+            DoValidation(Condition.Property);
+            PutNewline();
 
-            this.PutString(property_name);
+            PutString(property_name);
 
-            if (this.pretty_print)
+            if (pretty_print)
             {
-                if (property_name.Length > this.context.Padding)
-                    this.context.Padding = property_name.Length;
-
-                for (int i = this.context.Padding - property_name.Length;
-                     i >= 0; i--)
+                if (property_name.Length > context.Padding)
                 {
-                    this.writer.Write(' ');
+                    context.Padding = property_name.Length;
                 }
 
-                this.writer.Write(": ");
+                for (int i = context.Padding - property_name.Length;
+                     i >= 0; i--)
+                {
+                    writer.Write(' ');
+                }
+
+                writer.Write(": ");
             }
             else
             {
-                this.writer.Write(':');
+                writer.Write(':');
             }
 
-            this.context.ExpectingValue = true;
+            context.ExpectingValue = true;
         }
     }
 }

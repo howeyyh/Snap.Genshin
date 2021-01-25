@@ -9,8 +9,7 @@ namespace DGP.Genshin.Controls.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int star = (int)value;
-            return Application.Current.FindResource(star + "star");
+            return Application.Current.FindResource((int)value + "star");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();

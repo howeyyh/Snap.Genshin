@@ -57,11 +57,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\CharacterDialog.xaml.cs">
+      <DependentUpon>CharacterDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CharacterIcon.xaml.cs">
       <DependentUpon>CharacterIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Converters\AscensionStatToStringConverter.cs" />
+    <Compile Include="Controls\Converters\AscensionStatValueConverter.cs" />
+    <Compile Include="Controls\Converters\ElementToImageSourceConverter.cs" />
+    <Compile Include="Controls\Converters\ElementToIndexConverter.cs" />
+    <Compile Include="Controls\Converters\ElementToNameConverter.cs" />
     <Compile Include="Controls\Converters\StarToImageSourceConverter.cs" />
     <Compile Include="Controls\Converters\UriToImageSourceConverter.cs" />
+    <Compile Include="Controls\Converters\StarToSolidColorBrushConverter.cs" />
     <Compile Include="Controls\TalentMaterialPresenter.xaml.cs">
       <DependentUpon>TalentMaterialPresenter.xaml</DependentUpon>
     </Compile>
@@ -71,7 +80,15 @@
     <Compile Include="Controls\WeaponMaterialPresenter.xaml.cs">
       <DependentUpon>WeaponMaterialPresenter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\CharacterManager.cs" />
     <Compile Include="Data\Element.cs" />
+    <Compile Include="Data\Stat.cs" />
+    <Compile Include="Data\Talent\TalentHelper.cs" />
+    <Compile Include="Data\Talent\TalentMaterial.cs" />
+    <Compile Include="Data\Weapon\WeaponHelper.cs" />
+    <Compile Include="Data\Weapon\WeaponManager.cs" />
+    <Compile Include="Data\Weapon\WeaponMaterial.cs" />
+    <Compile Include="Data\Weapon\WeaponType.cs" />
     <Compile Include="Helper\NavHelper.cs" />
     <Compile Include="Helper\Observable.cs" />
     <Compile Include="Pages\DailyMaterialPage.xaml.cs">
@@ -89,6 +106,7 @@
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Service\Setting.cs" />
     <Compile Include="Service\SettingService.cs" />
+    <Compile Include="Service\TravelerPresentService.cs" />
     <Compile Include="Views\Artifact\ArtifactView.xaml.cs">
       <DependentUpon>ArtifactView.xaml</DependentUpon>
     </Compile>
@@ -101,6 +119,10 @@
     <Compile Include="Views\Dungon\WeeklyTalentView.xaml.cs">
       <DependentUpon>WeeklyTalentView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\CharacterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CharacterIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,13 +159,12 @@
     <Compile Include="Data\ArtifactGroup.cs" />
     <Compile Include="Data\Character.cs" />
     <Compile Include="Data\Constelllation.cs" />
-    <Compile Include="Data\DataManager.cs" />
     <Compile Include="Data\Material.cs" />
     <Compile Include="Data\MaterialGroup.cs" />
     <Compile Include="Data\SpecialAbility.cs" />
-    <Compile Include="Data\Talent.cs" />
-    <Compile Include="Data\TalentGroup.cs" />
-    <Compile Include="Data\Weapon.cs" />
+    <Compile Include="Data\Talent\Talent.cs" />
+    <Compile Include="Data\Talent\TalentGroup.cs" />
+    <Compile Include="Data\Weapon\Weapon.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -491,6 +512,39 @@
   <ItemGroup>
     <Resource Include="Data\Images\Icons\UI\char.png" />
     <Resource Include="Data\Images\Icons\UI\talent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Data\Images\splashscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Images\Characters\Huge\Albedo.png" />
+    <Resource Include="Data\Images\Characters\Huge\Amber.png" />
+    <Resource Include="Data\Images\Characters\Huge\Bannett.png" />
+    <Resource Include="Data\Images\Characters\Huge\Barbara.png" />
+    <Resource Include="Data\Images\Characters\Huge\Beidou.png" />
+    <Resource Include="Data\Images\Characters\Huge\Chongyun.png" />
+    <Resource Include="Data\Images\Characters\Huge\Diluc.png" />
+    <Resource Include="Data\Images\Characters\Huge\Diona.png" />
+    <Resource Include="Data\Images\Characters\Huge\Fischl.png" />
+    <Resource Include="Data\Images\Characters\Huge\Ganyu.png" />
+    <Resource Include="Data\Images\Characters\Huge\Jean.png" />
+    <Resource Include="Data\Images\Characters\Huge\Kaeya.png" />
+    <Resource Include="Data\Images\Characters\Huge\Keqing.png" />
+    <Resource Include="Data\Images\Characters\Huge\Klee.png" />
+    <Resource Include="Data\Images\Characters\Huge\Lisa.png" />
+    <Resource Include="Data\Images\Characters\Huge\Mona.png" />
+    <Resource Include="Data\Images\Characters\Huge\Ningguang.png" />
+    <Resource Include="Data\Images\Characters\Huge\Noelle.png" />
+    <Resource Include="Data\Images\Characters\Huge\Qiqi.png" />
+    <Resource Include="Data\Images\Characters\Huge\Razor.png" />
+    <Resource Include="Data\Images\Characters\Huge\Sucrose.png" />
+    <Resource Include="Data\Images\Characters\Huge\Tartaglia.png" />
+    <Resource Include="Data\Images\Characters\Huge\Venti.png" />
+    <Resource Include="Data\Images\Characters\Huge\Xiangling.png" />
+    <Resource Include="Data\Images\Characters\Huge\Xiao.png" />
+    <Resource Include="Data\Images\Characters\Huge\Xingqiu.png" />
+    <Resource Include="Data\Images\Characters\Huge\Xinyan.png" />
+    <Resource Include="Data\Images\Characters\Huge\Zhongli.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

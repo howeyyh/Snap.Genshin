@@ -1,4 +1,5 @@
 ﻿using DGP.Genshin.Data;
+using DGP.Genshin.Data.Weapon;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -18,32 +19,32 @@ namespace DGP.Genshin.Controls
             InitializeComponent();
         }
 
-        public WeaponMaterialType WeaponMaterial
+        public WeaponMaterial WeaponMaterial
         {
-            get { return (WeaponMaterialType)GetValue(WeaponMaterialProperty); }
+            get { return (WeaponMaterial)GetValue(WeaponMaterialProperty); }
             set { SetValue(WeaponMaterialProperty, value); }
         }
         public static readonly DependencyProperty WeaponMaterialProperty =
-            DependencyProperty.Register("WeaponMaterial", typeof(WeaponMaterialType), typeof(WeaponMaterialPresenter), new PropertyMetadata(WeaponMaterialType.Decarabians));
+            DependencyProperty.Register("WeaponMaterial", typeof(WeaponMaterial), typeof(WeaponMaterialPresenter), new PropertyMetadata(WeaponMaterial.Decarabians));
     }
     public class WeaponMaterialToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            WeaponMaterialType material = (WeaponMaterialType)value;
+            WeaponMaterial material = (WeaponMaterial)value;
             switch (material)
             {
-                case WeaponMaterialType.Aerosiderite:
+                case WeaponMaterial.Aerosiderite:
                     return "漆黑陨铁";
-                case WeaponMaterialType.Boreal:
+                case WeaponMaterial.Boreal:
                     return "凛风奔狼";
-                case WeaponMaterialType.DandelionGladiator:
+                case WeaponMaterial.DandelionGladiator:
                     return "狮牙斗士";
-                case WeaponMaterialType.Decarabians:
+                case WeaponMaterial.Decarabians:
                     return "高塔孤王";
-                case WeaponMaterialType.Guyun:
+                case WeaponMaterial.Guyun:
                     return "孤云寒林";
-                case WeaponMaterialType.MistVeiled:
+                case WeaponMaterial.MistVeiled:
                     return "雾海云间";
                 default:
                     return "555";
@@ -59,7 +60,7 @@ namespace DGP.Genshin.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            WeaponMaterialType material = (WeaponMaterialType)value;
+            WeaponMaterial material = (WeaponMaterial)value;
             return App.Current.FindResource(material.ToString() + "1");
         }
 
@@ -72,7 +73,7 @@ namespace DGP.Genshin.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            WeaponMaterialType material = (WeaponMaterialType)value;
+            WeaponMaterial material = (WeaponMaterial)value;
             return App.Current.FindResource(material.ToString() + "2");
         }
 
@@ -85,7 +86,7 @@ namespace DGP.Genshin.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            WeaponMaterialType material = (WeaponMaterialType)value;
+            WeaponMaterial material = (WeaponMaterial)value;
             return App.Current.FindResource(material.ToString() + "3");
         }
 
@@ -98,7 +99,7 @@ namespace DGP.Genshin.Controls
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            WeaponMaterialType material = (WeaponMaterialType)value;
+            WeaponMaterial material = (WeaponMaterial)value;
             return App.Current.FindResource(material.ToString() + "4");
         }
 

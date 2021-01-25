@@ -1,5 +1,4 @@
-﻿using DGP.Genshin.Data;
-using DGP.Genshin.Service;
+﻿using DGP.Genshin.Service;
 using System.Windows;
 
 namespace DGP.Genshin
@@ -11,7 +10,7 @@ namespace DGP.Genshin
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            _ = DataManager.Instance;
+            TravelerPresentService.Instance.SetPresentTraveler();
         }
 
         protected override void OnExit(ExitEventArgs e)

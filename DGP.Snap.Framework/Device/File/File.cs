@@ -9,7 +9,7 @@ namespace DGP.Snap.Framework.Device.File
         public async Task<string> ReadToEndAsync()
         {
             string line;
-            using (StreamReader sr = new StreamReader(this.path))
+            using (StreamReader sr = new StreamReader(path))
             {
                 line = await sr.ReadToEndAsync();
             }
@@ -18,7 +18,7 @@ namespace DGP.Snap.Framework.Device.File
 
         public async Task WriteAsync(string str)
         {
-            using (StreamWriter sw = new StreamWriter(this.path))
+            using (StreamWriter sw = new StreamWriter(path))
             {
                 await sw.WriteAsync(str);
             }

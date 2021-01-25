@@ -7,6 +7,6 @@ namespace DGP.Snap.Framework.Data.Json
     {
         public string Name { get; private set; }
 
-        public JsonProperty(string name) => this.Name = name;
+        public JsonProperty(string name) => Name = name;
     }
 }
