@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="DGP.Genshin.Controls.MaterialIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DGP.Genshin.Controls" xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters"
+             mc:Ignorable="d" 
+             Height="50" 
+    Width="50">
+    <UserControl.Resources>
+        <converters:StarToImageSourceConverter x:Key="StarToImageSourceConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Border CornerRadius="{StaticResource IconCornerRadius}">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding Star, Converter={StaticResource StarToImageSourceConverter}}" Stretch="UniformToFill"/>
+            </Border.Background>
+        </Border>
+        <Border CornerRadius="{StaticResource IconCornerRadius}">
+            <Border.Background>
+                <ImageBrush ImageSource="{Binding Character.ImageUri}" Stretch="Uniform"/>
+            </Border.Background>
+        </Border>
+        <Border CornerRadius="{StaticResource IconCornerRadius}" Background="#99000000" Opacity="0">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.35" To="1">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.35" To="0">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+            <TextBlock 
+                Margin="6" 
+                TextWrapping="Wrap" 
+                TextAlignment="Center" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Foreground="White" 
+                Style="{StaticResource CaptionTextBlockStyle}" 
+                Text="{Binding MaterialName}" 
+                SnapsToDevicePixels="True"/>
+        </Border>
+    </Grid>
+</UserControl>

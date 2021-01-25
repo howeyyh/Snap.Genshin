@@ -12,10 +12,10 @@
         ui:TitleBar.IsBackButtonVisible="{Binding ElementName=ContentFrame,Path=CanGoBack,Mode=OneWay}"  
         mc:Ignorable="d"
         Title="Snap原神" 
-        MinWidth="800"
+        MinWidth="822"
         MinHeight="562"
         Height="562" 
-        Width="800"
+        Width="822"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <ui:NavigationView 
