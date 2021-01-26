@@ -1,6 +1,7 @@
 ﻿using DGP.Genshin.Data.Talent;
 using DGP.Genshin.Data.Weapon;
 using System;
+using System.Collections.Generic;
 
 namespace DGP.Genshin.Data
 {
@@ -16,6 +17,16 @@ namespace DGP.Genshin.Data
 
         public Stat AscensionStat { get; set; } = Stat.None;
         public double AscensionStatValue { get; set; } = 0;
+
+        public Material AscensionGemstone { get; set; }
+        public Material AscensionBoss { get; set; }
+        public Material AscensionLocal { get; set; }
+        public Material AscensionMonster { get; set; }
+
+        public Material TalentDaily { get; set; }
+        public Material TalentWeekly { get; set; }
+
+        public List<Material> TalentMaterials { get; set; }
 
         #region Attributes
         #region base Stats
@@ -64,6 +75,5 @@ namespace DGP.Genshin.Data
         public WeaponType WeaponType { get; set; } = WeaponType.Sword;
         public Constelllation Constellation { get; set; }
         public TalentGroup Talents { get; set; }
-        public MaterialGroup Materials { get; set; }
     }
 }

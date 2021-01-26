@@ -1,0 +1,120 @@
+﻿<Page x:Class="DGP.Genshin.Pages.CharacterDetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DGP.Genshin.Pages"
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CharacterDetailPage">
+    <Page.Resources>
+        <Style x:Key="PersonPictureStyle1" TargetType="{x:Type ui:PersonPicture}">
+            <Setter Property="Foreground" Value="{DynamicResource PersonPictureForegroundThemeBrush}"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="350"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ui:PersonPicture}">
+                        <ControlTemplate.Resources>
+                            <StreamGeometry x:Key="Contact">M12.988281,11.748047C13.873697,12.054037 14.672852,12.482097 15.385742,13.032227 16.098633,13.582357 16.704102,14.21875 17.202148,14.941406 17.700195,15.664063 18.082682,16.455078 18.349609,17.314453 18.616535,18.173828 18.75,19.06901 18.75,20L17.5,20C17.5,18.932291 17.30957,17.94108 16.928711,17.026367 16.547852,16.111654 16.022135,15.319011 15.351563,14.648438 14.680989,13.977865 13.888346,13.452148 12.973633,13.071289 12.058919,12.69043 11.067708,12.5 10,12.5 9.303385,12.5 8.632813,12.587891 7.988281,12.763672 7.34375,12.939453 6.743164,13.188477 6.186523,13.510742 5.629883,13.833008 5.125325,14.220378 4.672852,14.672852 4.220377,15.125326 3.833008,15.629883 3.510742,16.186523 3.188477,16.743164 2.939453,17.34375 2.763672,17.988281 2.587891,18.632813 2.5,19.303385 2.5,20L1.25,20C1.25,19.0625 1.386719,18.165689 1.660156,17.30957 1.933594,16.453451 2.320963,15.667318 2.822266,14.951172 3.323567,14.235026 3.930664,13.603516 4.643555,13.056641 5.356445,12.509766 6.152344,12.076823 7.03125,11.757813 6.523437,11.484375 6.067708,11.152344 5.664063,10.761719 5.260417,10.371094 4.916992,9.936523 4.633789,9.458008 4.350586,8.979492 4.132487,8.468425 3.979492,7.924805 3.826497,7.381186 3.75,6.822918 3.75,6.25 3.75,5.384115 3.91276,4.57194 4.238281,3.813477 4.563802,3.055014 5.009766,2.392578 5.576172,1.826172 6.142578,1.259766 6.805013,0.813803 7.563477,0.488281 8.321939,0.162762 9.134114,0 10,0 10.865885,0 11.67806,0.162762 12.436523,0.488281 13.194986,0.813803 13.857422,1.259766 14.423828,1.826172 14.990234,2.392578 15.436197,3.055014 15.761719,3.813477 16.087238,4.57194 16.25,5.384115 16.25,6.25 16.25,6.822918 16.173502,7.379559 16.020508,7.919922 15.867512,8.460287 15.649413,8.9681 15.366211,9.443359 15.083007,9.91862 14.74121,10.35319 14.34082,10.74707 13.940429,11.140951 13.489582,11.474609 12.988281,11.748047z M5,6.25C5,6.940105 5.131836,7.587892 5.395508,8.193359 5.65918,8.798828 6.017252,9.3278 6.469727,9.780273 6.9222,10.232748 7.451171,10.59082 8.056641,10.854492 8.662109,11.118164 9.309896,11.25 10,11.25 10.690104,11.25 11.337891,11.118164 11.943359,10.854492 12.548828,10.59082 13.077799,10.232748 13.530273,9.780273 13.982746,9.3278 14.340819,8.798828 14.604492,8.193359 14.868163,7.587892 15,6.940105 15,6.25 15,5.559896 14.868163,4.912109 14.604492,4.306641 14.340819,3.701172 13.982746,3.172201 13.530273,2.719727 13.077799,2.267254 12.548828,1.90918 11.943359,1.645508 11.337891,1.381836 10.690104,1.25 10,1.25 9.309896,1.25 8.662109,1.381836 8.056641,1.645508 7.451171,1.90918 6.9222,2.267254 6.469727,2.719727 6.017252,3.172201 5.65918,3.701172 5.395508,4.306641 5.131836,4.912109 5,5.559896 5,6.25z</StreamGeometry>
+                            <StreamGeometry x:Key="People">F1M12.988281,11.748047C13.873697,12.054037 14.672852,12.482097 15.385742,13.032227 16.098633,13.582357 16.704102,14.21875 17.202148,14.941406 17.700195,15.664063 18.082682,16.455078 18.349609,17.314453 18.616535,18.173828 18.75,19.06901 18.75,20L17.5,20C17.5,18.932291 17.30957,17.94108 16.928711,17.026367 16.547852,16.111654 16.022135,15.319011 15.351563,14.648438 14.680989,13.977865 13.888346,13.452148 12.973633,13.071289 12.058919,12.69043 11.067708,12.5 10,12.5 9.303385,12.5 8.632813,12.587891 7.988281,12.763672 7.34375,12.939453 6.743164,13.188477 6.186523,13.510742 5.629883,13.833008 5.125325,14.220378 4.672852,14.672852 4.220377,15.125326 3.833008,15.629883 3.510742,16.186523 3.188477,16.743164 2.939453,17.34375 2.763672,17.988281 2.587891,18.632813 2.5,19.303385 2.5,20L1.25,20C1.25,19.0625 1.386719,18.165689 1.660156,17.30957 1.933594,16.453451 2.320963,15.667318 2.822266,14.951172 3.323567,14.235026 3.930664,13.603516 4.643555,13.056641 5.356445,12.509766 6.152344,12.076823 7.03125,11.757813 6.523437,11.484375 6.067708,11.152344 5.664063,10.761719 5.260417,10.371094 4.916992,9.936523 4.633789,9.458008 4.350586,8.979492 4.132487,8.468425 3.979492,7.924805 3.826497,7.381186 3.75,6.822918 3.75,6.25 3.75,5.384115 3.91276,4.57194 4.238281,3.813477 4.563802,3.055014 5.009766,2.392578 5.576172,1.826172 6.142578,1.259766 6.805013,0.813803 7.563477,0.488281 8.321939,0.162762 9.134114,0 10,0 10.865885,0 11.67806,0.162762 12.436523,0.488281 13.194986,0.813803 13.857422,1.259766 14.423828,1.826172 14.990234,2.392578 15.436197,3.055014 15.761719,3.813477 16.087238,4.57194 16.25,5.384115 16.25,6.25 16.25,6.822918 16.173502,7.379559 16.020508,7.919922 15.867512,8.460287 15.649413,8.9681 15.366211,9.443359 15.083007,9.91862 14.74121,10.35319 14.34082,10.74707 13.940429,11.140951 13.489582,11.474609 12.988281,11.748047z M5,6.25C5,6.940105 5.131836,7.587892 5.395508,8.193359 5.65918,8.798828 6.017252,9.3278 6.469727,9.780273 6.9222,10.232748 7.451171,10.59082 8.056641,10.854492 8.662109,11.118164 9.309896,11.25 10,11.25 10.690104,11.25 11.337891,11.118164 11.943359,10.854492 12.548828,10.59082 13.077799,10.232748 13.530273,9.780273 13.982746,9.3278 14.340819,8.798828 14.604492,8.193359 14.868163,7.587892 15,6.940105 15,6.25 15,5.559896 14.868163,4.912109 14.604492,4.306641 14.340819,3.701172 13.982746,3.172201 13.530273,2.719727 13.077799,2.267254 12.548828,1.90918 11.943359,1.645508 11.337891,1.381836 10.690104,1.25 10,1.25 9.309896,1.25 8.662109,1.381836 8.056641,1.645508 7.451171,1.90918 6.9222,2.267254 6.469727,2.719727 6.017252,3.172201 5.65918,3.701172 5.395508,4.306641 5.131836,4.912109 5,5.559896 5,6.25z</StreamGeometry>
+                        </ControlTemplate.Resources>
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <ui:VisualStateGroupListener.Listener>
+                                        <ui:VisualStateGroupListener x:Name="CommonStatesListener"/>
+                                    </ui:VisualStateGroupListener.Listener>
+                                    <VisualState x:Name="Photo"/>
+                                    <VisualState x:Name="Initials"/>
+                                    <VisualState x:Name="NoPhotoOrInitials"/>
+                                    <VisualState x:Name="Group"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="BadgeStates">
+                                    <ui:VisualStateGroupListener.Listener>
+                                        <ui:VisualStateGroupListener x:Name="BadgeStatesListener"/>
+                                    </ui:VisualStateGroupListener.Listener>
+                                    <VisualState x:Name="NoBadge"/>
+                                    <VisualState x:Name="BadgeWithoutImageSource"/>
+                                    <VisualState x:Name="BadgeWithImageSource">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="BadgingEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <ImageBrush Stretch="UniformToFill"/>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <!--here-->
+                            <Ellipse Fill="#99B60F0F" Height="{TemplateBinding Height}" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="{DynamicResource PersonPictureEllipseStrokeThickness}" Width="{TemplateBinding Width}"/>
+                            <TextBlock x:Name="InitialsTextBlock" Foreground="{TemplateBinding Foreground}" FontWeight="{TemplateBinding FontWeight}" FontSize="36" FontFamily="{TemplateBinding FontFamily}" HorizontalAlignment="Center" Text="{Binding TemplateSettings.ActualInitials, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform Y="-2"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <ui:FontIconFallback x:Name="PlaceholderIcon" Foreground="{TemplateBinding Foreground}" FontSize="{Binding FontSize, ElementName=InitialsTextBlock}" HorizontalAlignment="Center" Visibility="Collapsed" VerticalAlignment="Center">
+                                <ui:FontIconFallback.RenderTransform>
+                                    <TranslateTransform Y="-2"/>
+                                </ui:FontIconFallback.RenderTransform>
+                            </ui:FontIconFallback>
+                            <Ellipse x:Name="PersonPictureEllipse" FlowDirection="LeftToRight" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+                            <Grid x:Name="BadgeGrid" HorizontalAlignment="Right" Visibility="Collapsed" VerticalAlignment="Bottom">
+                                <Ellipse x:Name="BadgingBackgroundEllipse" Fill="{DynamicResource PersonPictureEllipseBadgeFillThemeBrush}" Opacity="{DynamicResource PersonPictureEllipseBadgeStrokeOpacity}" Stroke="{DynamicResource PersonPictureEllipseBadgeStrokeThemeBrush}" StrokeThickness="{DynamicResource PersonPictureEllipseBadgeStrokeThickness}"/>
+                                <Ellipse x:Name="BadgingEllipse" FlowDirection="LeftToRight" Opacity="0"/>
+                                <TextBlock x:Name="BadgeNumberTextBlock" Foreground="{DynamicResource PersonPictureEllipseBadgeForegroundThemeBrush}" FontWeight="{TemplateBinding FontWeight}" FontFamily="{TemplateBinding FontFamily}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform Y="-1"/>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                                <ui:FontIcon x:Name="BadgeGlyphIcon" Foreground="{DynamicResource PersonPictureEllipseBadgeForegroundThemeBrush}" FontWeight="{TemplateBinding FontWeight}" FontFamily="{DynamicResource SymbolThemeFontFamily}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="CurrentStateName" SourceName="CommonStatesListener" Value="Photo">
+                                <Setter Property="Fill" TargetName="PersonPictureEllipse" Value="{Binding TemplateSettings.ActualImageBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                            <Trigger Property="CurrentStateName" SourceName="CommonStatesListener" Value="NoPhotoOrInitials">
+                                <Setter Property="Visibility" TargetName="InitialsTextBlock" Value="Collapsed"/>
+                                <Setter Property="Data" TargetName="PlaceholderIcon" Value="M12.988281,11.748047C13.873697,12.054037 14.672852,12.482097 15.385742,13.032227 16.098633,13.582357 16.704102,14.21875 17.202148,14.941406 17.700195,15.664063 18.082682,16.455078 18.349609,17.314453 18.616535,18.173828 18.75,19.06901 18.75,20L17.5,20C17.5,18.932291 17.30957,17.94108 16.928711,17.026367 16.547852,16.111654 16.022135,15.319011 15.351563,14.648438 14.680989,13.977865 13.888346,13.452148 12.973633,13.071289 12.058919,12.69043 11.067708,12.5 10,12.5 9.303385,12.5 8.632813,12.587891 7.988281,12.763672 7.34375,12.939453 6.743164,13.188477 6.186523,13.510742 5.629883,13.833008 5.125325,14.220378 4.672852,14.672852 4.220377,15.125326 3.833008,15.629883 3.510742,16.186523 3.188477,16.743164 2.939453,17.34375 2.763672,17.988281 2.587891,18.632813 2.5,19.303385 2.5,20L1.25,20C1.25,19.0625 1.386719,18.165689 1.660156,17.30957 1.933594,16.453451 2.320963,15.667318 2.822266,14.951172 3.323567,14.235026 3.930664,13.603516 4.643555,13.056641 5.356445,12.509766 6.152344,12.076823 7.03125,11.757813 6.523437,11.484375 6.067708,11.152344 5.664063,10.761719 5.260417,10.371094 4.916992,9.936523 4.633789,9.458008 4.350586,8.979492 4.132487,8.468425 3.979492,7.924805 3.826497,7.381186 3.75,6.822918 3.75,6.25 3.75,5.384115 3.91276,4.57194 4.238281,3.813477 4.563802,3.055014 5.009766,2.392578 5.576172,1.826172 6.142578,1.259766 6.805013,0.813803 7.563477,0.488281 8.321939,0.162762 9.134114,0 10,0 10.865885,0 11.67806,0.162762 12.436523,0.488281 13.194986,0.813803 13.857422,1.259766 14.423828,1.826172 14.990234,2.392578 15.436197,3.055014 15.761719,3.813477 16.087238,4.57194 16.25,5.384115 16.25,6.25 16.25,6.822918 16.173502,7.379559 16.020508,7.919922 15.867512,8.460287 15.649413,8.9681 15.366211,9.443359 15.083007,9.91862 14.74121,10.35319 14.34082,10.74707 13.940429,11.140951 13.489582,11.474609 12.988281,11.748047z M5,6.25C5,6.940105 5.131836,7.587892 5.395508,8.193359 5.65918,8.798828 6.017252,9.3278 6.469727,9.780273 6.9222,10.232748 7.451171,10.59082 8.056641,10.854492 8.662109,11.118164 9.309896,11.25 10,11.25 10.690104,11.25 11.337891,11.118164 11.943359,10.854492 12.548828,10.59082 13.077799,10.232748 13.530273,9.780273 13.982746,9.3278 14.340819,8.798828 14.604492,8.193359 14.868163,7.587892 15,6.940105 15,6.25 15,5.559896 14.868163,4.912109 14.604492,4.306641 14.340819,3.701172 13.982746,3.172201 13.530273,2.719727 13.077799,2.267254 12.548828,1.90918 11.943359,1.645508 11.337891,1.381836 10.690104,1.25 10,1.25 9.309896,1.25 8.662109,1.381836 8.056641,1.645508 7.451171,1.90918 6.9222,2.267254 6.469727,2.719727 6.017252,3.172201 5.65918,3.701172 5.395508,4.306641 5.131836,4.912109 5,5.559896 5,6.25z"/>
+                                <Setter Property="Visibility" TargetName="PlaceholderIcon" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="CurrentStateName" SourceName="CommonStatesListener" Value="Group">
+                                <Setter Property="Visibility" TargetName="InitialsTextBlock" Value="Collapsed"/>
+                                <Setter Property="Data" TargetName="PlaceholderIcon" Value="F1M12.988281,11.748047C13.873697,12.054037 14.672852,12.482097 15.385742,13.032227 16.098633,13.582357 16.704102,14.21875 17.202148,14.941406 17.700195,15.664063 18.082682,16.455078 18.349609,17.314453 18.616535,18.173828 18.75,19.06901 18.75,20L17.5,20C17.5,18.932291 17.30957,17.94108 16.928711,17.026367 16.547852,16.111654 16.022135,15.319011 15.351563,14.648438 14.680989,13.977865 13.888346,13.452148 12.973633,13.071289 12.058919,12.69043 11.067708,12.5 10,12.5 9.303385,12.5 8.632813,12.587891 7.988281,12.763672 7.34375,12.939453 6.743164,13.188477 6.186523,13.510742 5.629883,13.833008 5.125325,14.220378 4.672852,14.672852 4.220377,15.125326 3.833008,15.629883 3.510742,16.186523 3.188477,16.743164 2.939453,17.34375 2.763672,17.988281 2.587891,18.632813 2.5,19.303385 2.5,20L1.25,20C1.25,19.0625 1.386719,18.165689 1.660156,17.30957 1.933594,16.453451 2.320963,15.667318 2.822266,14.951172 3.323567,14.235026 3.930664,13.603516 4.643555,13.056641 5.356445,12.509766 6.152344,12.076823 7.03125,11.757813 6.523437,11.484375 6.067708,11.152344 5.664063,10.761719 5.260417,10.371094 4.916992,9.936523 4.633789,9.458008 4.350586,8.979492 4.132487,8.468425 3.979492,7.924805 3.826497,7.381186 3.75,6.822918 3.75,6.25 3.75,5.384115 3.91276,4.57194 4.238281,3.813477 4.563802,3.055014 5.009766,2.392578 5.576172,1.826172 6.142578,1.259766 6.805013,0.813803 7.563477,0.488281 8.321939,0.162762 9.134114,0 10,0 10.865885,0 11.67806,0.162762 12.436523,0.488281 13.194986,0.813803 13.857422,1.259766 14.423828,1.826172 14.990234,2.392578 15.436197,3.055014 15.761719,3.813477 16.087238,4.57194 16.25,5.384115 16.25,6.25 16.25,6.822918 16.173502,7.379559 16.020508,7.919922 15.867512,8.460287 15.649413,8.9681 15.366211,9.443359 15.083007,9.91862 14.74121,10.35319 14.34082,10.74707 13.940429,11.140951 13.489582,11.474609 12.988281,11.748047z M5,6.25C5,6.940105 5.131836,7.587892 5.395508,8.193359 5.65918,8.798828 6.017252,9.3278 6.469727,9.780273 6.9222,10.232748 7.451171,10.59082 8.056641,10.854492 8.662109,11.118164 9.309896,11.25 10,11.25 10.690104,11.25 11.337891,11.118164 11.943359,10.854492 12.548828,10.59082 13.077799,10.232748 13.530273,9.780273 13.982746,9.3278 14.340819,8.798828 14.604492,8.193359 14.868163,7.587892 15,6.940105 15,6.25 15,5.559896 14.868163,4.912109 14.604492,4.306641 14.340819,3.701172 13.982746,3.172201 13.530273,2.719727 13.077799,2.267254 12.548828,1.90918 11.943359,1.645508 11.337891,1.381836 10.690104,1.25 10,1.25 9.309896,1.25 8.662109,1.381836 8.056641,1.645508 7.451171,1.90918 6.9222,2.267254 6.469727,2.719727 6.017252,3.172201 5.65918,3.701172 5.395508,4.306641 5.131836,4.912109 5,5.559896 5,6.25z"/>
+                                <Setter Property="Visibility" TargetName="PlaceholderIcon" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="CurrentStateName" SourceName="BadgeStatesListener" Value="BadgeWithoutImageSource">
+                                <Setter Property="Visibility" TargetName="BadgeGrid" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="CurrentStateName" SourceName="BadgeStatesListener" Value="BadgeWithImageSource">
+                                <Setter Property="Visibility" TargetName="BadgeGrid" Value="Visible"/>
+                                <Setter Property="Opacity" TargetName="BadgingEllipse" Value="{DynamicResource PersonPictureEllipseBadgeImageSourceStrokeOpacity}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <ui:SplitView IsPaneOpen="True" OpenPaneLength="220" DisplayMode="Inline">
+            <ui:SplitView.Pane>
+                <ui:ListView>
+                    <ui:PersonPicture Width="48" ProfilePicture="/DGP.Genshin;component/Data/Images/Characters/bennett.png" Style="{DynamicResource PersonPictureStyle1}"/>
+                </ui:ListView>
+            </ui:SplitView.Pane>
+            <Grid>
+                
+            </Grid>
+        </ui:SplitView>
+    </Grid>
+</Page>

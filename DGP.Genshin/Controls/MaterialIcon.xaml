@@ -13,12 +13,12 @@
     <Grid>
         <Border CornerRadius="{StaticResource IconCornerRadius}">
             <Border.Background>
-                <ImageBrush ImageSource="{Binding Star, Converter={StaticResource StarToImageSourceConverter}}" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="{Binding Material.Star, Converter={StaticResource StarToImageSourceConverter}}" Stretch="UniformToFill"/>
             </Border.Background>
         </Border>
         <Border CornerRadius="{StaticResource IconCornerRadius}">
             <Border.Background>
-                <ImageBrush ImageSource="{Binding Character.ImageUri}" Stretch="Uniform"/>
+                <ImageBrush ImageSource="{Binding Material.ImageUri}" Stretch="Uniform"/>
             </Border.Background>
         </Border>
         <Border CornerRadius="{StaticResource IconCornerRadius}" Background="#99000000" Opacity="0">
@@ -47,15 +47,15 @@
                 </EventTrigger>
             </Border.Triggers>
             <TextBlock 
-                Margin="6" 
+                Margin="4" 
                 TextWrapping="Wrap" 
                 TextAlignment="Center" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
                 Foreground="White" 
                 Style="{StaticResource CaptionTextBlockStyle}" 
-                Text="{Binding MaterialName}" 
-                SnapsToDevicePixels="True"/>
+                Text="{Binding Material.MaterialName}" 
+                SnapsToDevicePixels="True" FontSize="10"/>
         </Border>
     </Grid>
 </UserControl>

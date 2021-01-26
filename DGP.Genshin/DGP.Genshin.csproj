@@ -92,6 +92,9 @@
     <Compile Include="Controls\TalentMaterialPresenter.xaml.cs">
       <DependentUpon>TalentMaterialPresenter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\WeaponDialog.xaml.cs">
+      <DependentUpon>WeaponDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\WeaponIcon.xaml.cs">
       <DependentUpon>WeaponIcon.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,9 @@
     <Compile Include="Data\Weapon\WeaponType.cs" />
     <Compile Include="Helper\NavHelper.cs" />
     <Compile Include="Helper\Observable.cs" />
+    <Compile Include="Pages\CharacterDetailPage.xaml.cs">
+      <DependentUpon>CharacterDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DailyMaterialPage.xaml.cs">
       <DependentUpon>DailyMaterialPage.xaml</DependentUpon>
     </Compile>
@@ -153,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\WeaponDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\WeaponIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Data\CharacterDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Data\MaterialDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,7 +196,6 @@
     <Compile Include="Data\Character.cs" />
     <Compile Include="Data\Constelllation.cs" />
     <Compile Include="Data\Material.cs" />
-    <Compile Include="Data\MaterialGroup.cs" />
     <Compile Include="Data\SpecialAbility.cs" />
     <Compile Include="Data\Talent\Talent.cs" />
     <Compile Include="Data\Talent\TalentGroup.cs" />
@@ -191,6 +204,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\CharacterDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\DailyMaterialPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -579,6 +596,24 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Images\Materials\Gemstone\agnidus_agate_gemstone.png" />
+    <Resource Include="Data\Images\Materials\Gemstone\brilliant_diamond_gemstone.png" />
+    <Resource Include="Data\Images\Materials\Gemstone\prithiva_topaz_gemstone.png" />
+    <Resource Include="Data\Images\Materials\Gemstone\shivada_jade_gemstone.png" />
+    <Resource Include="Data\Images\Materials\Gemstone\vajrada_amethyst_gemstone.png" />
+    <Resource Include="Data\Images\Materials\Gemstone\varunada_lazurite_gemstone.png" />
+    <Resource Include="Data\Images\Materials\Gemstone\vayuda_turquoise_gemstone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Images\Materials\Ascension\basalt_pillar.png" />
+    <Resource Include="Data\Images\Materials\Ascension\cleansing_heart.png" />
+    <Resource Include="Data\Images\Materials\Ascension\everflame_seed.png" />
+    <Resource Include="Data\Images\Materials\Ascension\hoarfrost_core.png" />
+    <Resource Include="Data\Images\Materials\Ascension\hurricane_seed.png" />
+    <Resource Include="Data\Images\Materials\Ascension\juvenile_jade.png" />
+    <Resource Include="Data\Images\Materials\Ascension\lightning_prism.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

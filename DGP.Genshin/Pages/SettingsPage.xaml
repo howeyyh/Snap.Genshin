@@ -26,7 +26,7 @@
                 
                 <TextBlock Text="在页面上展示未发布的角色和武器" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <ui:ToggleSwitch OnContent="显示" OffContent="隐藏" IsOn="{Binding IsUnreleasedCharacterPresent,Mode=TwoWay,NotifyOnTargetUpdated=True}" Toggled="UnreleasedCharacterToggled"/>
-                <TextBlock Text="*未发布角色或武器为开发中内容，请以正式服上线为准" Foreground="Red" Style="{StaticResource CaptionTextBlockStyle}"/>
+                <TextBlock Text="*未发布角色或武器为开发中内容，请以正式服上线为准" Margin="0,2" Foreground="Red" Style="{StaticResource CaptionTextBlockStyle}"/>
 
                 <TextBlock Text="在页面上展示的旅行者形象" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <StackPanel x:Name="TravelerOptions" Orientation="Horizontal">
@@ -37,13 +37,14 @@
                         <controls:CharacterIcon Character="{StaticResource TravelerGeo}"/>
                     </RadioButton>
                 </StackPanel>
+                <TextBlock Text="*选择的形象会影响旅行者的属性" Margin="0,8,0,0" Style="{StaticResource CaptionTextBlockStyle}"/>
                 
                 <TextBlock Text="关于" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                 <TextBlock Text="Genshin Impact™, 原神™ 是 MiHoYo Co., Ltd.的注册商标" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="数据 © MiHoYo Co., Ltd." Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Snap 原神" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
-                <TextBlock Text="DGP.Genshin. version 2021.1.21, build 1" Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="DGP.Genshin - version 2021.1.26, build 2" Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="© 2021 DGP Studio. All right reserved." Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Honey Impact" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
 

@@ -12,6 +12,12 @@ namespace DGP.Genshin.Service
 
             CharacterManager.Instance["TravelerPresent"].ImageUri = TravelerSource.ImageUri;
             CharacterManager.Instance["TravelerPresent"].Element = TravelerSource.Element;
+            CharacterManager.Instance["TravelerPresent"].AscensionBoss = TravelerSource.AscensionBoss;
+            CharacterManager.Instance["TravelerPresent"].AscensionGemstone = TravelerSource.AscensionGemstone;
+            CharacterManager.Instance["TravelerPresent"].AscensionLocal = TravelerSource.AscensionLocal;
+            CharacterManager.Instance["TravelerPresent"].AscensionMonster = TravelerSource.AscensionMonster;
+            CharacterManager.Instance["TravelerPresent"].TalentDaily = TravelerSource.TalentDaily;
+            CharacterManager.Instance["TravelerPresent"].TalentWeekly = TravelerSource.TalentWeekly;
         }
 
         #region 单例

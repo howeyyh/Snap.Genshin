@@ -1,4 +1,5 @@
-﻿using DGP.Genshin.Data;
+﻿using DGP.Genshin.Data.Weapon;
+using ModernWpf.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +18,22 @@ using System.Windows.Shapes;
 namespace DGP.Genshin.Controls
 {
     /// <summary>
-    /// MaterialIcon.xaml 的交互逻辑
+    /// WeaponDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class MaterialIcon : UserControl
+    public partial class WeaponDialog : ContentDialog
     {
-        public MaterialIcon()
+        public WeaponDialog()
         {
             DataContext = this;
             InitializeComponent();
         }
-        public Material Material
+
+        public Weapon Weapon
         {
-            get { return (Material)GetValue(MaterialProperty); }
-            set { SetValue(MaterialProperty, value); }
+            get { return (Weapon)GetValue(WeaponProperty); }
+            set { SetValue(WeaponProperty, value); }
         }
-        public static readonly DependencyProperty MaterialProperty =
-            DependencyProperty.Register("Material", typeof(Material), typeof(MaterialIcon), new PropertyMetadata(null));
+        public static readonly DependencyProperty WeaponProperty =
+            DependencyProperty.Register("Weapon", typeof(Weapon), typeof(WeaponDialog), new PropertyMetadata(null));
     }
 }

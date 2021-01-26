@@ -1,0 +1,191 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DGP.Genshin.Data">
+    
+    <local:Material x:Key="Ascension_BasaltPillar" 
+                    MaterialName="玄岩之塔" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Ascension/basalt_pillar.png"/>
+    <local:Material x:Key="Ascension_CleansingHeart" 
+                    MaterialName="净水之心" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Ascension/cleansing_heart.png"/>
+    <local:Material x:Key="Ascension_EverflameSeed" 
+                    MaterialName="常燃之种" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Ascension/everflame_seed.png"/>
+    <local:Material x:Key="Ascension_HoarfrostCore" 
+                    MaterialName="极寒之核" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Ascension/hoarfrost_core.png"/>
+    <local:Material x:Key="Ascension_HurricaneSeed" 
+                    MaterialName="飓风之种" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Ascension/hurricane_seed.png"/>
+    <local:Material x:Key="Ascension_JuvenileJade" 
+                    MaterialName="未熟之玉" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Ascension/juvenile_jade.png"/>
+    <local:Material x:Key="Ascension_LightingPrism" 
+                    MaterialName="雷光棱镜" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Ascension/lightning_prism.png"/>
+
+    <local:Material x:Key="Gemstone_AgnidusAgate" 
+                    MaterialName="燃愿玛瑙" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Gemstone/agnidus_agate_gemstone.png"/>
+    <local:Material x:Key="Gemstone_BrilliantDiamond" 
+                    MaterialName="璀璨原钻" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Gemstone/brilliant_diamond_gemstone.png"/>
+    <local:Material x:Key="Gemstone_PrithivaTopaz" 
+                    MaterialName="坚牢黄玉" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Gemstone/prithiva_topaz_gemstone.png"/>
+    <local:Material x:Key="Gemstone_ShivadaJade" 
+                    MaterialName="哀叙冰玉" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Gemstone/shivada_jade_gemstone.png"/>
+    <local:Material x:Key="Gemstone_VajradaAmethyst" 
+                    MaterialName="最胜紫晶" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Gemstone/vajrada_amethyst_gemstone.png"/>
+    <local:Material x:Key="Gemstone_VarunadaLazurite" 
+                    MaterialName="涤净青金" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Gemstone/varunada_lazurite_gemstone.png"/>
+    <local:Material x:Key="Gemstone_VayudaTurquoise" 
+                    MaterialName="自在松石" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Gemstone/vayuda_turquoise_gemstone.png"/>
+    <!--Ascension Secondary Material-->
+    <local:Material x:Key="Monster_Slime"
+                    MaterialName="史莱姆" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/slime_condensate.png"/>
+    <local:Material x:Key="Monster_Mask"
+                    MaterialName="面具" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/damaged_mask.png"/>
+    <local:Material x:Key="Monster_Scroll"
+                    MaterialName="绘卷" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/divining_scroll.png"/>
+    <local:Material x:Key="Monster_Arrowhead"
+                    MaterialName="箭镞" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/firm_arrowhead.png"/>
+    <local:Material x:Key="Monster_Insignia"
+                    MaterialName="徽记" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/recruits_insignia.png"/>
+    <local:Material x:Key="Monster_RavenInsignia"
+                    MaterialName="鸦印" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/treasure_hoarder_insignia.png"/>
+    <local:Material x:Key="Monster_Nectar"
+                    MaterialName="花蜜" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/dead_ley_line_branch.png"/>
+    <!--Weapon Ascension Secondary Material-->
+    <local:Material x:Key="Elite_Chaos"
+                    MaterialName="混沌" Star="2"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/chaos_device.png"/>
+    <local:Material x:Key="Elite_LeyLine"
+                    MaterialName="地脉" Star="2"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/dead_ley_line_branch.png"/>
+    <local:Material x:Key="Elite_BoneShard"
+                    MaterialName="骨片" Star="2"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/fragile_bone_shard.png"/>
+    <local:Material x:Key="Elite_Horn"
+                    MaterialName="号角" Star="2"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/heavy_horn.png"/>
+    <local:Material x:Key="Elite_SacrificialKnife"
+                    MaterialName="祭刀" Star="2"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/hunters_sacrificial_knife.png"/>
+    <local:Material x:Key="Elite_MistGrass"
+                    MaterialName="雾虚" Star="2"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Monster/mist_grass_pollen.png"/>
+    <!--local material-->
+    <local:Material x:Key="Local_CallaLily"
+                    MaterialName="嘟嘟莲" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/calla_lily.png"/>
+    <local:Material x:Key="Local_Cecilia"
+                    MaterialName="塞西莉亚花" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/cecilia.png"/>
+    <local:Material x:Key="Local_CorLapis"
+                    MaterialName="石珀" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/cor_lapis.png"/>
+    <local:Material x:Key="Local_DandelionSeed"
+                    MaterialName="蒲公英种子" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/dandelion_seed.png"/>
+    <local:Material x:Key="Local_GlazeLily"
+                    MaterialName="琉璃百合" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/glaze_lily.png"/>
+    <local:Material x:Key="Local_JueyunChili"
+                    MaterialName="绝云椒椒" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/jueyun_chili.png"/>
+    <local:Material x:Key="Local_NoctilousJade"
+                    MaterialName="夜泊石" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/noctilous_jade.png"/>
+    <local:Material x:Key="Local_PhilanemoMushroom"
+                    MaterialName="慕风蘑菇" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/philanemo_mushroom.png"/>
+    <local:Material x:Key="Local_Qingxin"
+                    MaterialName="清心" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/qingxin.png"/>
+    <local:Material x:Key="Local_SilkFlower"
+                    MaterialName="霓裳花" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/silk_flower.png"/>
+    <local:Material x:Key="Local_SmallLampGrass"
+                    MaterialName="小灯草" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/small_lamp_grass.png"/>
+    <local:Material x:Key="Local_Starconch"
+                    MaterialName="星螺" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/starconch.png"/>
+    <local:Material x:Key="Local_Valberry"
+                    MaterialName="落落莓" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/valberry.png"/>
+    <local:Material x:Key="Local_Violetgrass"
+                    MaterialName="琉璃袋" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/violetgrass.png"/>
+    <local:Material x:Key="Local_WindwheelAster"
+                    MaterialName="风车菊" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/windwheel_aster.png"/>
+    <local:Material x:Key="Local_Wolfhook"
+                    MaterialName="钩钩果" Star="1"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Special/wolfhook.png"/>
+    <!--talent-->
+    <local:Material x:Key="Talent_Mondstadt"
+                    MaterialName="蒙德天赋" Star="4"/>
+    <local:Material x:Key="Talent_Freedom"
+                    MaterialName="自由" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Talent/philosophies_of_freedom.png"/>
+    <local:Material x:Key="Talent_Resistance"
+                    MaterialName="抗争" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Talent/philosophies_of_resistance.png"/>
+    <local:Material x:Key="Talent_Ballad"
+                    MaterialName="诗文" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Talent/philosophies_of_ballad.png"/>
+    <local:Material x:Key="Talent_Liyue"
+                    MaterialName="璃月天赋" Star="4"/>
+    <local:Material x:Key="Talent_Prosperity"
+                    MaterialName="繁荣" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Talent/philosophies_of_prosperity.png"/>
+    <local:Material x:Key="Talent_Diligence"
+                    MaterialName="勤劳" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Talent/philosophies_of_diligence.png"/>
+    <local:Material x:Key="Talent_Gold"
+                    MaterialName="黄金" Star="4"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Talent/philosophies_of_gold.png"/>
+    <!--weekly-->
+    <local:Material x:Key="Weekly_DvalinsClaw"
+                    MaterialName="东风之爪" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/dvalins_claw.png"/>
+    <local:Material x:Key="Weekly_DvalinsPlume"
+                    MaterialName="东风之翎" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/dvalins_plume.png"/>
+    <local:Material x:Key="Weekly_DvalinsSigh"
+                    MaterialName="东风的吐息" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/dvalins_claw.png"/>
+    
+    <local:Material x:Key="Weekly_RingofBoreas"
+                    MaterialName="北风之环" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/ring_of_boreas.png"/>
+    <local:Material x:Key="Weekly_SpiritLocketofBoreas"
+                    MaterialName="北风的魂匣" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/spirit_locket_of_boreas.png"/>
+    <local:Material x:Key="Weekly_TailofBoreas"
+                    MaterialName="北风之尾" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/tail_of_boreas.png"/>
+    
+    <local:Material x:Key="Weekly_ShadowoftheWarrior"
+                    MaterialName="武炼之魂·孤影" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/shadow_of_the_warrior.png"/>
+    <local:Material x:Key="Weekly_ShardofFoulLegacy"
+                    MaterialName="魔王武装·断片" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/shard_of_foul_legacy.png"/>
+    <local:Material x:Key="Weekly_TuskofMonocerosCaeli"
+                    MaterialName="吞天之鲸·只角" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/ring_of_boreas.png"/>
+</ResourceDictionary>
