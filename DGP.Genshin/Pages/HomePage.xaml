@@ -73,6 +73,7 @@
             </StackPanel>
         </ui:ScrollViewerEx>
         <controls:CharacterDialog x:Name="CharacterDetailDialog"/>
+        <controls:WeaponDialog x:Name="WeaponDetailDialog"/>
     </Grid>
     
 </Page>

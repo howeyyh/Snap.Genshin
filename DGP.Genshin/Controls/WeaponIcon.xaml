@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:DGP.Genshin.Controls" 
              xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters"
              mc:Ignorable="d" 
-             Height="70" Width="70">
+             Height="70" Width="70"
+             MouseUp="UserControl_MouseUp">
     <UserControl.Resources>
         <converters:StarToImageSourceConverter x:Key="StarToImageSourceConverter"/>
     </UserControl.Resources>

@@ -11,15 +11,14 @@
     d:DesignHeight="1000" d:DesignWidth="500"
     PrimaryButtonText="确定"
     Title="{Binding Character.CharacterName}"
-    Height="560"
     DefaultButton="Primary" Style="{DynamicResource CharacterDialogStyle}">
     <ui:ContentDialog.Resources>
         <converters:StarToSolidColorBrushConverter x:Key="StarToSolidColorBrushConverter"/>
         <converters:ElementToImageSourceConverter x:Key="ElementToImageSourceConverter"/>
         <converters:WeaponTypeToNameConverter x:Key="WeaponTypeToNameConverter"/>
         <converters:StarToImageSourceConverter x:Key="StarToImageSourceConverter"/>
-        <converters:AscensionStatToStringConverter x:Key="AscensionStatToStringConverter"/>
-        <converters:AscensionStatValueConverter x:Key="AscensionStatValueConverter"/>
+        <converters:StatToStringConverter x:Key="StatToStringConverter"/>
+        <converters:StatValueConverter x:Key="StatValueConverter"/>
 
         <Style x:Key="CharacterDialogStyle" TargetType="{x:Type ui:ContentDialog}">
             <Setter Property="Foreground" Value="{DynamicResource ContentDialogForeground}"/>
@@ -449,8 +448,8 @@
         <Image Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="70"  Height="70" Source="{Binding Character.ImageUri}" SnapsToDevicePixels="True" RenderOptions.BitmapScalingMode="Fant"/>
 
         <StackPanel Margin="8,8,0,4" VerticalAlignment="Bottom">
-            <TextBlock Text="{Binding Character.AscensionStat,Converter={StaticResource AscensionStatToStringConverter}}" Foreground="#99FFFFFF" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-            <TextBlock Text="{Binding Character.AscensionStatValue,Converter={StaticResource AscensionStatValueConverter}}" Foreground="#FFFFFFFF" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="{Binding Character.AscensionStat,Converter={StaticResource StatToStringConverter}}" Foreground="#99FFFFFF" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+            <TextBlock Text="{Binding Character.AscensionStatValue,Converter={StaticResource StatValueConverter}}" Foreground="#FFFFFFFF" Style="{StaticResource TitleTextBlockStyle}"/>
         </StackPanel>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#FFEDE5D8">

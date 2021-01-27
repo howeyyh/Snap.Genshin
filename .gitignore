@@ -12,3 +12,10 @@
 /DGP.Genshin/obj
 /DGP.Snap.Framework/obj
 /DGP.Snap.GenshinImpact.GachaStatistics/obj
+/Build/Debug
+/Build/Publish
+/Build/DGP.Snap.AutoVersion.exe.config
+/Build/DGP.Snap.AutoVersion.pdb
+/DGP.Snap.AutoVersion/bin/Debug
+/DGP.Snap.AutoVersion/obj
+/DGP.Snap.Updater/obj/Debug

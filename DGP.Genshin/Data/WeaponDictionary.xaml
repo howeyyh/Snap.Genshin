@@ -7,7 +7,9 @@
                   ImageUri="pack://application:,,,/Data/Images/Weapons/dull_blade.png"
                   Star="1"
                   Type="Sword"
-                  Material="Decarabians"/>
+                  Material="Decarabians"
+                  ATK="185"
+                  SubStat="None"/>
     <local:Weapon x:Key="SilverSword"
                   WeaponName="银剑"
                   ImageUri="pack://application:,,,/Data/Images/Weapons/silver_sword.png"

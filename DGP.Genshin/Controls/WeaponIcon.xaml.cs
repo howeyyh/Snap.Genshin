@@ -1,5 +1,6 @@
 ﻿using DGP.Genshin.Data;
 using DGP.Genshin.Data.Weapon;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,5 +24,11 @@ namespace DGP.Genshin.Controls
         }
         public static readonly DependencyProperty WeaponProperty =
             DependencyProperty.Register("Weapon", typeof(Weapon), typeof(WeaponIcon), new PropertyMetadata(null));
+
+        public EventHandler IconClicked;
+        private void UserControl_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            IconClicked?.Invoke(this, null);
+        }
     }
 }

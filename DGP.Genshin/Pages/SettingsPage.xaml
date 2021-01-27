@@ -4,7 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DGP.Genshin.Pages"
-      xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:controls="clr-namespace:DGP.Genshin.Controls" xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters"
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:controls="clr-namespace:DGP.Genshin.Controls" 
+      xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters" 
       mc:Ignorable="d" 
       d:DesignHeight="1600" 
       d:DesignWidth="800"
@@ -20,6 +22,22 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
+        <ui:ContentDialog x:Name="UpdateDialog" Title="下载更新中" CloseButtonText="取消" DefaultButton="Close">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="0,0,0,4">
+                    <TextBlock Text="{Binding UpdateInfo.Title}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <TextBlock Text="{Binding UpdateInfo.Detail}" Margin="0,4" Style="{StaticResource BodyTextBlockStyle}"/>
+                </StackPanel>
+                
+                <TextBlock Grid.Row="1" Text="{Binding UpdateInfo.ProgressText}" Style="{StaticResource BodyTextBlockStyle}" HorizontalAlignment="Center"/>
+                <ui:ProgressBar Grid.Row="2" Minimum="0" Maximum="1" Value="{Binding UpdateInfo.Progress}"/>
+            </Grid>
+        </ui:ContentDialog>
         <ScrollViewer Margin="12,0,0,0">
             <StackPanel>
                 <TextBlock Text="信息" Style="{StaticResource SubtitleTextBlockStyle}"/>
@@ -30,10 +48,10 @@
 
                 <TextBlock Text="在页面上展示的旅行者形象" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <StackPanel x:Name="TravelerOptions" Orientation="Horizontal">
-                    <RadioButton local:ElementHelper.Element="Anemo" GroupName="Traveler" Checked="RadioButton_Checked">
+                    <RadioButton local:ElementHelper.Element="Anemo" GroupName="Traveler" Checked="TravelerPresentSwitched">
                         <controls:CharacterIcon Character="{StaticResource TravelerAnemo}"/>
                     </RadioButton>
-                    <RadioButton local:ElementHelper.Element="Geo" GroupName="Traveler" Checked="RadioButton_Checked">
+                    <RadioButton local:ElementHelper.Element="Geo" GroupName="Traveler" Checked="TravelerPresentSwitched">
                         <controls:CharacterIcon Character="{StaticResource TravelerGeo}"/>
                     </RadioButton>
                 </StackPanel>
@@ -41,14 +59,16 @@
                 
                 <TextBlock Text="关于" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
 
-                <TextBlock Text="Genshin Impact™, 原神™ 是 MiHoYo Co., Ltd.的注册商标" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Text="数据 © MiHoYo Co., Ltd." Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Text="Snap 原神" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
-                <TextBlock Text="DGP.Genshin - version 2021.1.26, build 2" Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <TextBlock Text="© 2021 DGP Studio. All right reserved." Style="{StaticResource BodyTextBlockStyle}"/>
+                
+                <TextBlock Text="Snap 原神" Margin="0,18,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                <TextBlock Text="{Binding VersionString}" Margin="0,6,0,12" Style="{StaticResource BodyTextBlockStyle}"/>
+                <Button Content="检查更新" Click="UpdateRequired"/>
+                <TextBlock Text="© 2021 DGP Studio. All right reserved." Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Honey Impact" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
 
                 <TextBlock Text="© 2021 Honey Impact - Genshin Impact DB and Tools." Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="Genshin Impact™, 原神™ 是 MiHoYo Co., Ltd.的注册商标" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <TextBlock Text="数据 © MiHoYo Co., Ltd." Style="{StaticResource BodyTextBlockStyle}"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

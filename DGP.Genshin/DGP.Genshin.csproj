@@ -31,11 +31,11 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Build\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -44,10 +44,10 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Build\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -78,8 +78,8 @@
     <Compile Include="Controls\CharacterIcon.xaml.cs">
       <DependentUpon>CharacterIcon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Converters\AscensionStatToStringConverter.cs" />
-    <Compile Include="Controls\Converters\AscensionStatValueConverter.cs" />
+    <Compile Include="Controls\Converters\StatToStringConverter.cs" />
+    <Compile Include="Controls\Converters\StatValueConverter.cs" />
     <Compile Include="Controls\Converters\ElementToImageSourceConverter.cs" />
     <Compile Include="Controls\Converters\ElementToIndexConverter.cs" />
     <Compile Include="Controls\Converters\ElementToNameConverter.cs" />
@@ -110,8 +110,12 @@
     <Compile Include="Data\Weapon\WeaponManager.cs" />
     <Compile Include="Data\Weapon\WeaponMaterial.cs" />
     <Compile Include="Data\Weapon\WeaponType.cs" />
+    <Compile Include="Helper\Json.cs" />
     <Compile Include="Helper\NavHelper.cs" />
     <Compile Include="Helper\Observable.cs" />
+    <Compile Include="Models\Github\AssetsItem.cs" />
+    <Compile Include="Models\Github\People.cs" />
+    <Compile Include="Models\Github\Release.cs" />
     <Compile Include="Pages\CharacterDetailPage.xaml.cs">
       <DependentUpon>CharacterDetailPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +135,7 @@
     <Compile Include="Service\Setting.cs" />
     <Compile Include="Service\SettingService.cs" />
     <Compile Include="Service\TravelerPresentService.cs" />
+    <Compile Include="Service\UpdateService.cs" />
     <Compile Include="Views\Artifact\ArtifactView.xaml.cs">
       <DependentUpon>ArtifactView.xaml</DependentUpon>
     </Compile>
@@ -250,19 +255,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -615,5 +611,22 @@
     <Resource Include="Data\Images\Materials\Ascension\juvenile_jade.png" />
     <Resource Include="Data\Images\Materials\Ascension\lightning_prism.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DGP.Snap.Framework\DGP.Snap.Framework.csproj">
+      <Project>{d2950839-0eeb-4c45-b791-e756a1d552f5}</Project>
+      <Name>DGP.Snap.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)Build\DGP.Snap.AutoVersion.exe "$(ProjectDir)"
+if exist $(SolutionDir)Build\Publish rmdir /S /Q $(SolutionDir)Build\Publish</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>mkdir $(SolutionDir)Build\Publish
+xcopy /Y $(TargetDir)*.exe $(SolutionDir)Build\Publish
+xcopy /Y $(TargetDir)*.dll $(SolutionDir)Build\Publish
+$(SolutionDir)Build\7z.exe  a -r $(SolutionDir)Build\Publish\Package.zip $(SolutionDir)Build\Publish\*.*</PostBuildEvent>
+  </PropertyGroup>
 </Project>

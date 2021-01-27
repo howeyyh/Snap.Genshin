@@ -16,8 +16,6 @@ namespace DGP.Genshin.Pages
     /// </summary>
     public partial class HomePage : Page
     {
-        private const TalentMaterial all = TalentMaterial.All;
-
         private List<string> DayOfWeekList { get; set; } = new List<string>
         { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
         
@@ -29,6 +27,37 @@ namespace DGP.Genshin.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            InitializeCharacters();
+            InitializeWeapons();
+
+            SetVisibility();
+        }
+        private void InitializeWeapons()
+        {
+            IEnumerable<Weapon> weapons = WeaponManager.Instance.Weapons;
+            MondstadtWeapons = weapons
+                .Where(item => WeaponHelper.IsTodaysMondstadtWeapon(item.Material))
+                .Where(item => UnreleasedPolicyFilter(item))
+                .OrderByDescending(item => item.Star)
+                .Select(item =>
+                {
+                    var w= new WeaponIcon() { Weapon = item };
+                    w.IconClicked += OnWeaponClicked;
+                    return w;
+                });
+            LiyueWeapons = weapons
+                .Where(item => WeaponHelper.IsTodaysLiyueWeapon(item.Material))
+                .Where(item => UnreleasedPolicyFilter(item))
+                .OrderByDescending(item => item.Star)
+                .Select(item =>
+                {
+                    var w = new WeaponIcon() { Weapon = item };
+                    w.IconClicked += OnWeaponClicked;
+                    return w;
+                });
+        }
+        private void InitializeCharacters()
+        {
             IEnumerable<Character> chars = CharacterManager.Instance.Characters;
             MondstadtCharacters = chars
                 .Where(item => TalentHelper.IsTodaysMondstadtMaterial(item.TalentMaterial))
@@ -37,7 +66,7 @@ namespace DGP.Genshin.Pages
                 .Select(item =>
                 {
                     CharacterIcon c = new CharacterIcon() { Character = item };
-                    c.IconClickedEventHandler += OnIconClicked;
+                    c.IconClicked += OnCharacterClicked;
                     return c;
                 });
             LiyueCharacters = chars
@@ -47,34 +76,31 @@ namespace DGP.Genshin.Pages
                 .Select(item =>
                 {
                     CharacterIcon c = new CharacterIcon() { Character = item };
-                    c.IconClickedEventHandler += OnIconClicked;
+                    c.IconClicked += OnCharacterClicked;
                     return c;
                 });
-
-            IEnumerable<Weapon> weapons = WeaponManager.Instance.Weapons;
-            MondstadtWeapons = weapons
-                .Where(item => WeaponHelper.IsTodaysMondstadtWeapon(item.Material))
-                .Where(item => UnreleasedPolicyFilter(item))
-                .OrderByDescending(item => item.Star)
-                .Select(item => new WeaponIcon() { Weapon = item });
-            LiyueWeapons = weapons
-                .Where(item => WeaponHelper.IsTodaysLiyueWeapon(item.Material))
-                .Where(item => UnreleasedPolicyFilter(item))
-                .OrderByDescending(item => item.Star)
-                .Select(item => new WeaponIcon() { Weapon = item });
-
+        }
+        private void SetVisibility()
+        {
             DayOfWeek today = DateTime.Now.DayOfWeek;
-            Visibility1 = today == DayOfWeek.Sunday || today == DayOfWeek.Monday || today == DayOfWeek.Thursday ? Visibility.Visible : Visibility.Collapsed;
-            Visibility2 = today == DayOfWeek.Sunday || today == DayOfWeek.Tuesday || today == DayOfWeek.Friday ? Visibility.Visible : Visibility.Collapsed;
-            Visibility3 = today == DayOfWeek.Sunday || today == DayOfWeek.Wednesday || today == DayOfWeek.Saturday ? Visibility.Visible : Visibility.Collapsed;
+            Visibility1 = today == DayOfWeek.Sunday || today == DayOfWeek.Monday || today == DayOfWeek.Thursday ?
+                Visibility.Visible : Visibility.Collapsed;
+            Visibility2 = today == DayOfWeek.Sunday || today == DayOfWeek.Tuesday || today == DayOfWeek.Friday ?
+                Visibility.Visible : Visibility.Collapsed;
+            Visibility3 = today == DayOfWeek.Sunday || today == DayOfWeek.Wednesday || today == DayOfWeek.Saturday ?
+                Visibility.Visible : Visibility.Collapsed;
         }
 
-        private void OnIconClicked(object sender, EventArgs e)
+        private void OnCharacterClicked(object sender, EventArgs e)
         {
             CharacterDetailDialog.Character = ((CharacterIcon)sender).Character;
             CharacterDetailDialog.ShowAsync();
         }
-
+        private void OnWeaponClicked(object sender, EventArgs e)
+        {
+            WeaponDetailDialog.Weapon = ((WeaponIcon)sender).Weapon;
+            WeaponDetailDialog.ShowAsync();
+        }
         private bool UnreleasedPolicyFilter(Character item) => item.IsReleased || SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
         private bool UnreleasedPolicyFilter(Weapon item) => item.IsReleased || SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
 

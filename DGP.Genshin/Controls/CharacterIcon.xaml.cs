@@ -25,11 +25,11 @@ namespace DGP.Genshin.Controls
         public static readonly DependencyProperty CharacterProperty =
             DependencyProperty.Register("Character", typeof(Character), typeof(CharacterIcon), new PropertyMetadata(null));
 
-        public EventHandler IconClickedEventHandler;
+        public EventHandler IconClicked;
 
         private void UserControl_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            IconClickedEventHandler?.Invoke(this, null);
+            IconClicked?.Invoke(this, null);
         }
     }
 }

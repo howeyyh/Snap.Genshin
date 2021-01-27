@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace DGP.Genshin.Controls.Converters
 {
-    public class AscensionStatToStringConverter : IValueConverter
+    public class StatToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -46,7 +46,7 @@ namespace DGP.Genshin.Controls.Converters
                 case Stat.HealingBonusPercent:
                     return "治疗加成";
                 default:
-                    return "???";
+                    return "-";
             }
         }
 
