@@ -19,3 +19,5 @@
 /DGP.Snap.AutoVersion/bin/Debug
 /DGP.Snap.AutoVersion/obj
 /DGP.Snap.Updater/obj/Debug
+/Build/Release
+/DGP.Snap.Updater/obj/Release

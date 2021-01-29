@@ -158,6 +158,25 @@
     <local:Material x:Key="Talent_Gold"
                     MaterialName="黄金" Star="4"
                     ImageUri="pack://application:,,,/Data/Images/Materials/Talent/philosophies_of_gold.png"/>
+    <!--weapon-->
+    <local:Material x:Key="Weapon_Decarabians"
+                    MaterialName="高塔孤王" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weapon/scattered_piece_of_decarabianss_dream.png"/>
+    <local:Material x:Key="Weapon_Boreal"
+                    MaterialName="凛风奔狼" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weapon/boreal_wolfs_nostalgia.png"/>
+    <local:Material x:Key="Weapon_DandelionGladiator"
+                    MaterialName="狮牙斗士" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weapon/dream_of_the_dandelion_gladiator.png"/>
+    <local:Material x:Key="Weapon_Guyun"
+                    MaterialName="孤云寒林" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weapon/divine_body_from_guyun.png"/>
+    <local:Material x:Key="Weapon_MistVeiled"
+                    MaterialName="雾海云间" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weapon/mist_veiled_primo_elixir.png"/>
+    <local:Material x:Key="Weapon_Aerosiderite"
+                    MaterialName="漆黑陨铁" Star="5"
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weapon/chunk_of_aerosiderite.png"/>
     <!--weekly-->
     <local:Material x:Key="Weekly_DvalinsClaw"
                     MaterialName="东风之爪" Star="5"

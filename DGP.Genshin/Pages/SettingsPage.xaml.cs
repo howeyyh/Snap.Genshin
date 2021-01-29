@@ -75,24 +75,35 @@ namespace DGP.Genshin.Pages
             SettingService.Instance[Setting.PresentTravelerElementType] = ElementHelper.GetElement((RadioButton)sender);
             TravelerPresentService.Instance.SetPresentTraveler();
         }
-        private async void UpdateRequired(object sender, RoutedEventArgs e)
+        private async void UpdateRequested(object sender, RoutedEventArgs e)
         {
-            UpdateService.GetInstance().UpdateInfo = this.UpdateInfo;
-            UpdateAvailability u = UpdateService.GetInstance().CheckUpdateAvailability();
+            UpdateService.Instance.UpdateInfo = this.UpdateInfo;
+            UpdateAvailability u = UpdateService.Instance.CheckUpdateAvailability();
             Debug.WriteLine(u);
             switch (u)
             {
                 case UpdateAvailability.NeedUpdate:
-                    UpdateService.GetInstance().DownloadAndInstallPackage();
+                    UpdateService.Instance.DownloadAndInstallPackage();
                     await UpdateDialog.ShowAsync();
                     break;
                 case UpdateAvailability.IsNewestRelease:
+                    ((Button)sender).Content = "已是最新版";
+                    ((Button)sender).IsEnabled = false;
                     break;
                 case UpdateAvailability.IsInsiderVersion:
+                    ((Button)sender).Content = "内部测试版";
+                    ((Button)sender).IsEnabled = false;
                     break;
                 case UpdateAvailability.NotAvailable:
+                    ((Button)sender).Content = "获取更新失败";
+                    ((Button)sender).IsEnabled = false;
                     break;
             }
+        }
+
+        private void UpdateCancellationRequested(ModernWpf.Controls.ContentDialog sender, ModernWpf.Controls.ContentDialogButtonClickEventArgs args)
+        {
+            UpdateService.Instance.CancelUpdate();
         }
     }
     public class ElementHelper

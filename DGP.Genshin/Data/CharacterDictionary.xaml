@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:DGP.Genshin.Data">
+                    xmlns:local="clr-namespace:DGP.Genshin.Data" xmlns:calculation="clr-namespace:DGP.Genshin.Simulation.Calculation">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="MaterialDictionary.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -61,7 +61,14 @@
                      AscensionLocal="{StaticResource Local_Cecilia}"
                      AscensionMonster="{StaticResource Monster_Scroll}"
                      TalentDaily="{StaticResource Talent_Ballad}"
-                     TalentWeekly="{StaticResource Weekly_TuskofMonocerosCaeli}"/>
+                     TalentWeekly="{StaticResource Weekly_TuskofMonocerosCaeli}">
+        <local:Character.CalculationFunctions>
+            <local:CalculationFunctionCollection>
+                <calculation:CalculationFunction DisplayName="输出"/>
+                <calculation:CalculationFunction DisplayName="输出"/>
+            </local:CalculationFunctionCollection>
+        </local:Character.CalculationFunctions>
+    </local:Character>
     <local:Character x:Key="Amber" 
                      CharacterName="安柏"  
                      ImageUri="pack://application:,,,/Data/Images/Characters/amber.png" 

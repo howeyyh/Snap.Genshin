@@ -22,7 +22,7 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
-        <ui:ContentDialog x:Name="UpdateDialog" Title="下载更新中" CloseButtonText="取消" DefaultButton="Close">
+        <ui:ContentDialog x:Name="UpdateDialog" Title="下载更新中" CloseButtonText="取消" DefaultButton="Close" CloseButtonClick="UpdateCancellationRequested">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -39,7 +39,7 @@
             </Grid>
         </ui:ContentDialog>
         <ScrollViewer Margin="12,0,0,0">
-            <StackPanel>
+            <StackPanel Margin="0,0,0,12">
                 <TextBlock Text="信息" Style="{StaticResource SubtitleTextBlockStyle}"/>
                 
                 <TextBlock Text="在页面上展示未发布的角色和武器" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
@@ -62,8 +62,8 @@
                 
                 <TextBlock Text="Snap 原神" Margin="0,18,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
                 <TextBlock Text="{Binding VersionString}" Margin="0,6,0,12" Style="{StaticResource BodyTextBlockStyle}"/>
-                <Button Content="检查更新" Click="UpdateRequired"/>
-                <TextBlock Text="© 2021 DGP Studio. All right reserved." Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <Button Content="检查更新并安装" Click="UpdateRequested"/>
+                <TextBlock Text="© 2021 DGP Studio. All right reserved." Margin="0,12,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Honey Impact" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
 
                 <TextBlock Text="© 2021 Honey Impact - Genshin Impact DB and Tools." Margin="0,6,0,0" Style="{StaticResource BodyTextBlockStyle}"/>

@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:DGP.Genshin"
         xmlns:ui="http://schemas.modernwpf.com/2019" 
         xmlns:helper="clr-namespace:DGP.Genshin.Helper" 
-        xmlns:pages="clr-namespace:DGP.Genshin.Pages" xmlns:controls="clr-namespace:DGP.Genshin.Controls"
+        xmlns:pages="clr-namespace:DGP.Genshin.Pages" 
+        xmlns:controls="clr-namespace:DGP.Genshin.Controls"
         ui:WindowHelper.UseModernWindowStyle="True"
         ui:TitleBar.ExtendViewIntoTitleBar="True"
         ui:TitleBar.IsBackButtonVisible="{Binding ElementName=ContentFrame,Path=CanGoBack,Mode=OneWay}"  
@@ -26,9 +27,9 @@
             PaneDisplayMode="Auto">
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem Content="首页" helper:NavHelper.NavigateTo="{x:Type pages:HomePage}" Icon="Home"/>
-                <ui:NavigationViewItem Content="伤害计算" helper:NavHelper.NavigateTo="{x:Type pages:HomePage}" Icon="Calculator"/>
                 <ui:NavigationViewItem Content="日常" helper:NavHelper.NavigateTo="{x:Type pages:DailyMaterialPage}" Icon="CalendarDay"/>
                 <ui:NavigationViewItem Content="周常" helper:NavHelper.NavigateTo="{x:Type pages:WeeklyMaterialPage}" Icon="CalendarWeek"/>
+                <ui:NavigationViewItem Content="伤害计算" helper:NavHelper.NavigateTo="{x:Type pages:CalculationPage}" Icon="Calculator"/>
             </ui:NavigationView.MenuItems>
             <ui:Frame x:Name="ContentFrame">
                 <ui:Frame.ContentTransitions>

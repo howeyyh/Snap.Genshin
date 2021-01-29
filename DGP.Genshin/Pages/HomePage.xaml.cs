@@ -37,7 +37,7 @@ namespace DGP.Genshin.Pages
             IEnumerable<Weapon> weapons = WeaponManager.Instance.Weapons;
             MondstadtWeapons = weapons
                 .Where(item => WeaponHelper.IsTodaysMondstadtWeapon(item.Material))
-                .Where(item => UnreleasedPolicyFilter(item))
+                .Where(item => WeaponManager.UnreleasedPolicyFilter(item))
                 .OrderByDescending(item => item.Star)
                 .Select(item =>
                 {
@@ -47,7 +47,7 @@ namespace DGP.Genshin.Pages
                 });
             LiyueWeapons = weapons
                 .Where(item => WeaponHelper.IsTodaysLiyueWeapon(item.Material))
-                .Where(item => UnreleasedPolicyFilter(item))
+                .Where(item => WeaponManager.UnreleasedPolicyFilter(item))
                 .OrderByDescending(item => item.Star)
                 .Select(item =>
                 {
@@ -61,7 +61,7 @@ namespace DGP.Genshin.Pages
             IEnumerable<Character> chars = CharacterManager.Instance.Characters;
             MondstadtCharacters = chars
                 .Where(item => TalentHelper.IsTodaysMondstadtMaterial(item.TalentMaterial))
-                .Where(item => UnreleasedPolicyFilter(item))
+                .Where(item => CharacterManager.UnreleasedPolicyFilter(item))
                 .OrderByDescending(item => item.Star)
                 .Select(item =>
                 {
@@ -71,7 +71,7 @@ namespace DGP.Genshin.Pages
                 });
             LiyueCharacters = chars
                 .Where(item => TalentHelper.IsTodaysLiyueMaterial(item.TalentMaterial))
-                .Where(item => UnreleasedPolicyFilter(item))
+                .Where(item => CharacterManager.UnreleasedPolicyFilter(item))
                 .OrderByDescending(item => item.Star)
                 .Select(item =>
                 {
@@ -101,9 +101,6 @@ namespace DGP.Genshin.Pages
             WeaponDetailDialog.Weapon = ((WeaponIcon)sender).Weapon;
             WeaponDetailDialog.ShowAsync();
         }
-        private bool UnreleasedPolicyFilter(Character item) => item.IsReleased || SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
-        private bool UnreleasedPolicyFilter(Weapon item) => item.IsReleased || SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
-
         #region propdp
 
         #region Characters

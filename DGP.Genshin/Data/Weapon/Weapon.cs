@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DGP.Genshin.Data.Weapon
 {
@@ -8,7 +9,7 @@ namespace DGP.Genshin.Data.Weapon
         public Stat SubStat { get; set; } = Stat.None;
         public double SubStatValue { get; set; }
         public WeaponType Type { get; set; }
-        public SpecialAbility SpecialAbility { get; set; }
+        public PassiveCollection Passives { get; set; }
         public Uri ImageUri { get; set; }
         public string WeaponName { get; set; }
         public int Star { get; set; } = 1;
@@ -17,5 +18,12 @@ namespace DGP.Genshin.Data.Weapon
         public Material DailyMaterial { get; set; }
         public Material EliteMaterial { get; set; }
         public Material MonsterMaterial { get; set; }
+        public int RefineLevel { get; set; } = 1;
+
+    }
+
+    public class PassiveCollection : List<Passive>
+    {
+
     }
 }

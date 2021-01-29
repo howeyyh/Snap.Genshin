@@ -1,5 +1,6 @@
 ﻿using DGP.Genshin.Data.Talent;
 using DGP.Genshin.Data.Weapon;
+using DGP.Genshin.Simulation.Calculation;
 using System;
 using System.Collections.Generic;
 
@@ -75,5 +76,11 @@ namespace DGP.Genshin.Data
         public WeaponType WeaponType { get; set; } = WeaponType.Sword;
         public Constelllation Constellation { get; set; }
         public TalentGroup Talents { get; set; }
+        public CalculationFunctionCollection CalculationFunctions { get; set; }
+    }
+
+    public class CalculationFunctionCollection : List<CalculationFunction>
+    {
+
     }
 }

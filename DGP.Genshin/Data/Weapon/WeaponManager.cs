@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DGP.Genshin.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace DGP.Genshin.Data.Weapon
             get { return (Weapon)characterDictionary[key]; }
             set { characterDictionary[key] = value; }
         }
+        public static bool UnreleasedPolicyFilter(Weapon item) => item.IsReleased || SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
 
         #region 单例
         private static WeaponManager instance;
