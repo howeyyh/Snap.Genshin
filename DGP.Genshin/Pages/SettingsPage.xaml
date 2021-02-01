@@ -13,7 +13,7 @@
       Loaded="Page_Loaded"
       Title="SettingsPage">
     <Page.Resources>
-        <ResourceDictionary Source="/DGP.Genshin;component/Data/CharacterDictionary.xaml">
+        <ResourceDictionary Source="/DGP.Genshin;component/Data/Character/CharacterDictionary.xaml">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <converters:ElementToIndexConverter x:Key="ElementToIndexConverter"/>
@@ -62,7 +62,11 @@
                 
                 <TextBlock Text="Snap 原神" Margin="0,18,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
                 <TextBlock Text="{Binding VersionString}" Margin="0,6,0,12" Style="{StaticResource BodyTextBlockStyle}"/>
-                <Button Content="检查更新并安装" Click="UpdateRequested"/>
+                <TextBlock Text="检查更新并安装" Margin="0,12,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="4" Tag="Github" Content="Github" Click="UpdateRequested"/>
+                    <Button Margin="4" Tag="Gitee" Content="Gitee" Click="UpdateRequested"/>
+                </StackPanel>
                 <TextBlock Text="© 2021 DGP Studio. All right reserved." Margin="0,12,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Honey Impact" Margin="0,12,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
 

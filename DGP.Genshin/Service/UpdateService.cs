@@ -20,12 +20,11 @@ namespace DGP.Genshin.Service
 
         private const string GithubUrl = @"https://api.github.com/repos/DGP-Studio/Snap.Genshin/releases/latest";
         private const string GiteeUrl = @"https://gitee.com/api/v5/repos/Lightczx/Snap.Genshin/releases/latest";
-
-        public UpdateAvailability CheckUpdateAvailability()
+        public UpdateAvailability CheckUpdateAvailability(string url)
         {
             try
             {
-                ReleaseInfo = Json.GetWebRequestObject<Release>(GiteeUrl);
+                ReleaseInfo = Json.GetWebRequestObject<Release>(url);
                 UpdateInfo.Title = ReleaseInfo.Name;
                 UpdateInfo.Detail = ReleaseInfo.Body;
                 string newVersion = ReleaseInfo.TagName;
@@ -52,6 +51,15 @@ namespace DGP.Genshin.Service
             {
                 return UpdateAvailability.NotAvailable;
             }
+        }
+        public UpdateAvailability CheckUpdateAvailabilityViaGitee()
+        {
+            return CheckUpdateAvailability(GiteeUrl);
+        }
+
+        public UpdateAvailability CheckUpdateAvailabilityViaGithub()
+        {
+            return CheckUpdateAvailability(GithubUrl);
         }
 
         public void DownloadAndInstallPackage()

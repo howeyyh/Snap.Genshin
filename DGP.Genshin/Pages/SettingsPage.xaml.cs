@@ -78,8 +78,11 @@ namespace DGP.Genshin.Pages
         private async void UpdateRequested(object sender, RoutedEventArgs e)
         {
             UpdateService.Instance.UpdateInfo = UpdateInfo;
-            UpdateAvailability u = UpdateService.Instance.CheckUpdateAvailability();
-            Debug.WriteLine(u);
+            UpdateAvailability u;
+            if (((Button)sender).Tag.ToString() == "Github")
+                u = UpdateService.Instance.CheckUpdateAvailabilityViaGithub();
+            else
+                u = UpdateService.Instance.CheckUpdateAvailabilityViaGitee();
             switch (u)
             {
                 case UpdateAvailability.NeedUpdate:
