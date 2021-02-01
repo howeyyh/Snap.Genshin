@@ -101,13 +101,38 @@
     <Compile Include="Controls\WeaponMaterialPresenter.xaml.cs">
       <DependentUpon>WeaponMaterialPresenter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\CharacterManager.cs" />
+    <Compile Include="Data\Artifact\ArtifactProvider.cs" />
+    <Compile Include="Data\Artifact\ArtifactType.cs" />
+    <Compile Include="Data\Character\CalculationFunctionCollection.cs" />
+    <Compile Include="Data\Character\CharacterManager.cs" />
     <Compile Include="Data\Element.cs" />
     <Compile Include="Data\Stat.cs" />
     <Compile Include="Data\Talent\TalentHelper.cs" />
     <Compile Include="Data\Talent\TalentMaterial.cs" />
-    <Compile Include="Data\Weapon\TimeCollection.cs" />
-    <Compile Include="Data\Weapon\ValueCollection.cs" />
+    <Compile Include="Data\Weapon\Passives\ATKPercentBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\CritRateBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\DescensionPassive.cs" />
+    <Compile Include="Data\Weapon\Passives\ElementSkillCritRateBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\ElementSkillDealedDMGBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\HPPercentPassive.cs" />
+    <Compile Include="Data\Weapon\Passives\HPToATKPassive.cs" />
+    <Compile Include="Data\Weapon\Passives\NormalChargedDealedDMGBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\NormalPassive.cs" />
+    <Compile Include="Data\Weapon\Passives\PassiveCollection.cs" />
+    <Compile Include="Data\Weapon\Passives\TATKPercentBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\TATKToDamage.cs" />
+    <Compile Include="Data\Weapon\Passives\TCritRateBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\TDealedDMGBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\TimeCollection.cs" />
+    <Compile Include="Data\Weapon\Passives\Triggerable.cs" />
+    <Compile Include="Data\Weapon\Passives\TriggerableStackable.cs" />
+    <Compile Include="Data\Weapon\Passives\TriggerableStackableConditional.cs" />
+    <Compile Include="Data\Weapon\Passives\TSATKDEFPercentBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\TSATKPercentBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\TSCATKPercentBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\TSCritRateBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\TSDealedDMGBonus.cs" />
+    <Compile Include="Data\Weapon\Passives\ValueCollection.cs" />
     <Compile Include="Data\Weapon\WeaponHelper.cs" />
     <Compile Include="Data\Weapon\WeaponManager.cs" />
     <Compile Include="Data\Weapon\WeaponMaterial.cs" />
@@ -146,6 +171,7 @@
     <Compile Include="Simulation\Calculation\DealedDamageBuffFuncion.cs" />
     <Compile Include="Simulation\Calculation\Defence.cs" />
     <Compile Include="Simulation\Calculation\EvaporationMeltingDamageBouns.cs" />
+    <Compile Include="Simulation\Calculation\HP.cs" />
     <Compile Include="Simulation\Calculation\ReceivedDamageFuncion.cs" />
     <Compile Include="Simulation\Calculation\TalentBuffFunction.cs" />
     <Compile Include="Views\Artifact\ArtifactView.xaml.cs">
@@ -188,7 +214,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Data\CharacterDictionary.xaml">
+    <Page Include="Data\Character\CharacterDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -196,7 +222,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Data\WeaponDictionary.xaml">
+    <Page Include="Data\Weapon\WeaponDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,12 +234,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\Artifact.cs" />
-    <Compile Include="Data\ArtifactGroup.cs" />
-    <Compile Include="Data\Character.cs" />
+    <Compile Include="Data\Artifact\Artifact.cs" />
+    <Compile Include="Data\Artifact\ArtifactGroup.cs" />
+    <Compile Include="Data\Character\Character.cs" />
     <Compile Include="Data\Constelllation.cs" />
     <Compile Include="Data\Material.cs" />
-    <Compile Include="Data\Weapon\Passive.cs" />
+    <Compile Include="Data\Weapon\Passives\Passive.cs" />
     <Compile Include="Data\Talent\Talent.cs" />
     <Compile Include="Data\Talent\TalentGroup.cs" />
     <Compile Include="Data\Weapon\Weapon.cs" />

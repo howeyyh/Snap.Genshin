@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DGP.Genshin.Data.Weapon
 {
-    class WeaponHelper
+    internal class WeaponHelper
     {
         private const WeaponMaterial all = WeaponMaterial.All;
         private static List<WeaponMaterialEntry> WeaponMaterialEntries { get; set; } = new List<WeaponMaterialEntry>
@@ -31,20 +28,20 @@ namespace DGP.Genshin.Data.Weapon
 
         public static bool IsTodaysMondstadtWeapon(WeaponMaterial w)
         {
-            if(IsMondstadtWeapon(w))
+            if (IsMondstadtWeapon(w))
             {
                 WeaponMaterial todayMondstadtWeapon = WeaponMaterialEntries[(int)DateTime.Now.DayOfWeek].MondstadtWeapon;
-                return w == todayMondstadtWeapon ||todayMondstadtWeapon==all;
+                return w == todayMondstadtWeapon || todayMondstadtWeapon == all;
             }
             return false;
         }
 
         public static bool IsTodaysLiyueWeapon(WeaponMaterial w)
         {
-            if(IsLiyueWeapon(w))
+            if (IsLiyueWeapon(w))
             {
                 WeaponMaterial todayLiyueWeapon = WeaponMaterialEntries[(int)DateTime.Now.DayOfWeek].LiyueWeapon;
-                return w == todayLiyueWeapon||todayLiyueWeapon==all;
+                return w == todayLiyueWeapon || todayLiyueWeapon == all;
             }
             return false;
         }

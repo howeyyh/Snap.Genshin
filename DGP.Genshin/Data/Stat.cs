@@ -5,7 +5,9 @@
         None,
 
         ElementalMastery,
-
+        HP,
+        ATK,
+        DEF,
         ATKPercent,
         HPPercent,
         DEFPercent,

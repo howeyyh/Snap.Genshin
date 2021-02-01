@@ -1,8 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:DGP.Genshin.Data" xmlns:calculation="clr-namespace:DGP.Genshin.Simulation.Calculation">
+                    xmlns:calculation="clr-namespace:DGP.Genshin.Simulation.Calculation" 
+                    xmlns:local="clr-namespace:DGP.Genshin.Data.Character">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="MaterialDictionary.xaml"/>
+        <ResourceDictionary Source="../MaterialDictionary.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <local:Character x:Key="TravelerAnemo" 
                      CharacterName="旅行者(风)" 
@@ -64,8 +65,8 @@
                      TalentWeekly="{StaticResource Weekly_TuskofMonocerosCaeli}">
         <local:Character.CalculationFunctions>
             <local:CalculationFunctionCollection>
-                <calculation:CalculationFunction DisplayName="输出"/>
-                <calculation:CalculationFunction DisplayName="输出"/>
+                <calculation:CalculationFunction/>
+                <calculation:CalculationFunction/>
             </local:CalculationFunctionCollection>
         </local:Character.CalculationFunctions>
     </local:Character>

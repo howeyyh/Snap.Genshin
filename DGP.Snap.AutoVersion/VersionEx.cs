@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DGP.Snap.AutoVersion
 {
-    class VersionEx : ICloneable, IComparable, IComparable<VersionEx>, IEquatable<VersionEx>
+    internal class VersionEx : ICloneable, IComparable, IComparable<VersionEx>, IEquatable<VersionEx>
     {
         internal enum ParseFailureKind
         {

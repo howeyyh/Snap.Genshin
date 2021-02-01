@@ -1,5 +1,4 @@
-﻿using DGP.Genshin.Data;
-using DGP.Genshin.Data.Talent;
+﻿using DGP.Genshin.Data.Talent;
 using System;
 using System.Globalization;
 using System.Windows;

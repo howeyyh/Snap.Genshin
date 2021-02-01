@@ -1,10 +1,9 @@
 ﻿using DGP.Genshin.Data.Talent;
 using DGP.Genshin.Data.Weapon;
-using DGP.Genshin.Simulation.Calculation;
 using System;
 using System.Collections.Generic;
 
-namespace DGP.Genshin.Data
+namespace DGP.Genshin.Data.Character
 {
     public class Character
     {
@@ -77,10 +76,5 @@ namespace DGP.Genshin.Data
         public Constelllation Constellation { get; set; }
         public TalentGroup Talents { get; set; }
         public CalculationFunctionCollection CalculationFunctions { get; set; }
-    }
-
-    public class CalculationFunctionCollection : List<CalculationFunction>
-    {
-
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DGP.Snap.AutoVersion
 {
-    class Program
+    internal class Program
     {
         /// <summary>
         /// 编译时，项目版本号自动加1的工具
@@ -14,7 +14,7 @@ namespace DGP.Snap.AutoVersion
         /// <para><code>T035 "$(ProjectDir)"</code></para>
         /// <para>T035前面要不要指定路径就由你自己决定了，最简单的，就是把T035.exe放到System32目录</para>
         /// </summary>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length == 0)
             {
@@ -66,8 +66,10 @@ namespace DGP.Snap.AutoVersion
 
             // 备份文件删除（只读属性时将会出错）
             if (System.IO.File.Exists(sAssemOld) == true)
+            {
                 System.IO.File.Delete(sAssemOld);
-            
+            }
+
             // 原文件改名备份（只读属性下允许正常改名）
             System.IO.File.Move(sAssem, sAssemOld);
             // 新文件改为原文件（原只读属性将会丢失）
@@ -97,10 +99,16 @@ namespace DGP.Snap.AutoVersion
             // TODO: 自行去保证数据正确性，例如：1.0.7 或 1.0.0.7A
             string sVer = sLine.Substring(posStart + 2, posEnd - posStart - 2);
             VersionEx currentVersion = new VersionEx(sVer);
-            VersionEx newVersion = new VersionEx(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,currentVersion.Revision);
+            VersionEx newVersion = new VersionEx(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, currentVersion.Revision);
             if (newVersion > currentVersion)
+            {
                 newVersion.Revision = 0;
-            else newVersion.Revision = currentVersion.Revision + 1;
+            }
+            else
+            {
+                newVersion.Revision = currentVersion.Revision + 1;
+            }
+
             return "[assembly: AssemblyVersion(\"" + newVersion + "\")]";
         }
     }

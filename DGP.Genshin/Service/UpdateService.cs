@@ -2,13 +2,9 @@
 using DGP.Genshin.Models.Github;
 using DGP.Snap.Framework.Net.Download;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DGP.Genshin.Service
 {
@@ -43,9 +39,13 @@ namespace DGP.Genshin.Service
                 else
                 {
                     if (new Version(newVersion) == CurrentVersion)
+                    {
                         return UpdateAvailability.IsNewestRelease;
+                    }
                     else
+                    {
                         return UpdateAvailability.IsInsiderVersion;
+                    }
                 }
             }
             catch (Exception)
@@ -73,21 +73,28 @@ namespace DGP.Genshin.Service
         {
             double percent = Math.Round((double)args.BytesReceived / args.TotalBytesToReceive, 2);
             UpdateInfo.Progress = percent;
-            UpdateInfo.ProgressText = $@"{percent*100}% - {args.BytesReceived / 1024}KB / {args.TotalBytesToReceive / 1024}KB";
+            UpdateInfo.ProgressText = $@"{percent * 100}% - {args.BytesReceived / 1024}KB / {args.TotalBytesToReceive / 1024}KB";
         }
         internal void OnDownloadFileCompleted(object sender, DownloadFileCompletedArgs eventArgs)
         {
             //InnerFileDownloader.DownloadFileCompleted -= OnDownloadFileCompleted;
             //InnerFileDownloader.Dispose();
             if (eventArgs.State == CompletedState.Succeeded)
+            {
                 StartInstallUpdate();
+            }
+
             if (eventArgs.State == CompletedState.Canceled)
+            {
                 return;
+            }
         }
         public static void StartInstallUpdate()
         {
             if (File.Exists("OldUpdater.exe"))
+            {
                 File.Delete("OldUpdater.exe");
+            }
             //rename to oldupdater to avoid package extraction error
             File.Move("DGP.Snap.Updater.exe", "OldUpdater.exe");
             Process.Start("OldUpdater.exe");
@@ -95,7 +102,7 @@ namespace DGP.Genshin.Service
         }
         #region 单例
         private static UpdateService instance;
-        private static object _lock = new object();
+        private static readonly object _lock = new object();
         private UpdateService()
         {
 
@@ -138,6 +145,6 @@ namespace DGP.Genshin.Service
         public string Title { get => title; set => Set(ref title, value); }
         public string Detail { get => detail; set => Set(ref detail, value); }
         public string ProgressText { get => progressText; set => Set(ref progressText, value); }
-        public double Progress { get => progress; set => Set(ref progress,value); }
+        public double Progress { get => progress; set => Set(ref progress, value); }
     }
 }

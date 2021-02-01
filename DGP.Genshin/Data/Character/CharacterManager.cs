@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace DGP.Genshin.Data
+namespace DGP.Genshin.Data.Character
 {
     public class CharacterManager
     {
@@ -25,7 +25,7 @@ namespace DGP.Genshin.Data
         {
             characterDictionary = new ResourceDictionary
             {
-                Source = new Uri("/Data/CharacterDictionary.xaml", UriKind.Relative)
+                Source = new Uri("/Data/Character/CharacterDictionary.xaml", UriKind.Relative)
             };
             Characters = characterDictionary.Values.OfType<Character>();
         }

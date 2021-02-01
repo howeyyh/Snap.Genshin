@@ -1,4 +1,4 @@
-﻿using DGP.Genshin.Data;
+﻿using DGP.Genshin.Data.Character;
 using System;
 using System.Windows;
 using System.Windows.Controls;

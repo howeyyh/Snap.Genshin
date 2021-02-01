@@ -1,4 +1,5 @@
 ﻿using DGP.Genshin.Data;
+using DGP.Genshin.Data.Character;
 using System;
 
 namespace DGP.Genshin.Service

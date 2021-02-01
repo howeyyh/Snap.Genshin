@@ -1,5 +1,4 @@
-﻿using DGP.Genshin.Data;
-using DGP.Genshin.Data.Weapon;
+﻿using DGP.Genshin.Data.Weapon;
 using System;
 using System.Globalization;
 using System.Windows;

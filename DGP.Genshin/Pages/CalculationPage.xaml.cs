@@ -1,21 +1,12 @@
-﻿using DGP.Genshin.Data;
+﻿using DGP.Genshin.Data.Character;
 using DGP.Genshin.Data.Weapon;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DGP.Genshin.Pages
 {
@@ -45,7 +36,7 @@ namespace DGP.Genshin.Pages
             Characters = CharacterManager.Instance.Characters
                 .Where(c => c.CharacterName != "旅行者(风)" && c.CharacterName != "旅行者(岩)")
                 .Where(c => CharacterManager.UnreleasedPolicyFilter(c))
-                .OrderByDescending(c=>c.Star);
+                .OrderByDescending(c => c.Star);
         }
         private void SetWeapons()
         {
@@ -78,7 +69,7 @@ namespace DGP.Genshin.Pages
             DependencyProperty.Register("Weapons", typeof(IEnumerable<Weapon>), typeof(CalculationPage), new PropertyMetadata(null));
 
         //we need to notify char selection changed.
-        private Action SelectedCharChanged;
+        private readonly Action SelectedCharChanged;
 
         private Character selectedChar;
         public Character SelectedChar

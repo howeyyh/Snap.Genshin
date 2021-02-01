@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace DGP.Genshin.Data.Weapon
@@ -26,7 +24,7 @@ namespace DGP.Genshin.Data.Weapon
         {
             characterDictionary = new ResourceDictionary
             {
-                Source = new Uri("/Data/WeaponDictionary.xaml", UriKind.Relative)
+                Source = new Uri("/Data/Weapon/WeaponDictionary.xaml", UriKind.Relative)
             };
             Weapons = characterDictionary.Values.OfType<Weapon>();
         }

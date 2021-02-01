@@ -1,10 +1,6 @@
 ﻿using DGP.Genshin.Data;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace DGP.Genshin.Controls.Converters
@@ -46,7 +42,7 @@ namespace DGP.Genshin.Controls.Converters
                 case Stat.HealingBonusPercent:
                     return "治疗加成";
                 default:
-                    return "-";
+                    return "";
             }
         }
 

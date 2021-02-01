@@ -9,6 +9,5 @@
       Title="DialyMaterialPage">
 
     <Grid>
-        <controls:CharacterDialog x:Name="ADialog"/>
     </Grid>
 </Page>

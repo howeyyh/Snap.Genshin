@@ -1,7 +1,8 @@
-﻿namespace DGP.Genshin.Data
+﻿namespace DGP.Genshin.Data.Artifact
 {
-    internal class ArtifactGroup
+    public class ArtifactGroup
     {
+        public bool IsReleased { get; set; } = true;
         public Artifact FlowerofLife { get; set; }
         public Artifact PlumeofDeath { get; set; }
         public Artifact SandsofEon { get; set; }

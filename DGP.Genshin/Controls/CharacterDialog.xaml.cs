@@ -1,9 +1,6 @@
-﻿using DGP.Genshin.Data;
+﻿using DGP.Genshin.Data.Character;
 using ModernWpf.Controls;
-using System;
-using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
 
 namespace DGP.Genshin.Controls
 {

@@ -1,5 +1,4 @@
-﻿using DGP.Genshin.Data;
-using DGP.Genshin.Data.Weapon;
+﻿using DGP.Genshin.Data.Weapon;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -10,7 +9,7 @@ namespace DGP.Genshin.Controls.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch((WeaponType)value)
+            switch ((WeaponType)value)
             {
                 case WeaponType.Sword:
                     return "单手剑";

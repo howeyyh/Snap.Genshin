@@ -1,5 +1,4 @@
-﻿using DGP.Genshin.Data;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace DGP.Genshin.Pages
 {
@@ -11,11 +10,6 @@ namespace DGP.Genshin.Pages
         public DailyMaterialPage()
         {
             InitializeComponent();
-            Loaded += (s, e) =>
-            {
-                ADialog.Character = CharacterManager.Instance["Albedo"];
-                ADialog.ShowAsync();
-            };
         }
     }
 }

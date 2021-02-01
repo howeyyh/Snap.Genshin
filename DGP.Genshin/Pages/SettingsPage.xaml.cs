@@ -77,7 +77,7 @@ namespace DGP.Genshin.Pages
         }
         private async void UpdateRequested(object sender, RoutedEventArgs e)
         {
-            UpdateService.Instance.UpdateInfo = this.UpdateInfo;
+            UpdateService.Instance.UpdateInfo = UpdateInfo;
             UpdateAvailability u = UpdateService.Instance.CheckUpdateAvailability();
             Debug.WriteLine(u);
             switch (u)

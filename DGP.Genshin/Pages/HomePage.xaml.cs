@@ -1,8 +1,7 @@
 ﻿using DGP.Genshin.Controls;
-using DGP.Genshin.Data;
+using DGP.Genshin.Data.Character;
 using DGP.Genshin.Data.Talent;
 using DGP.Genshin.Data.Weapon;
-using DGP.Genshin.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace DGP.Genshin.Pages
     {
         private List<string> DayOfWeekList { get; set; } = new List<string>
         { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-        
+
         public HomePage()
         {
             DataContext = this;
@@ -41,7 +40,7 @@ namespace DGP.Genshin.Pages
                 .OrderByDescending(item => item.Star)
                 .Select(item =>
                 {
-                    var w= new WeaponIcon() { Weapon = item };
+                    var w = new WeaponIcon() { Weapon = item };
                     w.IconClicked += OnWeaponClicked;
                     return w;
                 });
