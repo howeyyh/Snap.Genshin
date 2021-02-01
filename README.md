@@ -1,16 +1,16 @@
 <div align="center"> 
     <h1 align="center">Snap Genshin</h1>
 
-![GitHub stars](https://img.shields.io/github/stars/DGP-studio/Snap.Genshin?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/DGP-studio/Snap.Genshin?style=for-the-badge)
-![Github Licence](https://img.shields.io/github/license/DGP-Studio/Snap.Genshin?style=for-the-badge)
-![GitHub contributors](https://img.shields.io/github/contributors/DGP-studio/Snap.Genshin?style=for-the-badge)
+[![GitHub stars](https://img.shields.io/github/stars/DGP-studio/Snap.Genshin?style=for-the-badge)](https://github.com/DGP-Studio/Snap.Genshin/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/DGP-studio/Snap.Genshin?style=for-the-badge)](https://github.com/DGP-Studio/Snap.Genshin/issues)
+[![Github Licence](https://img.shields.io/github/license/DGP-Studio/Snap.Genshin?style=for-the-badge)](https://github.com/DGP-Studio/Snap.Genshin/blob/main/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/DGP-studio/Snap.Genshin?style=for-the-badge)](https://github.com/DGP-Studio/Snap.Genshin/graphs/contributors)
 
 ---
 #### 总下载量
-![GitHub downloads](https://img.shields.io/github/downloads/DGP-Studio/Snap.Genshin/total?style=for-the-badge)
+[![GitHub downloads](https://img.shields.io/github/downloads/DGP-Studio/Snap.Genshin/total?style=for-the-badge)](https://github.com/DGP-Studio/Snap.Genshin/releases)
 #### 最新版下载量
-![GitHub release (latest by date)](https://img.shields.io/github/downloads/DGP-studio/Snap.Genshin/latest/total?style=for-the-badge)
+[![GitHub release (latest by date)](https://img.shields.io/github/downloads/DGP-studio/Snap.Genshin/latest/total?style=for-the-badge)](https://github.com/DGP-Studio/Snap.Genshin/releases/latest)
 
 #### 网络有问题?[前往码云下载](https://gitee.com/Lightczx/Snap.Genshin/releases)
 ---
