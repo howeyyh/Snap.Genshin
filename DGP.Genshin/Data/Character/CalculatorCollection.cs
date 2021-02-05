@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DGP.Genshin.Data.Character
 {
-    public class CalculationFunctionCollection : List<CalculationFunction>
+    public class CalculatorCollection : List<Calculator>
     {
 
     }

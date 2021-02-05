@@ -103,35 +103,14 @@
     </Compile>
     <Compile Include="Data\Artifact\ArtifactProvider.cs" />
     <Compile Include="Data\Artifact\ArtifactType.cs" />
-    <Compile Include="Data\Character\CalculationFunctionCollection.cs" />
+    <Compile Include="Data\Character\CalculatorCollection.cs" />
     <Compile Include="Data\Character\CharacterManager.cs" />
     <Compile Include="Data\Element.cs" />
+    <Compile Include="Data\Weapon\Passives\TimeCollection.cs" />
     <Compile Include="Data\Stat.cs" />
     <Compile Include="Data\Talent\TalentHelper.cs" />
     <Compile Include="Data\Talent\TalentMaterial.cs" />
-    <Compile Include="Data\Weapon\Passives\ATKPercentBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\CritRateBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\DescensionPassive.cs" />
-    <Compile Include="Data\Weapon\Passives\ElementSkillCritRateBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\ElementSkillDealedDMGBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\HPPercentPassive.cs" />
-    <Compile Include="Data\Weapon\Passives\HPToATKPassive.cs" />
-    <Compile Include="Data\Weapon\Passives\NormalChargedDealedDMGBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\NormalPassive.cs" />
     <Compile Include="Data\Weapon\Passives\PassiveCollection.cs" />
-    <Compile Include="Data\Weapon\Passives\TATKPercentBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\TATKToDamage.cs" />
-    <Compile Include="Data\Weapon\Passives\TCritRateBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\TDealedDMGBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\TimeCollection.cs" />
-    <Compile Include="Data\Weapon\Passives\Triggerable.cs" />
-    <Compile Include="Data\Weapon\Passives\TriggerableStackable.cs" />
-    <Compile Include="Data\Weapon\Passives\TriggerableStackableConditional.cs" />
-    <Compile Include="Data\Weapon\Passives\TSATKDEFPercentBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\TSATKPercentBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\TSCATKPercentBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\TSCritRateBonus.cs" />
-    <Compile Include="Data\Weapon\Passives\TSDealedDMGBonus.cs" />
     <Compile Include="Data\Weapon\Passives\ValueCollection.cs" />
     <Compile Include="Data\Weapon\WeaponHelper.cs" />
     <Compile Include="Data\Weapon\WeaponManager.cs" />
@@ -165,15 +144,14 @@
     <Compile Include="Service\Setting.cs" />
     <Compile Include="Service\SettingService.cs" />
     <Compile Include="Service\TravelerPresentService.cs" />
+    <Compile Include="Service\UpdateInfo.cs" />
     <Compile Include="Service\UpdateService.cs" />
-    <Compile Include="Simulation\Calculation\Attack.cs" />
-    <Compile Include="Simulation\Calculation\CalculationFunction.cs" />
-    <Compile Include="Simulation\Calculation\DealedDamageBuffFuncion.cs" />
-    <Compile Include="Simulation\Calculation\Defence.cs" />
-    <Compile Include="Simulation\Calculation\EvaporationMeltingDamageBouns.cs" />
-    <Compile Include="Simulation\Calculation\HP.cs" />
-    <Compile Include="Simulation\Calculation\ReceivedDamageFuncion.cs" />
+    <Compile Include="Service\UpdateState.cs" />
+    <Compile Include="Simulation\Calculation\BasicValue.cs" />
+    <Compile Include="Simulation\Calculation\Calculator.cs" />
+    <Compile Include="Simulation\Calculation\EvaporationMeltingMagnification.cs" />
     <Compile Include="Simulation\Calculation\TalentBuffFunction.cs" />
+    <Compile Include="Simulation\Calculation\Target.cs" />
     <Compile Include="Views\Artifact\ArtifactView.xaml.cs">
       <DependentUpon>ArtifactView.xaml</DependentUpon>
     </Compile>
@@ -660,6 +638,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Data\Images\Artifacts\archaic_petra.png" />
+    <Resource Include="Data\Images\Artifacts\blizzard_walker.png" />
+    <Resource Include="Data\Images\Artifacts\bloodstained_chivalry.png" />
+    <Resource Include="Data\Images\Artifacts\crimson_witch_of_flames.png" />
+    <Resource Include="Data\Images\Artifacts\depth_of_heart.png" />
+    <Resource Include="Data\Images\Artifacts\gladiators_finale.png" />
+    <Resource Include="Data\Images\Artifacts\lavawalker.png" />
+    <Resource Include="Data\Images\Artifacts\maiden_beloved.png" />
+    <Resource Include="Data\Images\Artifacts\noblesse_oblige.png" />
+    <Resource Include="Data\Images\Artifacts\retracing_bolide.png" />
+    <Resource Include="Data\Images\Artifacts\thundering_fury.png" />
+    <Resource Include="Data\Images\Artifacts\thundersoother.png" />
+    <Resource Include="Data\Images\Artifacts\viridescent_venerer.png" />
+    <Resource Include="Data\Images\Artifacts\wanderers_troupe.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>$(SolutionDir)Build\DGP.Snap.AutoVersion.exe "$(ProjectDir)"

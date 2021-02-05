@@ -43,17 +43,9 @@
                   SubStatValue="0.352">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TDealedDMGBonus Description="对处于水元素或冰元素影响下的敌人，造成的伤害提高*value*">
-                    <passives:TDealedDMGBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.12</system:Double>
-                            <system:Double>0.15</system:Double>
-                            <system:Double>0.18</system:Double>
-                            <system:Double>0.21</system:Double>
-                            <system:Double>0.24</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TDealedDMGBonus.Values>
-                </passives:TDealedDMGBonus>
+                <passives:DealedDMGBonus 
+                    Description="对处于水元素或冰元素影响下的敌人，造成的伤害提高*value*"
+                    Values="0.12 0.15 0.18 0.21 0.24"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -71,17 +63,9 @@
                   SubStatValue="141">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TATKPercentBonus Description="触发超载、超导、感电或雷元素扩散反应后的12秒内，基础攻击力提高*value*">
-                    <passives:TATKPercentBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.20</system:Double>
-                            <system:Double>0.25</system:Double>
-                            <system:Double>0.30</system:Double>
-                            <system:Double>0.35</system:Double>
-                            <system:Double>0.40</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TATKPercentBonus.Values>
-                </passives:TATKPercentBonus>
+                <passives:BaseATKPercentBonus 
+                    Description="触发超载、超导、感电或雷元素扩散反应后的12秒内，基础攻击力提高*value*"
+                    Values="0.2 0.25 0.3 0.35 0.4"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -99,26 +83,11 @@
                   SubStatValue="0.352">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TATKToDamage Description="攻击命中时，有50%的几率对单个敌人造成*value*攻击力的伤害。该效果每*time*秒只能触发一次">
-                    <passives:TATKToDamage.Values>
-                        <passives:ValueCollection>
-                            <system:Double>2.4</system:Double>
-                            <system:Double>2.8</system:Double>
-                            <system:Double>3.2</system:Double>
-                            <system:Double>3.6</system:Double>
-                            <system:Double>4</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TATKToDamage.Values>
-                    <passives:TATKToDamage.Times>
-                        <passives:TimeCollection>
-                            <system:Double>15</system:Double>
-                            <system:Double>14</system:Double>
-                            <system:Double>13</system:Double>
-                            <system:Double>12</system:Double>
-                            <system:Double>11</system:Double>
-                        </passives:TimeCollection>
-                    </passives:TATKToDamage.Times>
-                </passives:TATKToDamage>
+                <passives:ATKToDamage 
+                    Probability="0.5" 
+                    Description="攻击命中时，有50%的几率对单个敌人造成*value*攻击力的伤害。该效果每*time*秒只能触发一次"
+                    Values="2.4 2.8 3.2 3.6 4"
+                    Times="15 14 13 12 11"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -136,17 +105,9 @@
                   SubStatValue="0.469">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TCritRateBonus Description="生命值高于90%时，暴击率提升*value*">
-                    <passives:TCritRateBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.14</system:Double>
-                            <system:Double>0.175</system:Double>
-                            <system:Double>0.21</system:Double>
-                            <system:Double>0.245</system:Double>
-                            <system:Double>0.28</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TCritRateBonus.Values>
-                </passives:TCritRateBonus>
+                <passives:CritRateBonus 
+                    Description="生命值高于90%时，暴击率提升*value*"
+                    Values="0.14 0.175 0.21 0.245 0.28"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -164,17 +125,9 @@
                   SubStatValue="0.521">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TATKPercentBonus Description="释放元素爆发后，提高*value*攻击力和移动速度，持续15秒">
-                    <passives:TATKPercentBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.12</system:Double>
-                            <system:Double>0.15</system:Double>
-                            <system:Double>0.18</system:Double>
-                            <system:Double>0.21</system:Double>
-                            <system:Double>0.24</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TATKPercentBonus.Values>
-                </passives:TATKPercentBonus>
+                <passives:ATKPercentBonus 
+                    Description="释放元素爆发后，提高*value*攻击力和移动速度，持续15秒"
+                    Values="0.12 0.15 0.18 0.21 0.24"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -192,17 +145,9 @@
                   SubStatValue="0.293">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:NormalPassive Description="获得元素晶球或元素微粒时，恢复*value*生命值">
-                    <passives:NormalPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.01</system:Double>
-                            <system:Double>0.0125</system:Double>
-                            <system:Double>0.015</system:Double>
-                            <system:Double>0.0175</system:Double>
-                            <system:Double>0.02</system:Double>
-                        </passives:ValueCollection>
-                    </passives:NormalPassive.Values>
-                </passives:NormalPassive>
+                <passives:NormalPassive 
+                    Description="获得元素晶球或元素微粒时，恢复*value*生命值"
+                    Values="0.01 0.0125 0.015 0.0175 0.02"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -220,17 +165,10 @@
                   SubStatValue="0.368">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TSATKPercentBonus MaxStack="3" Description="打倒敌人后，攻击力提升*value*，持续30秒。该效果至多叠加三层，每层持续时间独立">
-                    <passives:TSATKPercentBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.12</system:Double>
-                            <system:Double>0.15</system:Double>
-                            <system:Double>0.18</system:Double>
-                            <system:Double>0.21</system:Double>
-                            <system:Double>0.24</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TSATKPercentBonus.Values>
-                </passives:TSATKPercentBonus>
+                <passives:ATKPercentBonus 
+                    MaxStack="3" 
+                    Description="打倒敌人后，攻击力提升*value*，持续30秒。该效果至多叠加三层，每层持续时间独立"
+                    Values="0.12 0.15 0.18 0.21 0.24"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -248,26 +186,10 @@
                   SubStatValue="0.613">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:NormalPassive Description="攻击造成暴击时，有*value*的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每*time*秒只能触发一次">
-                    <passives:NormalPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.6</system:Double>
-                            <system:Double>0.7</system:Double>
-                            <system:Double>0.8</system:Double>
-                            <system:Double>0.9</system:Double>
-                            <system:Double>1</system:Double>
-                        </passives:ValueCollection>
-                    </passives:NormalPassive.Values>
-                    <passives:NormalPassive.Times>
-                        <passives:TimeCollection>
-                            <system:Double>12</system:Double>
-                            <system:Double>10.5</system:Double>
-                            <system:Double>9</system:Double>
-                            <system:Double>7.5</system:Double>
-                            <system:Double>6</system:Double>
-                        </passives:TimeCollection>
-                    </passives:NormalPassive.Times>
-                </passives:NormalPassive>
+                <passives:NormalPassive 
+                    Description="攻击造成暴击时，有*value*的几率产生少量元素微粒，能为角色恢复6点元素能量。该效果每*time*秒只能触发一次"
+                    Values="0.6 0.7 0.8 0.9 1"
+                    Times="12 10.5 9 7.5 6"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -285,17 +207,10 @@
                   SubStatValue="165">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TSDealedDMGBonus MaxStack="2" Description="造成元素伤害后的6秒内，角色造成的伤害提高*value*，该效果最多叠加2层。该效果每1秒可以触发一次">
-                    <passives:TSDealedDMGBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.12</system:Double>
-                            <system:Double>0.15</system:Double>
-                            <system:Double>0.18</system:Double>
-                            <system:Double>0.21</system:Double>
-                            <system:Double>0.24</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TSDealedDMGBonus.Values>
-                </passives:TSDealedDMGBonus>
+                <passives:DealedDMGBonus 
+                    MaxStack="2" 
+                    Description="造成元素伤害后的6秒内，角色造成的伤害提高*value*，该效果最多叠加2层。该效果每1秒可以触发一次"
+                    Values="0.12 0.15 0.18 0.21 0.24"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -313,17 +228,9 @@
                   SubStatValue="0.413">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TDealedDMGBonus Description="对处于火元素或雷元素影响下的敌人，造成的伤害提高*value*">
-                    <passives:TDealedDMGBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.2</system:Double>
-                            <system:Double>0.24</system:Double>
-                            <system:Double>0.28</system:Double>
-                            <system:Double>0.32</system:Double>
-                            <system:Double>0.36</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TDealedDMGBonus.Values>
-                </passives:TDealedDMGBonus>
+                <passives:DealedDMGBonus 
+                    Description="对处于火元素或雷元素影响下的敌人，造成的伤害提高*value*"
+                    Values="0.2 0.24 0.28 0.32 0.36"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -341,17 +248,10 @@
                   SubStatValue="0.345">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TSATKDEFPercentBonus MaxStack="4" Description="普通攻击或重击命中时，攻击力和防御力提高*value*，持续6秒，最多叠加4层。该效果每0.3秒只能触发一次">
-                    <passives:TSATKDEFPercentBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.04</system:Double>
-                            <system:Double>0.05</system:Double>
-                            <system:Double>0.06</system:Double>
-                            <system:Double>0.07</system:Double>
-                            <system:Double>0.08</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TSATKDEFPercentBonus.Values>
-                </passives:TSATKDEFPercentBonus>
+                <passives:ATKDEFPercentBonus 
+                    MaxStack="4" 
+                    Description="普通攻击或重击命中时，攻击力和防御力提高*value*，持续6秒，最多叠加4层。该效果每0.3秒只能触发一次"
+                    Values="0.04 0.05 0.06 0.07 0.08"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -369,17 +269,10 @@
                   SubStatValue="0.413">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TSCritRateBonus MaxStack="5" Description="攻击造成伤害时，暴击率提升*value*，最多堆叠5次。攻击造成暴击后，移除已有的专注效果">
-                    <passives:TSCritRateBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.08</system:Double>
-                            <system:Double>0.1</system:Double>
-                            <system:Double>0.12</system:Double>
-                            <system:Double>0.14</system:Double>
-                            <system:Double>0.16</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TSCritRateBonus.Values>
-                </passives:TSCritRateBonus>
+                <passives:CritRateBonus 
+                    MaxStack="5" 
+                    Description="攻击造成伤害时，暴击率提升*value*，最多堆叠5次。攻击造成暴击后，移除已有的专注效果"
+                    Values="0.08 0.1 0.12 0.14 0.16"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -397,26 +290,10 @@
                   SubStatValue="0.613">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:NormalPassive Description="元素战技造成伤害时，有*value*的概率重置该技能的冷却时间，该效果每*time*秒只能触发一次">
-                    <passives:NormalPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.4</system:Double>
-                            <system:Double>0.5</system:Double>
-                            <system:Double>0.6</system:Double>
-                            <system:Double>0.7</system:Double>
-                            <system:Double>0.8</system:Double>
-                        </passives:ValueCollection>
-                    </passives:NormalPassive.Values>
-                    <passives:NormalPassive.Times>
-                        <passives:TimeCollection>
-                            <system:Double>30</system:Double>
-                            <system:Double>26</system:Double>
-                            <system:Double>22</system:Double>
-                            <system:Double>19</system:Double>
-                            <system:Double>16</system:Double>
-                        </passives:TimeCollection>
-                    </passives:NormalPassive.Times>
-                </passives:NormalPassive>
+                <passives:NormalPassive 
+                    Description="元素战技造成伤害时，有*value*的概率重置该技能的冷却时间，该效果每*time*秒只能触发一次"
+                    Values="0.4 0.5 0.6 0.7 0.8"
+                    Times="30 26 22 19 16"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -444,28 +321,12 @@
                   SubStatValue="0.276">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:NormalChargedDealedDMGBonus Description="普通攻击与重击造成的伤害提升*value*">
-                    <passives:NormalChargedDealedDMGBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.2</system:Double>
-                            <system:Double>0.25</system:Double>
-                            <system:Double>0.3</system:Double>
-                            <system:Double>0.35</system:Double>
-                            <system:Double>0.4</system:Double>
-                        </passives:ValueCollection>
-                    </passives:NormalChargedDealedDMGBonus.Values>
-                </passives:NormalChargedDealedDMGBonus>
-                <passives:NormalPassive Description="此外普通攻击与重击暴击的同时，回复等同与攻击力*value*的生命值。该效果每5秒最多发动一次">
-                    <passives:NormalPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.6</system:Double>
-                            <system:Double>0.7</system:Double>
-                            <system:Double>0.8</system:Double>
-                            <system:Double>0.9</system:Double>
-                            <system:Double>1</system:Double>
-                        </passives:ValueCollection>
-                    </passives:NormalPassive.Values>
-                </passives:NormalPassive>
+                <passives:NormalChargedDealedDMGBonus 
+                    Description="普通攻击与重击造成的伤害提升*value*"
+                    Values="0.2 0.25 0.3 0.35 0.4"/>
+                <passives:NormalPassive 
+                    Description="此外普通攻击与重击暴击的同时，回复等同与攻击力*value*的生命值。该效果每5秒最多发动一次"
+                    Values="0.6 0.7 0.8 0.9 1"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -483,17 +344,9 @@
                   SubStatValue="0.413">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TATKToDamage Description="普通攻击或重击命中时，有100%的概率获得一个和音。积攒5个和音后，释放音律的力量，对周围的敌人造成*value*攻击力的伤害。和音最多存在30秒">
-                    <passives:TATKToDamage.Values>
-                        <passives:ValueCollection>
-                            <system:Double>1</system:Double>
-                            <system:Double>1.25</system:Double>
-                            <system:Double>1.5</system:Double>
-                            <system:Double>1.75</system:Double>
-                            <system:Double>2</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TATKToDamage.Values>
-                </passives:TATKToDamage>
+                <passives:ATKToDamage 
+                    Description="普通攻击或重击命中时，有100%的概率获得一个和音。积攒5个和音后，释放音律的力量，对周围的敌人造成*value*攻击力的伤害。和音最多存在30秒"
+                    Values="1 1.25 1.5 1.75 2"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -511,8 +364,13 @@
                   SubStatValue="0.352">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:TATKToDamage Description="普通攻击或重击命中敌人后，有50%概率在小范围内造成200%攻击力的伤害。该效果每10秒只能触发一次"/>
-                <passives:DescensionPassive Description="此外，旅行者装备降临之剑时，攻击力提升66点"/>
+                <passives:ATKToDamage 
+                    Probability="0.5" 
+                    Description="普通攻击或重击命中敌人后，有50%概率在小范围内造成200%攻击力的伤害。该效果每10秒只能触发一次"
+                    Values="2 2 2 2 2"/>
+                <passives:ATKBonus 
+                    Description="此外，旅行者装备降临之剑时，攻击力提升66点"
+                    Values="66 66 66 66 66"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -530,28 +388,12 @@
                   SubStatValue="0.459">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:ElementSkillDealedDMGBonus Description="元素战技造成的伤害增加*value*，">
-                    <passives:ElementSkillDealedDMGBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.16</system:Double>
-                            <system:Double>0.20</system:Double>
-                            <system:Double>0.24</system:Double>
-                            <system:Double>0.28</system:Double>
-                            <system:Double>0.32</system:Double>
-                        </passives:ValueCollection>
-                    </passives:ElementSkillDealedDMGBonus.Values>
-                </passives:ElementSkillDealedDMGBonus>
-                <passives:ElementSkillCritRateBonus Description="元素战技的暴击率提升*value*">
-                    <passives:ElementSkillCritRateBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.06</system:Double>
-                            <system:Double>0.075</system:Double>
-                            <system:Double>0.09</system:Double>
-                            <system:Double>0.105</system:Double>
-                            <system:Double>0.12</system:Double>
-                        </passives:ValueCollection>
-                    </passives:ElementSkillCritRateBonus.Values>
-                </passives:ElementSkillCritRateBonus>
+                <passives:ElementSkillDealedDMGBonus 
+                    Description="元素战技造成的伤害增加*value*"
+                    Values="0.16 0.2 0.24 0.28 0.32"/>
+                <passives:ElementSkillCritRateBonus 
+                    Description="元素战技的暴击率提升*value*"
+                    Values="0.06 0.075 0.09 0.105 0.12"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -569,39 +411,16 @@
                   SubStatValue="0.413">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:ATKPercentBonus Description="攻击力提高*value*">
-                    <passives:ATKPercentBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.2</system:Double>
-                            <system:Double>0.25</system:Double>
-                            <system:Double>0.3</system:Double>
-                            <system:Double>0.35</system:Double>
-                            <system:Double>0.4</system:Double>
-                        </passives:ValueCollection>
-                    </passives:ATKPercentBonus.Values>
-                </passives:ATKPercentBonus>
-                <passives:NormalPassive Description="受到伤害时触发：高扬抗争旗号的西风鹰之魂苏醒，恢复同等于攻击力的*value*生命值">
-                    <passives:NormalPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>1</system:Double>
-                            <system:Double>1.15</system:Double>
-                            <system:Double>1.3</system:Double>
-                            <system:Double>1.45</system:Double>
-                            <system:Double>1.6</system:Double>
-                        </passives:ValueCollection>
-                    </passives:NormalPassive.Values>
-                </passives:NormalPassive>
-                <passives:TATKToDamage Description="并对周围的敌人造成*value*攻击力的伤害。该效果每15秒只能触发一次">
-                    <passives:TATKToDamage.Values>
-                        <passives:ValueCollection>
-                            <system:Double>2</system:Double>
-                            <system:Double>2.3</system:Double>
-                            <system:Double>2.6</system:Double>
-                            <system:Double>2.9</system:Double>
-                            <system:Double>3.2</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TATKToDamage.Values>
-                </passives:TATKToDamage>
+                <passives:ATKPercentBonus 
+                    Description="攻击力提高*value*"
+                    Values="0.2 0.25 0.3 0.35 0.4"/>
+                <passives:NormalPassive 
+                    Description="受到伤害时触发：高扬抗争旗号的西风鹰之魂苏醒，恢复同等于攻击力的*value*生命值"
+                    Values="1 1.15 1.3 1.45 1.6"/>
+                <passives:ATKToDamage 
+                    Description="并对周围的敌人造成*value*攻击力的伤害。该效果每15秒只能触发一次"
+                    Values="2 2.3 2.6 2.9 3.2">
+                </passives:ATKToDamage>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -619,29 +438,15 @@
                   SubStatValue="0.551">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:CritRateBonus Description="暴击率提升*value*">
-                    <passives:CritRateBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.04</system:Double>
-                            <system:Double>0.05</system:Double>
-                            <system:Double>0.06</system:Double>
-                            <system:Double>0.07</system:Double>
-                            <system:Double>0.08</system:Double>
-                        </passives:ValueCollection>
-                    </passives:CritRateBonus.Values>
-                </passives:CritRateBonus>
-                <passives:NormalPassive Description="施放元素爆发时，获得破空之势：移动速度提升10%，攻击速度提升10%"/>
-                <passives:TATKToDamage Description="普通攻击与重击命中时，额外造成*value*攻击力的伤害，持续12秒">
-                    <passives:TATKToDamage.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.2</system:Double>
-                            <system:Double>0.25</system:Double>
-                            <system:Double>0.3</system:Double>
-                            <system:Double>0.35</system:Double>
-                            <system:Double>0.4</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TATKToDamage.Values>
-                </passives:TATKToDamage>
+                <passives:CritRateBonus 
+                    Description="暴击率提升*value*"
+                    Values="0.04 0.05 0.06 0.07 0.08"/>
+                <passives:AttackSpeedBonus 
+                    Description="施放元素爆发时，获得破空之势：移动速度提升10%，攻击速度提升10%"
+                    Values="0.1 0.1 0.1 0.1 0.1"/>
+                <passives:ATKToDamage 
+                    Description="普通攻击与重击命中时，额外造成*value*攻击力的伤害，持续12秒"
+                    Values="0.2 0.25 0.3 0.35 0.4"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -659,28 +464,15 @@
                   SubStatValue="0.496">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:NormalPassive Description="护盾强效提升*value*">
-                    <passives:NormalPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.2</system:Double>
-                            <system:Double>0.25</system:Double>
-                            <system:Double>0.3</system:Double>
-                            <system:Double>0.35</system:Double>
-                            <system:Double>0.4</system:Double>
-                        </passives:ValueCollection>
-                    </passives:NormalPassive.Values>
-                </passives:NormalPassive>
-                <passives:TSCATKPercentBonus Rate="2" ConditonText="处于护盾庇护下" Description="攻击命中后的8秒内，攻击力提升*value*。该效果至多可叠加5层，每0.3秒只能触发一次。此外，处于护盾庇护下时，该效果的攻击力提升效果提高100%">
-                    <passives:TSCATKPercentBonus.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.04</system:Double>
-                            <system:Double>0.05</system:Double>
-                            <system:Double>0.06</system:Double>
-                            <system:Double>0.07</system:Double>
-                            <system:Double>0.08</system:Double>
-                        </passives:ValueCollection>
-                    </passives:TSCATKPercentBonus.Values>
-                </passives:TSCATKPercentBonus>
+                <passives:NormalPassive 
+                    Description="护盾强效提升*value*"
+                    Values="0.2 0.25 0.3 0.35 0.4"/>
+                <passives:ATKPercentBonus 
+                    Rate="2" 
+                    ConditionText="处于护盾庇护下" 
+                    MaxStack="5" 
+                    Description="攻击命中后的8秒内，攻击力提升*value*。该效果至多可叠加5层，每0.3秒只能触发一次。此外，处于护盾庇护下时，该效果的攻击力提升效果提高100%"
+                    Values="0.04 0.05 0.06 0.07 0.08"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -698,28 +490,12 @@
                   SubStatValue="0.441">
         <local:Weapon.Passives>
             <passives:PassiveCollection>
-                <passives:HPPercentPassive Description="HP increased by*value*">
-                    <passives:HPPercentPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.2</system:Double>
-                            <system:Double>0.25</system:Double>
-                            <system:Double>0.3</system:Double>
-                            <system:Double>0.35</system:Double>
-                            <system:Double>0.4</system:Double>
-                        </passives:ValueCollection>
-                    </passives:HPPercentPassive.Values>
-                </passives:HPPercentPassive>
-                <passives:HPToATKPassive Description="Additionally, provides an ATK Bonus based on*value*of the wielder's Max HP.">
-                    <passives:HPToATKPassive.Values>
-                        <passives:ValueCollection>
-                            <system:Double>0.012</system:Double>
-                            <system:Double>0.015</system:Double>
-                            <system:Double>0.018</system:Double>
-                            <system:Double>0.021</system:Double>
-                            <system:Double>0.024</system:Double>
-                        </passives:ValueCollection>
-                    </passives:HPToATKPassive.Values>
-                </passives:HPToATKPassive>
+                <passives:HPPercentPassive 
+                    Description="生命值提升*value*"
+                    Values="0.2 0.25 0.3 0.35 0.4"/>
+                <passives:HPToATK 
+                    Description="此外，基于装备该武器的角色生命值上限的*value*，获得攻击力加成"
+                    Values="0.012 0.015 0.021 0.024"/>
             </passives:PassiveCollection>
         </local:Weapon.Passives>
     </local:Weapon>
@@ -1476,7 +1252,7 @@
                   MonsterMaterial="{StaticResource Monster_Mask}"/>
     <local:Weapon x:Key="MappaMare"
                   WeaponName="万国诸海图谱"
-                  ImageUri="pack://application:,,,/Data/Images/Weapons/favonius_codex.png"
+                  ImageUri="pack://application:,,,/Data/Images/Weapons/mappa_mare.png"
                   Star="4"
                   Type="Catalyst"
                   Material="Aerosiderite"

@@ -3,16 +3,25 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:DGP.Genshin.Pages" xmlns:ui="http://schemas.modernwpf.com/2019" xmlns:controls="clr-namespace:DGP.Genshin.Controls"
+      xmlns:local="clr-namespace:DGP.Genshin.Pages" 
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
+      xmlns:controls="clr-namespace:DGP.Genshin.Controls" 
+      xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters" 
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CalculationPage"
       Loaded="Page_Loaded">
     <Page.Resources>
+        <converters:StatValueConverter x:Key="StatValueConverter"/>
+        <converters:StatToStringConverter x:Key="StatToStringConverter"/>
+
+        <system:String x:Key="ConditionNullValue">满足额外条件</system:String>
+
         <Style x:Key="CharacterPersonPictureStyle" TargetType="{x:Type ui:PersonPicture}">
             <Setter Property="Foreground" Value="{DynamicResource PersonPictureForegroundThemeBrush}"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Height" Value="24"/>
             <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
             <Setter Property="FontWeight" Value="350"/>
             <Setter Property="IsTabStop" Value="False"/>
@@ -65,7 +74,7 @@
                                     <TranslateTransform Y="-2"/>
                                 </ui:FontIconFallback.RenderTransform>
                             </ui:FontIconFallback>
-                            <Ellipse x:Name="PersonPictureEllipse" FlowDirection="LeftToRight" Height="44" Width="44"/>
+                            <Ellipse x:Name="PersonPictureEllipse" FlowDirection="LeftToRight" Height="22" Width="22"/>
                             <Grid x:Name="BadgeGrid" HorizontalAlignment="Right" Visibility="Collapsed" VerticalAlignment="Bottom">
                                 <Ellipse x:Name="BadgingBackgroundEllipse" Fill="{DynamicResource PersonPictureEllipseBadgeFillThemeBrush}" Opacity="{DynamicResource PersonPictureEllipseBadgeStrokeOpacity}" Stroke="{DynamicResource PersonPictureEllipseBadgeStrokeThemeBrush}" StrokeThickness="{DynamicResource PersonPictureEllipseBadgeStrokeThickness}"/>
                                 <Ellipse x:Name="BadgingEllipse" FlowDirection="LeftToRight" Opacity="0"/>
@@ -103,54 +112,392 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type Expander}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Expander}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="True">
+                            <DockPanel>
+                                <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" DockPanel.Dock="Top" Foreground="{TemplateBinding Foreground}" ui:FocusVisualHelper.FocusVisualMargin="-3" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" MinWidth="0" MinHeight="0" Padding="{TemplateBinding Padding}" ui:FocusVisualHelper.UseSystemFocusVisuals="True" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="{x:Type ToggleButton}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                        <ControlTemplate.Resources>
+                                                            <StreamGeometry x:Key="ChevronDown">M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z</StreamGeometry>
+                                                            <StreamGeometry x:Key="ChevronUp">M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z</StreamGeometry>
+                                                        </ControlTemplate.Resources>
+                                                        <Border Padding="{TemplateBinding Padding}">
+                                                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="*"/>
+                                                                    <RowDefinition Height="auto"/>
+                                                                </Grid.RowDefinitions>
+                                                                <ui:FontIconFallback Grid.Row="1" Margin="2" x:Name="arrow" Data="M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" FontSize="12" FontFamily="{DynamicResource SymbolThemeFontFamily}" HorizontalAlignment="Center" SnapsToDevicePixels="False" VerticalAlignment="Center"/>
+                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" ContentStringFormat="{TemplateBinding ContentStringFormat}" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="Data" TargetName="arrow" Value="M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlPageTextBaseMediumBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
+                                <ContentPresenter x:Name="ExpandSite" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" DockPanel.Dock="Bottom" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </DockPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="True">
+                                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Right">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Right"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Left"/>
+                                <Setter Property="Style" TargetName="HeaderSite">
+                                    <Setter.Value>
+                                        <Style TargetType="{x:Type ToggleButton}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                        <ControlTemplate.Resources>
+                                                            <StreamGeometry x:Key="ChevronDown">M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z</StreamGeometry>
+                                                            <StreamGeometry x:Key="ChevronUp">M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z</StreamGeometry>
+                                                        </ControlTemplate.Resources>
+                                                        <Border Padding="{TemplateBinding Padding}">
+                                                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid>
+                                                                    <Grid.LayoutTransform>
+                                                                        <TransformGroup>
+                                                                            <RotateTransform Angle="-90"/>
+                                                                        </TransformGroup>
+                                                                    </Grid.LayoutTransform>
+                                                                    <ui:FontIconFallback x:Name="arrow" Data="M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" FontSize="12" FontFamily="{DynamicResource SymbolThemeFontFamily}" HorizontalAlignment="Center" SnapsToDevicePixels="False" VerticalAlignment="Center"/>
+                                                                </Grid>
+                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="Data" TargetName="arrow" Value="M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlPageTextBaseMediumBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Up">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Top"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Bottom"/>
+                                <Setter Property="Style" TargetName="HeaderSite">
+                                    <Setter.Value>
+                                        <Style TargetType="{x:Type ToggleButton}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                        <ControlTemplate.Resources>
+                                                            <StreamGeometry x:Key="ChevronDown">M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z</StreamGeometry>
+                                                            <StreamGeometry x:Key="ChevronUp">M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z</StreamGeometry>
+                                                        </ControlTemplate.Resources>
+                                                        <Border Padding="{TemplateBinding Padding}">
+                                                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid>
+                                                                    <Grid.LayoutTransform>
+                                                                        <TransformGroup>
+                                                                            <RotateTransform Angle="180"/>
+                                                                        </TransformGroup>
+                                                                    </Grid.LayoutTransform>
+                                                                    <ui:FontIconFallback x:Name="arrow" Data="M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" FontSize="12" FontFamily="{DynamicResource SymbolThemeFontFamily}" HorizontalAlignment="Center" SnapsToDevicePixels="False" VerticalAlignment="Center"/>
+                                                                </Grid>
+                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Left" Margin="8,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="Data" TargetName="arrow" Value="M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlPageTextBaseMediumBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="ExpandDirection" Value="Left">
+                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Left"/>
+                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Right"/>
+                                <Setter Property="Style" TargetName="HeaderSite">
+                                    <Setter.Value>
+                                        <Style TargetType="{x:Type ToggleButton}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                        <ControlTemplate.Resources>
+                                                            <StreamGeometry x:Key="ChevronDown">M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z</StreamGeometry>
+                                                            <StreamGeometry x:Key="ChevronUp">M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z</StreamGeometry>
+                                                        </ControlTemplate.Resources>
+                                                        <Border Padding="{TemplateBinding Padding}">
+                                                            <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="*"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid>
+                                                                    <Grid.LayoutTransform>
+                                                                        <TransformGroup>
+                                                                            <RotateTransform Angle="90"/>
+                                                                        </TransformGroup>
+                                                                    </Grid.LayoutTransform>
+                                                                    <ui:FontIconFallback x:Name="arrow" Data="M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" FontSize="12" FontFamily="{DynamicResource SymbolThemeFontFamily}" HorizontalAlignment="Center" SnapsToDevicePixels="False" VerticalAlignment="Center"/>
+                                                                </Grid>
+                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" Margin="0,4,0,0" Grid.Row="1" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter Property="Data" TargetName="arrow" Value="M19.091797,14.970703L10,5.888672 0.908203,14.970703 0.029297,14.091797 10,4.111328 19.970703,14.091797z"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlPageTextBaseMediumBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter Property="Foreground" TargetName="arrow" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DefaultListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="Local"/>
+            <Setter Property="Padding" Value="0,9,0,12"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}"/>
+            <Setter Property="ui:FocusVisualHelper.UseSystemFocusVisuals" Value="{DynamicResource UseSystemFocusVisuals}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="LayoutRoot" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <Grid>
+                                <Rectangle x:Name="PressedBackground" Fill="Transparent" ui:FocusVisualHelper.IsTemplateFocusTarget="True"/>
+                                <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" TextElement.FontWeight="Normal" TextElement.FontSize="{DynamicResource ControlContentThemeFontSize}" HorizontalAlignment="Stretch" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="ContentPresenter" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" TargetName="PressedBackground" Value="{DynamicResource SystemControlHighlightListLowBrush}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ContentPresenter" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Fill" TargetName="PressedBackground" Value="{DynamicResource SystemControlHighlightListAccentMediumLowBrush}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ContentPresenter" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Fill" TargetName="PressedBackground" Value="{DynamicResource SystemControlHighlightListAccentMediumLowBrush}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ContentPresenter" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Fill" TargetName="PressedBackground" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="ContentPresenter" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
-    <Grid>
+    <Grid Margin="12,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="144"/>
-            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="312"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ui:ListView Grid.Column="0" ItemsSource="{Binding Characters}" SelectedItem="{Binding SelectedChar,Mode=TwoWay}">
-            <ui:ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0,4" HorizontalAlignment="Stretch">
-                        <ui:PersonPicture HorizontalAlignment="Left" Width="48" ProfilePicture="{Binding ImageUri}" Style="{DynamicResource CharacterPersonPictureStyle}"/>
-                        <TextBlock Margin="64,0,0,0" Text="{Binding CharacterName}" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                    </Grid>
-                </DataTemplate>
-            </ui:ListView.ItemTemplate>
-        </ui:ListView>
-        <ui:ListView Grid.Column="1" ItemsSource="{Binding Weapons}" SelectedItem="{Binding SelectedWeapon,Mode=TwoWay}">
-            <ui:ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0,4" HorizontalAlignment="Stretch">
-                        <ui:PersonPicture HorizontalAlignment="Left" Width="48" ProfilePicture="{Binding ImageUri}" Style="{DynamicResource CharacterPersonPictureStyle}"/>
-                        <TextBlock Margin="64,0,0,0" Text="{Binding WeaponName}" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                    </Grid>
-                </DataTemplate>
-            </ui:ListView.ItemTemplate>
-        </ui:ListView>
-        <StackPanel Grid.Column="2">
-            <Grid Margin="16,16,16,8">
-                <controls:CharacterIcon Character="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedChar}" HorizontalAlignment="Left"/>
-                <TextBox HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="技能倍率" Width="80"/>
-            </Grid>
-            <Separator Margin="16,0"/>
-            <Grid Margin="16,8,16,0">
-                <controls:WeaponIcon Weapon="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedWeapon}" HorizontalAlignment="Left"/>
-                <ComboBox HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="精炼阶数" Width="80" SelectedIndex="0">
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
-                    <ComboBoxItem>5</ComboBoxItem>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <ComboBox MinWidth="146" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding Characters}" SelectedItem="{Binding SelectedChar,Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch">
+                                <ui:PersonPicture HorizontalAlignment="Left" Width="48" ProfilePicture="{Binding ImageUri}" Style="{DynamicResource CharacterPersonPictureStyle}"/>
+                                <TextBlock Margin="32,0,0,0" Text="{Binding CharacterName}" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
+                <ComboBox MinWidth="146" Margin="4,0,16,0" VerticalAlignment="Center" ItemsSource="{Binding Weapons}" SelectedItem="{Binding SelectedWeapon,Mode=TwoWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch">
+                                <ui:PersonPicture HorizontalAlignment="Left" Width="48" ProfilePicture="{Binding ImageUri}" Style="{DynamicResource CharacterPersonPictureStyle}"/>
+                                <TextBlock Margin="32,0,0,0" Text="{Binding WeaponName}" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <ui:ScrollViewerEx Padding="0,0,16,0">
+                    <StackPanel Grid.Column="2">
+                        <Expander Margin="0,16,0,8">
+                            <Expander.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <controls:CharacterIcon Character="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedChar}" HorizontalAlignment="Left"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding SelectedChar.AscensionStat,Converter={StaticResource StatToStringConverter}}" VerticalAlignment="Top" Margin="16,8,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding SelectedChar.AscensionStatValue,Converter={StaticResource StatValueConverter}}" VerticalAlignment="Bottom" Margin="16,0,0,14" Style="{StaticResource BodyTextBlockStyle}"/>
+                                    <TextBox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="技能倍率" Width="80"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:ListView  IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
+                                <Grid>
+                                    <TextBlock Text="sakfhsdfkj" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                                    <ui:ToggleSwitch HorizontalAlignment="Right" Width="80" Margin="0"/>
+                                </Grid>
+                                <Grid>
+                                    <TextBlock Text="sakfhsdfkj" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                                    <ui:ToggleSwitch HorizontalAlignment="Right" Width="80" Margin="0"/>
+                                </Grid>
+                            </ui:ListView>
+                        </Expander>
+                        <Separator/>
+                        <Expander Margin="0,8">
+                            <Expander.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <controls:WeaponIcon Weapon="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedWeapon}" HorizontalAlignment="Left"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding SelectedWeapon.SubStat,Converter={StaticResource StatToStringConverter}}" VerticalAlignment="Top" Margin="16,8,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding SelectedWeapon.SubStatValue,Converter={StaticResource StatValueConverter}}" VerticalAlignment="Bottom" Margin="16,0,0,14" Style="{StaticResource BodyTextBlockStyle}"/>
+                                    <ComboBox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="精炼阶数" Width="80" SelectedIndex="{Binding SelectedWeapon.RefineLevel,Mode=TwoWay}">
+                                        <ComboBoxItem IsEnabled="False">-</ComboBoxItem>
+                                        <ComboBoxItem>1</ComboBoxItem>
+                                        <ComboBoxItem>2</ComboBoxItem>
+                                        <ComboBoxItem>3</ComboBoxItem>
+                                        <ComboBoxItem>4</ComboBoxItem>
+                                        <ComboBoxItem>5</ComboBoxItem>
+                                    </ComboBox>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:ListView ItemsSource="{Binding SelectedWeapon.Passives}" IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
+                                <ui:ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Expander>
+                                            <Expander.Header>
+                                                <TextBlock Margin="4,0" Text="{Binding DescriptionAll}" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                                            </Expander.Header>
+                                            <StackPanel>
+                                                <ui:ToggleSwitch IsOn="{Binding IsTriggered,Mode=TwoWay}" OnContent="启用" OffContent="禁用"/>
+                                                <CheckBox Content="{Binding ConditionText,TargetNullValue={StaticResource ConditionNullValue}}" IsChecked="{Binding IsSatisfied}" HorizontalAlignment="Left"/>
+                                                <ComboBox ItemsSource="{Binding Stacks}" SelectedItem="{Binding CurrentStack,Mode=TwoWay}"/>
+                                            </StackPanel>
+                                        </Expander>
+                                        
+                                    </DataTemplate>
+                                </ui:ListView.ItemTemplate>
+                            </ui:ListView>
+                        </Expander>
+                        <Separator/>
+                    </StackPanel>
+                </ui:ScrollViewerEx>
             </Grid>
-            <Grid Margin="16,0,0,8">
-                <TextBlock Text="sakfhsdfkj" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                <ui:ToggleSwitch HorizontalAlignment="Right" Width="80" Margin="16,0"/>
-            </Grid>
-            <Separator Margin="16,0"/>
-        </StackPanel>
+            <Button Grid.Row="2" Content="计算" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,4,16,12"/>
+        </Grid>
+
     </Grid>
 </Page>

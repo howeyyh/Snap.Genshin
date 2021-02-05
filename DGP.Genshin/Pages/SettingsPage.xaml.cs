@@ -1,7 +1,6 @@
 ﻿using DGP.Genshin.Data;
 using DGP.Genshin.Service;
 using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -78,26 +77,31 @@ namespace DGP.Genshin.Pages
         private async void UpdateRequested(object sender, RoutedEventArgs e)
         {
             UpdateService.Instance.UpdateInfo = UpdateInfo;
-            UpdateAvailability u;
+            UpdateState u;
             if (((Button)sender).Tag.ToString() == "Github")
-                u = UpdateService.Instance.CheckUpdateAvailabilityViaGithub();
+            {
+                u = UpdateService.Instance.CheckUpdateStateViaGithub();
+            }
             else
-                u = UpdateService.Instance.CheckUpdateAvailabilityViaGitee();
+            {
+                u = UpdateService.Instance.CheckUpdateStateViaGitee();
+            }
+
             switch (u)
             {
-                case UpdateAvailability.NeedUpdate:
+                case UpdateState.NeedUpdate:
                     UpdateService.Instance.DownloadAndInstallPackage();
                     await UpdateDialog.ShowAsync();
                     break;
-                case UpdateAvailability.IsNewestRelease:
+                case UpdateState.IsNewestRelease:
                     ((Button)sender).Content = "已是最新版";
                     ((Button)sender).IsEnabled = false;
                     break;
-                case UpdateAvailability.IsInsiderVersion:
+                case UpdateState.IsInsiderVersion:
                     ((Button)sender).Content = "内部测试版";
                     ((Button)sender).IsEnabled = false;
                     break;
-                case UpdateAvailability.NotAvailable:
+                case UpdateState.NotAvailable:
                     ((Button)sender).Content = "获取更新失败";
                     ((Button)sender).IsEnabled = false;
                     break;

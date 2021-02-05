@@ -454,6 +454,7 @@
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2" Background="#FFEDE5D8">
             <StackPanel Margin="8">
+                <ui:RatingControl IsEnabled="False" Value="{Binding Character.Star}" HorizontalAlignment="Left"/>
                 <Grid Margin="0,2">
                     <TextBlock HorizontalAlignment="Left" Text="生命值上限" Style="{StaticResource BodyTextBlockStyle}" Foreground="#CC000000"/>
                     <TextBlock HorizontalAlignment="Right" Text="{Binding Character.MaxHP}" Style="{StaticResource BaseTextBlockStyle}" Foreground="#CC000000"/>

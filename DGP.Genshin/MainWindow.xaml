@@ -19,6 +19,7 @@
         Width="822"
         WindowStartupLocation="CenterScreen">
     <Grid>
+        <TextBlock Margin="6" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Snap 原神 目前仍处于早期开发阶段"/>
         <ui:NavigationView 
             x:Name="NavView" 
             OpenPaneLength="160" 

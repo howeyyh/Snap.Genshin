@@ -20,7 +20,7 @@ namespace DGP.Genshin.Service
 
         private const string GithubUrl = @"https://api.github.com/repos/DGP-Studio/Snap.Genshin/releases/latest";
         private const string GiteeUrl = @"https://gitee.com/api/v5/repos/Lightczx/Snap.Genshin/releases/latest";
-        public UpdateAvailability CheckUpdateAvailability(string url)
+        public UpdateState CheckUpdateState(string url)
         {
             try
             {
@@ -33,33 +33,32 @@ namespace DGP.Genshin.Service
                 if (new Version(newVersion) > CurrentVersion)//有新版本
                 {
                     PackageUri = new Uri(ReleaseInfo.Assets[0].BrowserDownloadUrl);
-                    return UpdateAvailability.NeedUpdate;
+                    return UpdateState.NeedUpdate;
                 }
                 else
                 {
                     if (new Version(newVersion) == CurrentVersion)
                     {
-                        return UpdateAvailability.IsNewestRelease;
+                        return UpdateState.IsNewestRelease;
                     }
                     else
                     {
-                        return UpdateAvailability.IsInsiderVersion;
+                        return UpdateState.IsInsiderVersion;
                     }
                 }
             }
             catch (Exception)
             {
-                return UpdateAvailability.NotAvailable;
+                return UpdateState.NotAvailable;
             }
         }
-        public UpdateAvailability CheckUpdateAvailabilityViaGitee()
+        public UpdateState CheckUpdateStateViaGitee()
         {
-            return CheckUpdateAvailability(GiteeUrl);
+            return CheckUpdateState(GiteeUrl);
         }
-
-        public UpdateAvailability CheckUpdateAvailabilityViaGithub()
+        public UpdateState CheckUpdateStateViaGithub()
         {
-            return CheckUpdateAvailability(GithubUrl);
+            return CheckUpdateState(GithubUrl);
         }
 
         public void DownloadAndInstallPackage()
@@ -71,7 +70,6 @@ namespace DGP.Genshin.Service
             string destinationPath = AppDomain.CurrentDomain.BaseDirectory + @"\Package.zip";
             InnerFileDownloader.DownloadFileAsync(PackageUri, destinationPath);
         }
-
         public void CancelUpdate()
         {
             InnerFileDownloader.CancelDownloadAsync();
@@ -105,7 +103,9 @@ namespace DGP.Genshin.Service
             }
             //rename to oldupdater to avoid package extraction error
             File.Move("DGP.Snap.Updater.exe", "OldUpdater.exe");
-            Process.Start("OldUpdater.exe");
+
+            ProcessStartInfo info = new ProcessStartInfo() { FileName = "OldUpdater.exe", CreateNoWindow = true };
+            Process.Start(info);
             App.Current.Shutdown();
         }
         #region 单例
@@ -133,26 +133,5 @@ namespace DGP.Genshin.Service
             }
         }
         #endregion
-    }
-
-    public enum UpdateAvailability
-    {
-        NeedUpdate = 0,
-        IsNewestRelease = 1,
-        IsInsiderVersion = 2,
-        NotAvailable = 3
-    }
-
-    public class UpdateInfo : Observable
-    {
-        private string title;
-        private string detail;
-        private string progressText;
-        private double progress;
-
-        public string Title { get => title; set => Set(ref title, value); }
-        public string Detail { get => detail; set => Set(ref detail, value); }
-        public string ProgressText { get => progressText; set => Set(ref progressText, value); }
-        public double Progress { get => progress; set => Set(ref progress, value); }
     }
 }

@@ -63,12 +63,12 @@
                      AscensionMonster="{StaticResource Monster_Scroll}"
                      TalentDaily="{StaticResource Talent_Ballad}"
                      TalentWeekly="{StaticResource Weekly_TuskofMonocerosCaeli}">
-        <local:Character.CalculationFunctions>
-            <local:CalculationFunctionCollection>
-                <calculation:CalculationFunction/>
-                <calculation:CalculationFunction/>
-            </local:CalculationFunctionCollection>
-        </local:Character.CalculationFunctions>
+        <local:Character.Calculators>
+            <local:CalculatorCollection>
+                <calculation:Calculator/>
+                <calculation:Calculator/>
+            </local:CalculatorCollection>
+        </local:Character.Calculators>
     </local:Character>
     <local:Character x:Key="Amber" 
                      CharacterName="安柏"  

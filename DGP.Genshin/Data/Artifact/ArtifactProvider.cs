@@ -102,10 +102,12 @@ namespace DGP.Genshin.Data.Artifact
             artifact.SubStat1Value += levelUpDict[artifact.SubStat1].GetRandom();
             artifact.SubStat2Value += levelUpDict[artifact.SubStat2].GetRandom();
             artifact.SubStat3Value += levelUpDict[artifact.SubStat3].GetRandom();
-            if(random.Next(0,2)==0)
+            if (random.Next(0, 2) == 0)
+            {
                 artifact.SubStat4Value += levelUpDict[artifact.SubStat4].GetRandom();
+            }
 
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 switch (random.Next(1, 5))
                 {

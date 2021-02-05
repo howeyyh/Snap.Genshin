@@ -19,11 +19,8 @@ namespace DGP.Genshin.Pages
         {
             DataContext = this;
             InitializeComponent();
-            SelectedCharChanged += OnCharacterChanged;
+            SelectedCharTypeChanged += OnCharacterChanged;
         }
-
-
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             SetCharacters();
@@ -69,15 +66,19 @@ namespace DGP.Genshin.Pages
             DependencyProperty.Register("Weapons", typeof(IEnumerable<Weapon>), typeof(CalculationPage), new PropertyMetadata(null));
 
         //we need to notify char selection changed.
-        private readonly Action SelectedCharChanged;
+        private readonly Action SelectedCharTypeChanged;
 
         private Character selectedChar;
         public Character SelectedChar
         {
             get => selectedChar; set
             {
+                var p = selectedChar?.WeaponType;
                 Set(ref selectedChar, value);
-                SelectedCharChanged?.Invoke();
+                if (p != value.WeaponType)
+                {
+                    SelectedCharTypeChanged?.Invoke();
+                }
             }
         }
 
@@ -100,5 +101,6 @@ namespace DGP.Genshin.Pages
 
         protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         #endregion
+
     }
 }

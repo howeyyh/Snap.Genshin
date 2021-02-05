@@ -1,7 +1,6 @@
 ﻿using DGP.Genshin.Data.Talent;
 using DGP.Genshin.Data.Weapon;
 using System;
-using System.Collections.Generic;
 
 namespace DGP.Genshin.Data.Character
 {
@@ -12,21 +11,6 @@ namespace DGP.Genshin.Data.Character
         public Uri ImageUri { get; set; }
         public int Star { get; set; } = 4;
         public bool IsReleased { get; set; } = true;
-        public Element Element { get; set; }
-        public TalentMaterial TalentMaterial { get; set; }
-
-        public Stat AscensionStat { get; set; } = Stat.None;
-        public double AscensionStatValue { get; set; } = 0;
-
-        public Material AscensionGemstone { get; set; }
-        public Material AscensionBoss { get; set; }
-        public Material AscensionLocal { get; set; }
-        public Material AscensionMonster { get; set; }
-
-        public Material TalentDaily { get; set; }
-        public Material TalentWeekly { get; set; }
-
-        public List<Material> TalentMaterials { get; set; }
 
         #region Attributes
         #region base Stats
@@ -34,11 +18,11 @@ namespace DGP.Genshin.Data.Character
         /// 生命值上限
         /// </summary>
         public uint MaxHP { get; set; }
-        public double HPPercent { get; set; }
+        /// <summary>
+        /// 基础攻击力
+        /// </summary>
         public uint ATK { get; set; }
-        public double ATKPercent { get; set; }
         public uint DEF { get; set; }
-        public uint ElementalMastery { get; set; }
         #endregion
 
         #region Advanced Stats
@@ -72,9 +56,21 @@ namespace DGP.Genshin.Data.Character
 
         #endregion
 
+        public Element Element { get; set; }
+        public TalentMaterial TalentMaterial { get; set; }
+        public Stat AscensionStat { get; set; } = Stat.None;
+        public double AscensionStatValue { get; set; } = 0;
+
+        #region Materials
+        public Material AscensionGemstone { get; set; }
+        public Material AscensionBoss { get; set; }
+        public Material AscensionLocal { get; set; }
+        public Material AscensionMonster { get; set; }
+        public Material TalentDaily { get; set; }
+        public Material TalentWeekly { get; set; }
+        #endregion
+
         public WeaponType WeaponType { get; set; } = WeaponType.Sword;
-        public Constelllation Constellation { get; set; }
-        public TalentGroup Talents { get; set; }
-        public CalculationFunctionCollection CalculationFunctions { get; set; }
+        public CalculatorCollection Calculators { get; set; }
     }
 }
