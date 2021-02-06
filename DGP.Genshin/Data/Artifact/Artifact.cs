@@ -2,15 +2,10 @@
 
 namespace DGP.Genshin.Data.Artifact
 {
-    public class Artifact
+    public abstract class Artifact
     {
-        public Artifact(ArtifactType type)
-        {
-            Type = type;
-        }
         public ArtifactSet Set { get; set; }
-        public ArtifactType Type { get; set; }
-        public Stat MainStat { get; set; }
+        public Stat MainStat { get; protected set; }
         public double MainStatValue { get; set; }
 
         public Stat SubStat1 { get; set; }
@@ -67,6 +62,33 @@ namespace DGP.Genshin.Data.Artifact
                     throw new Exception();
             }
         }
+
+    }
+
+    public class FlowerofLife : Artifact
+    {
+        public FlowerofLife()
+        {
+            MainStat = Stat.HP;
+        }
+    }
+    public class PlumeofDeath : Artifact
+    {
+        public PlumeofDeath()
+        {
+            MainStat = Stat.ATK;
+        }
+    }
+    public class SandsofEon : Artifact
+    {
+
+    }
+    public class GobletofEonothem : Artifact
+    {
+
+    }
+    public class CircletofLogos : Artifact
+    {
 
     }
     public enum ArtifactSet

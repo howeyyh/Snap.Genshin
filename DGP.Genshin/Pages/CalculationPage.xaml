@@ -8,6 +8,7 @@
       xmlns:controls="clr-namespace:DGP.Genshin.Controls" 
       xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters" 
       xmlns:system="clr-namespace:System;assembly=mscorlib"
+      xmlns:helper="clr-namespace:DGP.Genshin.Helper" 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CalculationPage"
@@ -136,12 +137,12 @@
                                                         </ControlTemplate.Resources>
                                                         <Border Padding="{TemplateBinding Padding}">
                                                             <Grid Background="Transparent" SnapsToDevicePixels="False">
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="*"/>
-                                                                    <RowDefinition Height="auto"/>
-                                                                </Grid.RowDefinitions>
-                                                                <ui:FontIconFallback Grid.Row="1" Margin="2" x:Name="arrow" Data="M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" FontSize="12" FontFamily="{DynamicResource SymbolThemeFontFamily}" HorizontalAlignment="Center" SnapsToDevicePixels="False" VerticalAlignment="Center"/>
-                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" ContentStringFormat="{TemplateBinding ContentStringFormat}" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <ui:FontIconFallback Margin="2,0" Visibility="{Binding Path=(helper:ExpanderHelper.ArrowVisibility),RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Expander}}}" Grid.Column="1" x:Name="arrow" Data="M18.935547,4.560547L19.814453,5.439453 10,15.253906 0.185547,5.439453 1.064453,4.560547 10,13.496094z" Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}" FontSize="12" FontFamily="{DynamicResource SymbolThemeFontFamily}" HorizontalAlignment="Center" SnapsToDevicePixels="False" VerticalAlignment="Center"/>
+                                                                <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Margin="0,0,8,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                                                             </Grid>
                                                         </Border>
                                                         <ControlTemplate.Triggers>
@@ -337,7 +338,8 @@
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="KeyboardNavigation.TabNavigation" Value="Local"/>
-            <Setter Property="Padding" Value="0,9,0,12"/>
+            <!--<Setter Property="Padding" Value="0,9,0,12"/>-->
+            <Setter Property="Padding" Value="0,4,0,4"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="FocusVisualStyle" Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}"/>
@@ -356,7 +358,7 @@
                                 <Setter Property="TextElement.Foreground" TargetName="ContentPresenter" Value="{DynamicResource SystemControlDisabledBaseMediumLowBrush}"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Fill" TargetName="PressedBackground" Value="{DynamicResource SystemControlHighlightListLowBrush}"/>
+                                <!--<Setter Property="Fill" TargetName="PressedBackground" Value="{DynamicResource SystemControlHighlightListLowBrush}"/>-->
                                 <Setter Property="TextElement.Foreground" TargetName="ContentPresenter" Value="{DynamicResource SystemControlHighlightAltBaseHighBrush}"/>
                             </Trigger>
                             <MultiTrigger>
@@ -390,10 +392,233 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="PassiveCheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="{DynamicResource CheckBoxBackgroundUnchecked}"/>
+            <Setter Property="Foreground" Value="{DynamicResource CheckBoxForegroundUnchecked}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource CheckBoxBorderBrushUnchecked}"/>
+            <Setter Property="Padding" Value="8,0,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="MinHeight" Value="32"/>
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource {x:Static SystemParameters.FocusVisualStyleKey}}"/>
+            <Setter Property="ui:FocusVisualHelper.UseSystemFocusVisuals" Value="{DynamicResource UseSystemFocusVisuals}"/>
+            <Setter Property="ui:FocusVisualHelper.FocusVisualMargin" Value="-7,-3"/>
+            <Setter Property="ui:ControlHelper.CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <ControlTemplate.Resources>
+                            <StreamGeometry x:Key="CheckboxIndeterminate">M15,5L15,15 5,15 5,5z</StreamGeometry>
+                            <StreamGeometry x:Key="CheckMark">M17.939453,5.439453L7.5,15.888672 2.060547,10.439453 2.939453,9.560547 7.5,14.111328 17.060547,4.560547z</StreamGeometry>
+                        </ControlTemplate.Resources>
+                        <Border x:Name="RootGrid" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding ui:ControlHelper.CornerRadius}" SnapsToDevicePixels="True">
+                            <Grid VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid VerticalAlignment="Top">
+                                    <Rectangle x:Name="NormalRectangle" Fill="{DynamicResource CheckBoxCheckBackgroundFillUnchecked}" Height="20" Stroke="{DynamicResource CheckBoxCheckBackgroundStrokeUnchecked}" StrokeThickness="{DynamicResource CheckBoxBorderThemeThickness}" UseLayoutRounding="False" Width="20">
+                                        <Rectangle.RadiusY>
+                                            <TemplateBinding Property="ui:ControlHelper.CornerRadius">
+                                                <TemplateBinding.Converter>
+                                                    <ui:CornerRadiusFilterConverter Filter="BottomRightValue" Scale="1"/>
+                                                </TemplateBinding.Converter>
+                                            </TemplateBinding>
+                                        </Rectangle.RadiusY>
+                                        <Rectangle.RadiusX>
+                                            <TemplateBinding Property="ui:ControlHelper.CornerRadius">
+                                                <TemplateBinding.Converter>
+                                                    <ui:CornerRadiusFilterConverter Filter="TopLeftValue" Scale="1"/>
+                                                </TemplateBinding.Converter>
+                                            </TemplateBinding>
+                                        </Rectangle.RadiusX>
+                                    </Rectangle>
+                                    <ui:FontIconFallback x:Name="CheckGlyph" Data="M17.939453,5.439453L7.5,15.888672 2.060547,10.439453 2.939453,9.560547 7.5,14.111328 17.060547,4.560547z" Foreground="{DynamicResource CheckBoxCheckGlyphForegroundUnchecked}" FontSize="16" FontFamily="{DynamicResource SymbolThemeFontFamily}" Opacity="0"/>
+                                </Grid>
+                                <ui:ContentPresenterEx x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="False"/>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                    <Condition Property="IsPressed" Value="False"/>
+                                    <Condition Property="IsEnabled" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundUnchecked}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundUnchecked}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushUnchecked}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeUnchecked}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillUnchecked}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundUnchecked}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="False"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundUncheckedPointerOver}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundUncheckedPointerOver}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushUncheckedPointerOver}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeUncheckedPointerOver}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillUncheckedPointerOver}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundUncheckedPointerOver}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="False"/>
+                                    <Condition Property="IsPressed" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundUncheckedPressed}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundUncheckedPressed}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushUncheckedPressed}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeUncheckedPressed}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillUncheckedPressed}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundUncheckedPressed}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="False"/>
+                                    <Condition Property="IsEnabled" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundUncheckedDisabled}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundUncheckedDisabled}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushUncheckedDisabled}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeUncheckedDisabled}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillUncheckedDisabled}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundUncheckedDisabled}"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                    <Condition Property="IsPressed" Value="False"/>
+                                    <Condition Property="IsEnabled" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundChecked}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundChecked}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushChecked}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeChecked}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillChecked}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundChecked}"/>
+                                <Setter Property="StrokeThickness" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckedStrokeThickness}"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundCheckedPointerOver}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundCheckedPointerOver}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushCheckedPointerOver}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeCheckedPointerOver}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPointerOver}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundCheckedPointerOver}"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                    <Condition Property="IsPressed" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundCheckedPressed}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundCheckedPressed}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushCheckedPressed}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeCheckedPressed}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedPressed}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundCheckedPressed}"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                    <Condition Property="IsEnabled" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundCheckedDisabled}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundCheckedDisabled}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushCheckedDisabled}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeCheckedDisabled}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillCheckedDisabled}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundCheckedDisabled}"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="{x:Null}"/>
+                                    <Condition Property="IsMouseOver" Value="False"/>
+                                    <Condition Property="IsPressed" Value="False"/>
+                                    <Condition Property="IsEnabled" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundIndeterminate}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundIndeterminate}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushIndeterminate}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeIndeterminate}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillIndeterminate}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundIndeterminate}"/>
+                                <Setter Property="Data" TargetName="CheckGlyph" Value="M15,5L15,15 5,15 5,5z"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="{x:Null}"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundIndeterminatePointerOver}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundIndeterminatePointerOver}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushIndeterminatePointerOver}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeIndeterminatePointerOver}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillIndeterminatePointerOver}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundIndeterminatePointerOver}"/>
+                                <Setter Property="Data" TargetName="CheckGlyph" Value="M15,5L15,15 5,15 5,5z"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="{x:Null}"/>
+                                    <Condition Property="IsPressed" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundIndeterminatePressed}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundIndeterminatePressed}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushIndeterminatePressed}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeIndeterminatePressed}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillIndeterminatePressed}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundIndeterminatePressed}"/>
+                                <Setter Property="Data" TargetName="CheckGlyph" Value="M15,5L15,15 5,15 5,5z"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="{x:Null}"/>
+                                    <Condition Property="IsEnabled" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" TargetName="ContentPresenter" Value="{DynamicResource CheckBoxForegroundIndeterminateDisabled}"/>
+                                <Setter Property="Background" TargetName="RootGrid" Value="{DynamicResource CheckBoxBackgroundIndeterminateDisabled}"/>
+                                <Setter Property="BorderBrush" TargetName="RootGrid" Value="{DynamicResource CheckBoxBorderBrushIndeterminateDisabled}"/>
+                                <Setter Property="Stroke" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundStrokeIndeterminateDisabled}"/>
+                                <Setter Property="Fill" TargetName="NormalRectangle" Value="{DynamicResource CheckBoxCheckBackgroundFillIndeterminateDisabled}"/>
+                                <Setter Property="Foreground" TargetName="CheckGlyph" Value="{DynamicResource CheckBoxCheckGlyphForegroundIndeterminateDisabled}"/>
+                                <Setter Property="Data" TargetName="CheckGlyph" Value="M15,5L15,15 5,15 5,5z"/>
+                                <Setter Property="Opacity" TargetName="CheckGlyph" Value="1"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
-    <Grid Margin="12,0,0,0">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="312"/>
+            <ColumnDefinition Width="356"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid>
@@ -402,8 +627,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <ComboBox MinWidth="146" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding Characters}" SelectedItem="{Binding SelectedChar,Mode=TwoWay}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="16,0,0,0">
+                <ComboBox MinWidth="160" Margin="0" VerticalAlignment="Center" ItemsSource="{Binding Characters}" SelectedItem="{Binding SelectedChar,Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Grid HorizontalAlignment="Stretch">
@@ -413,7 +638,7 @@
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-                <ComboBox MinWidth="146" Margin="4,0,16,0" VerticalAlignment="Center" ItemsSource="{Binding Weapons}" SelectedItem="{Binding SelectedWeapon,Mode=TwoWay}">
+                <ComboBox MinWidth="160" Margin="4,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding Weapons}" SelectedItem="{Binding SelectedWeapon,Mode=TwoWay}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Grid HorizontalAlignment="Stretch">
@@ -425,78 +650,83 @@
                 </ComboBox>
             </StackPanel>
             <Grid Grid.Row="1">
-                <ui:ScrollViewerEx Padding="0,0,16,0">
-                    <StackPanel Grid.Column="2">
-                        <Expander Margin="0,16,0,8">
-                            <Expander.Header>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="70"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="80"/>
-                                    </Grid.ColumnDefinitions>
-                                    <controls:CharacterIcon Character="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedChar}" HorizontalAlignment="Left"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding SelectedChar.AscensionStat,Converter={StaticResource StatToStringConverter}}" VerticalAlignment="Top" Margin="16,8,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding SelectedChar.AscensionStatValue,Converter={StaticResource StatValueConverter}}" VerticalAlignment="Bottom" Margin="16,0,0,14" Style="{StaticResource BodyTextBlockStyle}"/>
-                                    <TextBox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="技能倍率" Width="80"/>
-                                </Grid>
-                            </Expander.Header>
-                            <ui:ListView  IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
-                                <Grid>
-                                    <TextBlock Text="sakfhsdfkj" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                                    <ui:ToggleSwitch HorizontalAlignment="Right" Width="80" Margin="0"/>
-                                </Grid>
-                                <Grid>
-                                    <TextBlock Text="sakfhsdfkj" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                                    <ui:ToggleSwitch HorizontalAlignment="Right" Width="80" Margin="0"/>
-                                </Grid>
-                            </ui:ListView>
-                        </Expander>
-                        <Separator/>
-                        <Expander Margin="0,8">
-                            <Expander.Header>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="70"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="80"/>
-                                    </Grid.ColumnDefinitions>
-                                    <controls:WeaponIcon Weapon="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedWeapon}" HorizontalAlignment="Left"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding SelectedWeapon.SubStat,Converter={StaticResource StatToStringConverter}}" VerticalAlignment="Top" Margin="16,8,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding SelectedWeapon.SubStatValue,Converter={StaticResource StatValueConverter}}" VerticalAlignment="Bottom" Margin="16,0,0,14" Style="{StaticResource BodyTextBlockStyle}"/>
-                                    <ComboBox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="精炼阶数" Width="80" SelectedIndex="{Binding SelectedWeapon.RefineLevel,Mode=TwoWay}">
-                                        <ComboBoxItem IsEnabled="False">-</ComboBoxItem>
-                                        <ComboBoxItem>1</ComboBoxItem>
-                                        <ComboBoxItem>2</ComboBoxItem>
-                                        <ComboBoxItem>3</ComboBoxItem>
-                                        <ComboBoxItem>4</ComboBoxItem>
-                                        <ComboBoxItem>5</ComboBoxItem>
-                                    </ComboBox>
-                                </Grid>
-                            </Expander.Header>
-                            <ui:ListView ItemsSource="{Binding SelectedWeapon.Passives}" IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
-                                <ui:ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Expander>
-                                            <Expander.Header>
-                                                <TextBlock Margin="4,0" Text="{Binding DescriptionAll}" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
-                                            </Expander.Header>
+                <ui:ScrollViewerEx>
+                    <StackPanel Grid.Column="2" ClipToBounds="False">
+                        <ui:ThemeShadowChrome Margin="16,16,16,0">
+                            <Expander helper:ExpanderHelper.ArrowVisibility="Visible" Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="80"/>
+                                        </Grid.ColumnDefinitions>
+                                        <controls:CharacterIcon Character="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedChar}" HorizontalAlignment="Left"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding SelectedChar.AscensionStat,Converter={StaticResource StatToStringConverter}}" VerticalAlignment="Top" Margin="16,8,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding SelectedChar.AscensionStatValue,Converter={StaticResource StatValueConverter}}" VerticalAlignment="Bottom" Margin="16,0,0,14" Style="{StaticResource BodyTextBlockStyle}"/>
+                                        <TextBox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="技能倍率" Width="80"/>
+                                    </Grid>
+                                </Expander.Header>
+                                <ui:ListView IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
+                                    <Grid>
+                                        <TextBlock Text="sakfhsdfkj" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                                        <ui:ToggleSwitch HorizontalAlignment="Right" Width="80" Margin="0"/>
+                                    </Grid>
+                                    <Grid>
+                                        <TextBlock Text="sakfhsdfkj" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}"/>
+                                        <ui:ToggleSwitch HorizontalAlignment="Right" Width="80" Margin="0"/>
+                                    </Grid>
+                                </ui:ListView>
+                            </Expander>
+                        </ui:ThemeShadowChrome>
+                        <ui:ThemeShadowChrome Margin="16">
+                            <Expander helper:ExpanderHelper.ArrowVisibility="Visible" Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                                <Expander.Header>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="80"/>
+                                        </Grid.ColumnDefinitions>
+                                        <controls:WeaponIcon Weapon="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:CalculationPage}},Path=SelectedWeapon}" HorizontalAlignment="Left"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding SelectedWeapon.SubStat,Converter={StaticResource StatToStringConverter}}" VerticalAlignment="Top" Margin="16,8,0,0" Style="{StaticResource BaseTextBlockStyle}"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding SelectedWeapon.SubStatValue,Converter={StaticResource StatValueConverter}}" VerticalAlignment="Bottom" Margin="16,0,0,14" Style="{StaticResource BodyTextBlockStyle}"/>
+                                        <ComboBox Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" ui:ControlHelper.Header="精炼阶数" Width="80" SelectedIndex="{Binding SelectedWeapon.RefineLevel,Mode=TwoWay}">
+                                            <ComboBoxItem IsEnabled="False">-</ComboBoxItem>
+                                            <ComboBoxItem>1</ComboBoxItem>
+                                            <ComboBoxItem>2</ComboBoxItem>
+                                            <ComboBoxItem>3</ComboBoxItem>
+                                            <ComboBoxItem>4</ComboBoxItem>
+                                            <ComboBoxItem>5</ComboBoxItem>
+                                        </ComboBox>
+                                    </Grid>
+                                </Expander.Header>
+                                <ui:ListView ItemsSource="{Binding SelectedWeapon.Passives}" IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate>
                                             <StackPanel>
-                                                <ui:ToggleSwitch IsOn="{Binding IsTriggered,Mode=TwoWay}" OnContent="启用" OffContent="禁用"/>
-                                                <CheckBox Content="{Binding ConditionText,TargetNullValue={StaticResource ConditionNullValue}}" IsChecked="{Binding IsSatisfied}" HorizontalAlignment="Left"/>
-                                                <ComboBox ItemsSource="{Binding Stacks}" SelectedItem="{Binding CurrentStack,Mode=TwoWay}"/>
+                                                <Separator Margin="0,0,0,8"/>
+                                                <Expander HorizontalAlignment="Stretch">
+                                                    <Expander.Header>
+                                                        <CheckBox HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding IsTriggered,Mode=TwoWay}" Style="{StaticResource PassiveCheckBoxStyle}">
+                                                            <TextBlock Margin="4,0,0,0" Text="{Binding DescriptionByRefineLevel}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap"/>
+                                                        </CheckBox>
+                                                    </Expander.Header>
+                                                    <Grid>
+                                                        <ui:ToggleSwitch HorizontalAlignment="Left" ui:ControlHelper.Header="{Binding ConditionText,TargetNullValue={StaticResource ConditionNullValue}}" IsOn="{Binding IsSatisfied}"/>
+                                                        <ComboBox HorizontalAlignment="Right" ui:ControlHelper.Header="被动层数" ItemsSource="{Binding Stacks}" SelectedItem="{Binding CurrentStack,Mode=TwoWay}"/>
+                                                    </Grid>
+                                                </Expander>
                                             </StackPanel>
-                                        </Expander>
-                                        
-                                    </DataTemplate>
-                                </ui:ListView.ItemTemplate>
-                            </ui:ListView>
-                        </Expander>
-                        <Separator/>
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+                            </Expander>
+                        </ui:ThemeShadowChrome>
                     </StackPanel>
                 </ui:ScrollViewerEx>
             </Grid>
-            <Button Grid.Row="2" Content="计算" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,4,16,12"/>
+            <Button Grid.Row="2" Content="计算" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="16,4,16,12"/>
         </Grid>
 
     </Grid>

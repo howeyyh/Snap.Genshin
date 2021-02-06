@@ -22,7 +22,7 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
-        <ui:ContentDialog x:Name="UpdateDialog" Title="下载更新中" CloseButtonText="取消" DefaultButton="Close" CloseButtonClick="UpdateCancellationRequested">
+        <ui:ContentDialog x:Name="UpdateDialog" Title="下载更新中" CloseButtonText="取消" DefaultButton="Close" CloseButtonClick="UpdateCancellationRequested" d:IsHidden="True">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -56,7 +56,13 @@
                     </RadioButton>
                 </StackPanel>
                 <TextBlock Text="*选择的形象会影响旅行者的属性" Margin="0,8,0,0" Style="{StaticResource CaptionTextBlockStyle}"/>
-                
+                <!--<TextBlock Text="外观" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <TextBlock Text="选择应用的颜色" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
+                <ui:RadioButtons>
+                    <RadioButton Content="浅色"/>
+                    <RadioButton Content="深色"/>
+                    <RadioButton Content="跟随系统"/>
+                </ui:RadioButtons>-->
                 <TextBlock Text="关于" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                 

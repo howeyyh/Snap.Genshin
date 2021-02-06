@@ -1,10 +1,12 @@
-﻿using DGP.Genshin.Simulation.Calculation;
+﻿using DGP.Genshin.Helper;
+using DGP.Genshin.Simulation.Calculation;
 using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 
 namespace DGP.Genshin.Data.Weapon.Passives
 {
-    public abstract class Passive
+    public abstract class Passive : Observable
     {
 
 
@@ -27,6 +29,25 @@ namespace DGP.Genshin.Data.Weapon.Passives
                 return d;
             }
         }
+        public string DescriptionByRefineLevel
+        {
+            get
+            {
+                string d = Description;
+                if (Values != null)
+                {
+                    //string v = string.Join("/", Values.Select(i => i * 100 + "%"));
+                    string v = Values[refineLevel - 1] * 100 + "%";
+                    d = d.Replace("*value*", " " + v + " ");
+                }
+                if (Times != null)
+                {
+                    string t = Times[refineLevel - 1].ToString();
+                    d = d.Replace("*time*", " " + t + " ");
+                }
+                return d;
+            }
+        }
         public DoubleCollection Values { get; set; }
         protected double CurrentValue { get { return Values[RefineLevel - 1]; } }
         public DoubleCollection Times { get; set; }
@@ -36,7 +57,8 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             get => refineLevel; set
             {
-                refineLevel = value;
+                Set(ref refineLevel, value);
+                OnPropertyChanged("DescriptionByRefineLevel");
             }
         }
         //for triggerable
@@ -55,8 +77,9 @@ namespace DGP.Genshin.Data.Weapon.Passives
             } 
         }
         //for conditional
-        public double Rate { get; set; }
+        public double Rate { get; set; } = 1;
         public string ConditionText { get; set; }
+        public Visibility ConditionVisibility { get; set; } = Visibility.Collapsed;
         public bool IsSatisfied { get; set; } = true;
 
         public abstract void Apply(Calculator c);
@@ -73,7 +96,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.HP.BonusByPercent += CurrentValue * CurrentStack;
+                c.HP.BonusByPercent += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -83,7 +106,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.Attack.Bonus += c.HP.Total * CurrentValue * CurrentStack;
+                c.Attack.Bonus += c.HP.Total * CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -93,7 +116,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.DamageBonus += CurrentValue * CurrentStack;
+                c.DamageBonus += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -103,7 +126,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered && (c.Target == Target.NormalAttack || c.Target == Target.NormalAttack))
             {
-                c.DamageBonus += CurrentValue * CurrentStack;
+                c.DamageBonus += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -113,7 +136,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.Attack.Base *= (1 + CurrentValue * CurrentStack);
+                c.Attack.Base *= (1 + CurrentValue * CurrentStack) * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -123,7 +146,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.Attack.BonusByPercent += CurrentValue * CurrentStack;
+                c.Attack.BonusByPercent += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -133,7 +156,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.Attack.Bonus += CurrentValue * CurrentStack;
+                c.Attack.Bonus += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -143,8 +166,8 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.Attack.BonusByPercent += CurrentValue * CurrentStack;
-                c.Defence.BonusByPercent += CurrentValue * CurrentStack;
+                c.Attack.BonusByPercent += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
+                c.Defence.BonusByPercent += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -156,7 +179,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
             if (IsTriggered)
             {
                 //将一击与额外伤害合并计算
-                c.ATKToDMGRate = (1 + CurrentValue) * Probability * CurrentStack;
+                c.ATKToDMGRate = (1 + CurrentValue) * Probability * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -166,7 +189,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.CritRate += CurrentValue * CurrentStack;
+                c.CritRate += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -176,7 +199,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered && c.Target == Target.ElementSkill)
             {
-                c.DamageBonus += CurrentValue * CurrentStack;
+                c.DamageBonus += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -186,7 +209,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered && c.Target == Target.ElementSkill)
             {
-                c.CritRate += CurrentValue * CurrentStack;
+                c.CritRate += CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }
@@ -196,7 +219,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered && c.Target == Target.ElementSkill)
             {
-                c.AttackSpeed += CurrentValue;
+                c.AttackSpeed += CurrentValue * (IsSatisfied ? Rate : 1);
             }
         }
     }

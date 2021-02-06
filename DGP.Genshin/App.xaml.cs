@@ -1,4 +1,5 @@
 ﻿using DGP.Genshin.Service;
+using ModernWpf;
 using System.Windows;
 
 namespace DGP.Genshin
@@ -11,6 +12,7 @@ namespace DGP.Genshin
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             TravelerPresentService.Instance.SetPresentTraveler();
+            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
         }
 
         protected override void OnExit(ExitEventArgs e)

@@ -65,7 +65,7 @@ namespace DGP.Genshin.Pages
         public static readonly DependencyProperty WeaponsProperty =
             DependencyProperty.Register("Weapons", typeof(IEnumerable<Weapon>), typeof(CalculationPage), new PropertyMetadata(null));
 
-        //we need to notify char selection changed.
+        //we need to notify char weapon type changed.
         private readonly Action SelectedCharTypeChanged;
 
         private Character selectedChar;
@@ -101,6 +101,5 @@ namespace DGP.Genshin.Pages
 
         protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         #endregion
-
     }
 }

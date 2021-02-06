@@ -206,5 +206,5 @@
                     ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/shard_of_foul_legacy.png"/>
     <local:Material x:Key="Weekly_TuskofMonocerosCaeli"
                     MaterialName="吞天之鲸·只角" Star="5"
-                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/ring_of_boreas.png"/>
+                    ImageUri="pack://application:,,,/Data/Images/Materials/Weekly/tusk_of_monoceros_caeli.png"/>
 </ResourceDictionary>

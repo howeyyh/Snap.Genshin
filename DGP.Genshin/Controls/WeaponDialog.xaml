@@ -523,7 +523,7 @@
                     <ui:ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <TextBlock Margin="4,0" Text="{Binding DescriptionAll}" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="#CC000000"/>
+                                <TextBlock Margin="4,0" Text="{Binding DescriptionAll}" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Foreground="#CC000000" TextWrapping="Wrap"/>
                             </Grid>
                         </DataTemplate>
                     </ui:ListView.ItemTemplate>
