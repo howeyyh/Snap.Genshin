@@ -679,7 +679,7 @@
                                 </ui:ListView>
                             </Expander>
                         </ui:ThemeShadowChrome>
-                        <ui:ThemeShadowChrome Margin="16">
+                        <ui:ThemeShadowChrome Margin="16,16,16,0">
                             <Expander helper:ExpanderHelper.ArrowVisibility="Visible" Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
                                 <Expander.Header>
                                     <Grid>
@@ -701,6 +701,30 @@
                                         </ComboBox>
                                     </Grid>
                                 </Expander.Header>
+                                <ui:ListView ItemsSource="{Binding SelectedWeapon.Passives}" IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
+                                    <ui:ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <Separator Margin="0,0,0,8"/>
+                                                <Expander HorizontalAlignment="Stretch">
+                                                    <Expander.Header>
+                                                        <CheckBox HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{Binding IsTriggered,Mode=TwoWay}" Style="{StaticResource PassiveCheckBoxStyle}">
+                                                            <TextBlock Margin="4,0,0,0" Text="{Binding DescriptionByRefineLevel}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap"/>
+                                                        </CheckBox>
+                                                    </Expander.Header>
+                                                    <Grid>
+                                                        <ui:ToggleSwitch HorizontalAlignment="Left" ui:ControlHelper.Header="{Binding ConditionText,TargetNullValue={StaticResource ConditionNullValue}}" IsOn="{Binding IsSatisfied}"/>
+                                                        <ComboBox HorizontalAlignment="Right" ui:ControlHelper.Header="被动层数" ItemsSource="{Binding Stacks}" SelectedItem="{Binding CurrentStack,Mode=TwoWay}"/>
+                                                    </Grid>
+                                                </Expander>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ui:ListView.ItemTemplate>
+                                </ui:ListView>
+                            </Expander>
+                        </ui:ThemeShadowChrome>
+                        <ui:ThemeShadowChrome Margin="16">
+                            <Expander Header="其他BUFF与参数" Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
                                 <ui:ListView ItemsSource="{Binding SelectedWeapon.Passives}" IsSelectionEnabled="False" Padding="0" ItemContainerStyle="{StaticResource DefaultListBoxItemStyle}">
                                     <ui:ListView.ItemTemplate>
                                         <DataTemplate>

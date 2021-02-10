@@ -23,6 +23,7 @@ namespace DGP.Genshin.Data.Character
         /// </summary>
         public uint ATK { get; set; }
         public uint DEF { get; set; }
+        public uint ElementalMastery { get; set; }
         #endregion
 
         #region Advanced Stats
@@ -33,25 +34,6 @@ namespace DGP.Genshin.Data.Character
         public double EnergyRecharge { get; set; }
         public double ReduceCD { get; set; }
         public double PowerfulShield { get; set; }
-        #endregion
-
-        #region Elemental Type
-        public double PyroDMGBonus { get; set; }
-        public double PyroRES { get; set; }
-        public double HydroDMGBonus { get; set; }
-        public double HydroRES { get; set; }
-        public double DendroDMGBonus { get; set; }
-        public double DendroRES { get; set; }
-        public double ElectroDMGBonus { get; set; }
-        public double ElectroRES { get; set; }
-        public double AnemoDMGBonus { get; set; }
-        public double AnemoRES { get; set; }
-        public double CryoDMGBonus { get; set; }
-        public double CryoRES { get; set; }
-        public double GeoDMGBonus { get; set; }
-        public double GeoRES { get; set; }
-        public double PhysicalDMGBonus { get; set; }
-        public double PhysicalRES { get; set; }
         #endregion
 
         #endregion
