@@ -1,5 +1,4 @@
-﻿using Fiddler;
-using System;
+﻿using System;
 
 namespace DGP.Snap.Test
 {

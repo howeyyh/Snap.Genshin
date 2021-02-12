@@ -13,6 +13,7 @@
     MouseUp="UserControl_MouseUp"
     >
     <UserControl.Resources>
+        <CornerRadius x:Key="IconCornerRadius">4</CornerRadius>
         <converters:StarToImageSourceConverter x:Key="StarToImageSourceConverter"/>
     </UserControl.Resources>
     <Grid>

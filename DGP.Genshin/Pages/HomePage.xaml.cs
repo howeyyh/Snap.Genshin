@@ -15,14 +15,10 @@ namespace DGP.Genshin.Pages
     /// </summary>
     public partial class HomePage : Page
     {
-        private List<string> DayOfWeekList { get; set; } = new List<string>
-        { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-
         public HomePage()
         {
             DataContext = this;
             InitializeComponent();
-            DayOfWeekText = DayOfWeekList[(int)DateTime.Now.DayOfWeek];
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -160,16 +156,6 @@ namespace DGP.Genshin.Pages
         }
         public static readonly DependencyProperty Visibility3Property =
             DependencyProperty.Register("Visibility3", typeof(Visibility), typeof(HomePage), new PropertyMetadata(Visibility.Collapsed));
-        #endregion
-
-        #region common
-        public string DayOfWeekText
-        {
-            get { return (string)GetValue(DayOfWeekTextProperty); }
-            set { SetValue(DayOfWeekTextProperty, value); }
-        }
-        public static readonly DependencyProperty DayOfWeekTextProperty =
-            DependencyProperty.Register("DayOfWeekText", typeof(string), typeof(HomePage), new PropertyMetadata("星期日"));
         #endregion
 
         #endregion

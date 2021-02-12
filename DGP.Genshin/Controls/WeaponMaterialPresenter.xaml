@@ -3,16 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DGP.Genshin.Controls"
+             xmlns:local="clr-namespace:DGP.Genshin.Controls" 
+             xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters"
              mc:Ignorable="d" 
              Height="35" Width="65">
     <UserControl.Resources>
-        <local:WeaponMaterialToNameConverter x:Key="WeaponMaterialToNameConverter"/>
-        
-        <local:WeaponMaterialTo1Converter x:Key="WeaponMaterialTo1Converter"/>
-        <local:WeaponMaterialTo2Converter x:Key="WeaponMaterialTo2Converter"/>
-        <local:WeaponMaterialTo3Converter x:Key="WeaponMaterialTo3Converter"/>
-        <local:WeaponMaterialTo4Converter x:Key="WeaponMaterialTo4Converter"/>
+        <converters:WeaponMaterialToNameConverter x:Key="WeaponMaterialToNameConverter"/>
+
+        <converters:WeaponMaterialTo1Converter x:Key="WeaponMaterialTo1Converter"/>
+        <converters:WeaponMaterialTo2Converter x:Key="WeaponMaterialTo2Converter"/>
+        <converters:WeaponMaterialTo3Converter x:Key="WeaponMaterialTo3Converter"/>
+        <converters:WeaponMaterialTo4Converter x:Key="WeaponMaterialTo4Converter"/>
     </UserControl.Resources>
     <Grid Height="35" Width="65">
         <Image Height="35" Width="35" Margin="0,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding WeaponMaterial,Converter={StaticResource WeaponMaterialTo1Converter}}"/>

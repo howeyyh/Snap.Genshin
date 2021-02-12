@@ -43,7 +43,7 @@
                 <TextBlock Text="信息" Style="{StaticResource SubtitleTextBlockStyle}"/>
                 
                 <TextBlock Text="在页面上展示未发布的角色和武器" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <ui:ToggleSwitch OnContent="显示" OffContent="隐藏" IsOn="{Binding IsUnreleasedCharacterPresent,Mode=TwoWay,NotifyOnTargetUpdated=True}" Toggled="UnreleasedCharacterToggled"/>
+                <ui:ToggleSwitch OnContent="显示" OffContent="隐藏" IsOn="{Binding IsUnreleasedDataPresent,Mode=TwoWay}" Toggled="UnreleasedCInfoToggled"/>
                 <TextBlock Text="*未发布角色或武器为开发中内容，请以正式服上线为准" Margin="0,2" Foreground="Red" Style="{StaticResource CaptionTextBlockStyle}"/>
 
                 <TextBlock Text="在页面上展示的旅行者形象" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
@@ -56,13 +56,12 @@
                     </RadioButton>
                 </StackPanel>
                 <TextBlock Text="*选择的形象会影响旅行者的属性" Margin="0,8,0,0" Style="{StaticResource CaptionTextBlockStyle}"/>
-                <!--<TextBlock Text="外观" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                <TextBlock Text="选择应用的颜色" Margin="0,18,0,0" Style="{StaticResource BodyTextBlockStyle}"/>
-                <ui:RadioButtons>
-                    <RadioButton Content="浅色"/>
-                    <RadioButton Content="深色"/>
-                    <RadioButton Content="跟随系统"/>
-                </ui:RadioButtons>-->
+                <TextBlock Text="外观" Margin="0,24,0,18" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <ComboBox x:Name="ThemeComboBox" SelectionChanged="ThemeChangeRequested" ui:ControlHelper.Header="选择应用的颜色">
+                    <ComboBoxItem Content="浅色"/>
+                    <ComboBoxItem Content="深色"/>
+                    <ComboBoxItem Content="跟随系统"/>
+                </ComboBox>
                 <TextBlock Text="关于" Margin="0,24,0,0" Style="{StaticResource SubtitleTextBlockStyle}"/>
 
                 

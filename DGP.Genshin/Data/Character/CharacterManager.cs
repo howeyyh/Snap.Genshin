@@ -1,6 +1,5 @@
 ﻿using DGP.Genshin.Service;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
@@ -8,26 +7,25 @@ namespace DGP.Genshin.Data.Character
 {
     public class CharacterManager
     {
-        private readonly ResourceDictionary characterDictionary;
-        public IEnumerable<Character> Characters;
+        private readonly ResourceDictionary characterDictionary = new ResourceDictionary
+        {
+            Source = new Uri("/Data/Character/CharacterDictionary.xaml", UriKind.Relative)
+        };
+        public CharacterCollection Characters => new CharacterCollection(characterDictionary.Values.OfType<Character>().Where(i => UnreleasedPolicyFilter(i)));
         public Character this[string key]
         {
             get { return (Character)characterDictionary[key]; }
             set { characterDictionary[key] = value; }
         }
 
-        public static bool UnreleasedPolicyFilter(Character item) => item.IsReleased || SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
+        public static bool UnreleasedPolicyFilter(Character item) => item.IsReleased || SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedData, false);
 
         #region 单例
         private static CharacterManager instance;
         private static readonly object _lock = new object();
         private CharacterManager()
         {
-            characterDictionary = new ResourceDictionary
-            {
-                Source = new Uri("/Data/Character/CharacterDictionary.xaml", UriKind.Relative)
-            };
-            Characters = characterDictionary.Values.OfType<Character>();
+            
         }
         public static CharacterManager Instance
         {
@@ -48,4 +46,5 @@ namespace DGP.Genshin.Data.Character
         }
         #endregion
     }
+
 }

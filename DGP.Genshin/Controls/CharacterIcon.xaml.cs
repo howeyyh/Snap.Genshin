@@ -7,7 +7,6 @@ namespace DGP.Genshin.Controls
 {
     /// <summary>
     /// CharacterIcon.xaml 的交互逻辑
-    /// pack://application:,,,/DGP.Genshin;component/Data/Images/Weapons/mappa_mare.png
     /// </summary>
     public partial class CharacterIcon : UserControl
     {

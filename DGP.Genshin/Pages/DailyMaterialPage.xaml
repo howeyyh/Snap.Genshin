@@ -3,11 +3,148 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:DGP.Genshin.Pages" xmlns:dungon="clr-namespace:DGP.Genshin.Views.Dungon" xmlns:controls="clr-namespace:DGP.Genshin.Controls"
+      xmlns:local="clr-namespace:DGP.Genshin.Pages" 
+      xmlns:controls="clr-namespace:DGP.Genshin.Controls" 
+      xmlns:ui="http://schemas.modernwpf.com/2019" 
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="DialyMaterialPage">
-
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="DialyMaterialPage"
+      Loaded="Page_Loaded">
     <Grid>
+        <ui:ScrollViewerEx>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:TalentMaterialPresenter HorizontalAlignment="Left" TalentMaterial="Freedom"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Characters.Freedom}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:TalentMaterialPresenter HorizontalAlignment="Left" TalentMaterial="Prosperity"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Characters.Prosperity}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:TalentMaterialPresenter HorizontalAlignment="Left" TalentMaterial="Resistance"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Characters.Resistance}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:TalentMaterialPresenter HorizontalAlignment="Left" TalentMaterial="Diligence"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Characters.Diligence}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:TalentMaterialPresenter HorizontalAlignment="Left" TalentMaterial="Ballad"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Characters.Ballad}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:TalentMaterialPresenter HorizontalAlignment="Left" TalentMaterial="Gold"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Characters.Gold}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:WeaponMaterialPresenter HorizontalAlignment="Left" WeaponMaterial="Decarabians"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Weapons.Decarabians}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:WeaponMaterialPresenter HorizontalAlignment="Left" WeaponMaterial="Guyun"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Weapons.Guyun}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:WeaponMaterialPresenter HorizontalAlignment="Left" WeaponMaterial="Boreal"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Weapons.Boreal}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:WeaponMaterialPresenter HorizontalAlignment="Left" WeaponMaterial="MistVeiled"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Weapons.MistVeiled}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:WeaponMaterialPresenter HorizontalAlignment="Left" WeaponMaterial="DandelionGladiator"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Weapons.DandelionGladiator}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                    <ui:ThemeShadowChrome Margin="16,16,16,0">
+                        <Expander Padding="8" Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+                            <Expander.Header>
+                                <Grid>
+                                    <controls:WeaponMaterialPresenter HorizontalAlignment="Left" WeaponMaterial="Aerosiderite"/>
+                                </Grid>
+                            </Expander.Header>
+                            <ui:GridView ItemsSource="{Binding Weapons.Aerosiderite}" IsSelectionEnabled="False" Padding="0"/>
+                        </Expander>
+                    </ui:ThemeShadowChrome>
+                </StackPanel>
+            </Grid>
+        </ui:ScrollViewerEx>
+        
     </Grid>
 </Page>

@@ -1,5 +1,6 @@
 ﻿using DGP.Genshin.Service;
 using ModernWpf;
+using System;
 using System.Windows;
 
 namespace DGP.Genshin
@@ -12,7 +13,9 @@ namespace DGP.Genshin
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             TravelerPresentService.Instance.SetPresentTraveler();
-            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+            Func<object, ApplicationTheme?> converter = n => { if (n == null) { return null; } return (ApplicationTheme)Enum.Parse(typeof(ApplicationTheme), n.ToString()); };
+            ThemeManager.Current.ApplicationTheme =
+                SettingService.Instance.GetOrDefault<ApplicationTheme?>(Setting.AppTheme, null, converter);
         }
 
         protected override void OnExit(ExitEventArgs e)

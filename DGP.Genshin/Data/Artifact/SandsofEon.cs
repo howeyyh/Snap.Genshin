@@ -15,7 +15,9 @@ namespace DGP.Genshin.Data.Artifact
                 Stat.ElementalMastery
             };
             if (!statList.Contains(stat))
+            {
                 throw new Exception();
+            }
         }
     }
 }

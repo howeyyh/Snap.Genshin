@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FBD79451-A168-49A9-9E61-00F0E9C464D1}</ProjectGuid>
@@ -92,6 +93,10 @@
     <Compile Include="Controls\TalentMaterialPresenter.xaml.cs">
       <DependentUpon>TalentMaterialPresenter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Converters\TalentMaterialToGuideConverter.cs" />
+    <Compile Include="Controls\Converters\TalentMaterialToNameConverter.cs" />
+    <Compile Include="Controls\Converters\TalentMaterialToPhilosophiesConverter.cs" />
+    <Compile Include="Controls\Converters\TalentMaterialToTeachingConverter.cs" />
     <Compile Include="Controls\WeaponDialog.xaml.cs">
       <DependentUpon>WeaponDialog.xaml</DependentUpon>
     </Compile>
@@ -101,6 +106,11 @@
     <Compile Include="Controls\WeaponMaterialPresenter.xaml.cs">
       <DependentUpon>WeaponMaterialPresenter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Converters\WeaponMaterialTo1Converter.cs" />
+    <Compile Include="Controls\Converters\WeaponMaterialTo2Converter.cs" />
+    <Compile Include="Controls\Converters\WeaponMaterialTo3Converter.cs" />
+    <Compile Include="Controls\Converters\WeaponMaterialTo4Converter.cs" />
+    <Compile Include="Controls\Converters\WeaponMaterialToNameConverter.cs" />
     <Compile Include="Data\Artifact\ArtifactProvider.cs" />
     <Compile Include="Data\Artifact\ArtifactSet.cs" />
     <Compile Include="Data\Artifact\CircletofLogos.cs" />
@@ -109,6 +119,7 @@
     <Compile Include="Data\Artifact\PlumeofDeath.cs" />
     <Compile Include="Data\Artifact\SandsofEon.cs" />
     <Compile Include="Data\Character\CalculatorCollection.cs" />
+    <Compile Include="Data\Character\CharacterCollection.cs" />
     <Compile Include="Data\Character\CharacterManager.cs" />
     <Compile Include="Data\Element.cs" />
     <Compile Include="Data\Weapon\Passives\TimeCollection.cs" />
@@ -117,6 +128,7 @@
     <Compile Include="Data\Talent\TalentMaterial.cs" />
     <Compile Include="Data\Weapon\Passives\PassiveCollection.cs" />
     <Compile Include="Data\Weapon\Passives\ValueCollection.cs" />
+    <Compile Include="Data\Weapon\WeaponCollection.cs" />
     <Compile Include="Data\Weapon\WeaponHelper.cs" />
     <Compile Include="Data\Weapon\WeaponManager.cs" />
     <Compile Include="Data\Weapon\WeaponMaterial.cs" />
@@ -137,6 +149,7 @@
     <Compile Include="Pages\DailyMaterialPage.xaml.cs">
       <DependentUpon>DailyMaterialPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ElementHelper.cs" />
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -156,7 +169,6 @@
     <Compile Include="Simulation\Calculation\BasicValue.cs" />
     <Compile Include="Simulation\Calculation\Calculator.cs" />
     <Compile Include="Simulation\Calculation\DamageType.cs" />
-    <Compile Include="Simulation\Calculation\EvaporationMeltingMagnification.cs" />
     <Compile Include="Simulation\Calculation\TalentBuffFunction.cs" />
     <Compile Include="Simulation\Calculation\Target.cs" />
     <Compile Include="Views\Artifact\ArtifactView.xaml.cs">

@@ -9,7 +9,10 @@
         //百分比绿字
         public double BonusByPercent { get; set; }
         //总数字
-        public double Total { get { return Base + Bonus + Base * BonusByPercent; } }
+        public static implicit operator double(BasicValue b)
+        {
+            return b.Base + b.Bonus + b.Base * b.BonusByPercent;
+        }
     }
 
 }

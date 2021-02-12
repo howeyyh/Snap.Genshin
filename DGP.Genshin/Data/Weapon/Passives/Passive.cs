@@ -18,12 +18,12 @@ namespace DGP.Genshin.Data.Weapon.Passives
                 string d = Description;
                 if (Values != null)
                 {
-                    string v = string.Join("/",Values.Select(i=> i * 100 + "%"));
+                    string v = string.Join("/", Values.Select(i => i * 100 + "%"));
                     d = d.Replace("*value*", "[" + v + "]");
                 }
                 if (Times != null)
                 {
-                    string t= string.Join("/", Times);
+                    string t = string.Join("/", Times);
                     d = d.Replace("*time*", "[" + t + "]");
                 }
                 return d;
@@ -66,15 +66,18 @@ namespace DGP.Genshin.Data.Weapon.Passives
         //for stackable
         public int MaxStack { get; set; } = 1;
         public int CurrentStack { get; set; } = 1;
-        public Int32Collection Stacks 
-        { 
-            get 
+        public Int32Collection Stacks
+        {
+            get
             {
                 Int32Collection stacks = new Int32Collection();
                 for (int i = 1; i <= MaxStack; i++)
+                {
                     stacks.Add(i);
+                }
+
                 return stacks;
-            } 
+            }
         }
         //for conditional
         public double Rate { get; set; } = 1;
@@ -106,7 +109,7 @@ namespace DGP.Genshin.Data.Weapon.Passives
         {
             if (IsTriggered)
             {
-                c.Attack.Bonus += c.HP.Total * CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
+                c.Attack.Bonus += c.HP * CurrentValue * CurrentStack * (IsSatisfied ? Rate : 1);
             }
         }
     }

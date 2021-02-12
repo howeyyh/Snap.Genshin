@@ -5,7 +5,7 @@ namespace DGP.Genshin.Data.Artifact
 {
     public class GobletofEonothem : Artifact
     {
-        public GobletofEonothem(Stat stat):base(stat)
+        public GobletofEonothem(Stat stat) : base(stat)
         {
             List<Stat> statList = new List<Stat> {
                 Stat.AnemoDMGPercent,
@@ -21,7 +21,9 @@ namespace DGP.Genshin.Data.Artifact
                 Stat.ElementalMastery
             };
             if (!statList.Contains(stat))
+            {
                 throw new Exception();
+            }
         }
     }
 }

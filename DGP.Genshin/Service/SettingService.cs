@@ -12,17 +12,6 @@ namespace DGP.Genshin.Service
 
         private Dictionary<string, object> settingDictionary = new Dictionary<string, object>();
 
-        public object GetOrDefault(string key, object defaultValue)
-        {
-            if (settingDictionary.TryGetValue(key, out object value))
-            {
-                return value;
-            }
-            else
-            {
-                return defaultValue;
-            }
-        }
         public T GetOrDefault<T>(string key, T defaultValue)
         {
             if (settingDictionary.TryGetValue(key, out object value))
@@ -45,6 +34,7 @@ namespace DGP.Genshin.Service
                 return defaultValue;
             }
         }
+
         public object this[string key]
         {
             set

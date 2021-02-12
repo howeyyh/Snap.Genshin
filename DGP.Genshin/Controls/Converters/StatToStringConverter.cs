@@ -9,41 +9,29 @@ namespace DGP.Genshin.Controls.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch ((Stat)value)
+            return ((Stat)value) switch
             {
-                case Stat.ElementalMastery:
-                    return "元素精通";
-                case Stat.ATKPercent:
-                    return "攻击力";
-                case Stat.HPPercent:
-                    return "生命值";
-                case Stat.DEFPercent:
-                    return "防御力";
-                case Stat.EnergyRechargePercent:
-                    return "元素充能效率";
-                case Stat.CRITDMGPercent:
-                    return "暴击伤害";
-                case Stat.CRITRatePercent:
-                    return "暴击率";
-                case Stat.PhysDMGPercent:
-                    return "物理伤害加成";
-                case Stat.ElectroDMGPercent:
-                    return "雷元素伤害加成";
-                case Stat.PyroDMGPercent:
-                    return "火元素伤害加成";
-                case Stat.GeoDMGPercent:
-                    return "岩元素伤害加成";
-                case Stat.AnemoDMGPercent:
-                    return "风元素伤害加成";
-                case Stat.HydroDMGPercent:
-                    return "水元素伤害加成";
-                case Stat.CryoDMGPercent:
-                    return "冰元素伤害加成";
-                case Stat.HealingBonusPercent:
-                    return "治疗加成";
-                default:
-                    return "";
-            }
+                Stat.ElementalMastery => "元素精通",
+                Stat.ATKPercent => "攻击力",
+                Stat.HPPercent => "生命值",
+                Stat.DEFPercent => "防御力",
+                Stat.EnergyRechargePercent => "元素充能效率",
+                Stat.CRITDMGPercent => "暴击伤害",
+                Stat.CRITRatePercent => "暴击率",
+                Stat.PhysDMGPercent => "物理伤害加成",
+                Stat.ElectroDMGPercent => "雷元素伤害加成",
+                Stat.PyroDMGPercent => "火元素伤害加成",
+                Stat.GeoDMGPercent => "岩元素伤害加成",
+                Stat.AnemoDMGPercent => "风元素伤害加成",
+                Stat.HydroDMGPercent => "水元素伤害加成",
+                Stat.CryoDMGPercent => "冰元素伤害加成",
+                Stat.HealingBonusPercent => "治疗加成",
+                Stat.None => "",
+                Stat.HP => "生命值",
+                Stat.ATK => "攻击力",
+                Stat.DEF => "防御力",
+                _ => "",
+            };
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

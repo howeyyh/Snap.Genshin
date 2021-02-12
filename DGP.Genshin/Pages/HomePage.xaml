@@ -13,17 +13,15 @@
     <Grid>
         <ui:ScrollViewerEx>
             <StackPanel Margin="12,0">
-                <TextBlock Text="{Binding DayOfWeekText}" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
-                <TextBlock Text="今日天赋材料" Margin="0,24,0,8" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Left"/>
+                <TextBlock Text="今日天赋材料" Margin="0,0,0,8" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Left"/>
                 <StackPanel Orientation="Horizontal" Margin="6,0">
-                    <Border Visibility="{Binding Path=Visibility1,Mode=OneWay}">
+                    <Border Visibility="{Binding Visibility1}">
                         <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Freedom" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </Border>
-                    <Border Visibility="{Binding Path=Visibility2,Mode=OneWay}">
+                    <Border Visibility="{Binding Visibility2}">
                         <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Resistance" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </Border>
-                    <Border Visibility="{Binding Path=Visibility3,Mode=OneWay}">
+                    <Border Visibility="{Binding Visibility3}">
                         <controls:TalentMaterialPresenter Margin="6,0" TalentMaterial="Ballad" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </Border>
                 </StackPanel>
@@ -69,8 +67,8 @@
                 <ui:GridView Padding="4" Margin="0,4" IsSelectionEnabled="False" ItemsSource="{Binding LiyueWeapons}"/>
             </StackPanel>
         </ui:ScrollViewerEx>
-        <controls:CharacterDialog x:Name="CharacterDetailDialog"/>
-        <controls:WeaponDialog x:Name="WeaponDetailDialog"/>
+        <controls:CharacterDialog x:Name="CharacterDetailDialog" d:IsHidden="True"/>
+        <controls:WeaponDialog x:Name="WeaponDetailDialog" d:IsHidden="True"/>
     </Grid>
     
 </Page>

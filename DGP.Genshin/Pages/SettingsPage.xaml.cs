@@ -1,5 +1,6 @@
 ﻿using DGP.Genshin.Data;
 using DGP.Genshin.Service;
+using ModernWpf;
 using System;
 using System.Reflection;
 using System.Windows;
@@ -21,9 +22,9 @@ namespace DGP.Genshin.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //unreleased character present
-            IsUnreleasedCharacterPresent = SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedCharacter, false);
+            IsUnreleasedDataPresent = SettingService.Instance.GetOrDefault(Setting.ShowUnreleasedData, false);
             //traveler present
-            TravelerElement = SettingService.Instance.GetOrDefault(Setting.PresentTravelerElementType, Element.Anemo, n => (Element)Enum.Parse(typeof(Element), n.ToString()));
+            TravelerElement = SettingService.Instance.GetOrDefault(Setting.PresentTravelerElementType, Element.Anemo, Setting.EnumConverter<Element>);
             foreach (RadioButton radioButton in TravelerOptions.Children)
             {
                 if (ElementHelper.GetElement(radioButton) == TravelerElement)
@@ -33,17 +34,25 @@ namespace DGP.Genshin.Pages
             }
             //version
             Version v = Assembly.GetExecutingAssembly().GetName().Version;
-            VersionString = $"DGP.Genshin - version {v.Major}.{v.Minor}.{v.Build} build {v.Revision}";
+            VersionString = $"DGP.Genshin - version {v.Major}.{v.Minor}.{v.Build} Build {v.Revision}";
+            //theme
+            Func<object, ApplicationTheme?> converter = n => { if (n == null) { return null; } return (ApplicationTheme)Enum.Parse(typeof(ApplicationTheme), n.ToString()); };
+            ThemeComboBox.SelectedIndex = (SettingService.Instance.GetOrDefault(Setting.AppTheme, null, converter)) switch
+            {
+                ApplicationTheme.Light => 0,
+                ApplicationTheme.Dark => 1,
+                _ => 2,
+            };
         }
 
         #region propdp
-        public bool IsUnreleasedCharacterPresent
+        public bool IsUnreleasedDataPresent
         {
-            get { return (bool)GetValue(IsUnreleasedCharacterPresentProperty); }
-            set { SetValue(IsUnreleasedCharacterPresentProperty, value); }
+            get { return (bool)GetValue(IsUnreleasedDataPresentProperty); }
+            set { SetValue(IsUnreleasedDataPresentProperty, value); }
         }
-        public static readonly DependencyProperty IsUnreleasedCharacterPresentProperty =
-            DependencyProperty.Register("IsUnreleasedCharacterPresent", typeof(bool), typeof(SettingsPage), new PropertyMetadata(false));
+        public static readonly DependencyProperty IsUnreleasedDataPresentProperty =
+            DependencyProperty.Register("IsUnreleasedDataPresent", typeof(bool), typeof(SettingsPage), new PropertyMetadata(false));
 
         public Element TravelerElement { get; set; }
 
@@ -63,11 +72,19 @@ namespace DGP.Genshin.Pages
         public static readonly DependencyProperty VersionStringProperty =
             DependencyProperty.Register("VersionString", typeof(string), typeof(SettingsPage), new PropertyMetadata(""));
 
+        public ApplicationTheme CurrentTheme
+        {
+            get { return (ApplicationTheme)GetValue(CurrentThemeProperty); }
+            set { SetValue(CurrentThemeProperty, value); }
+        }
+        public static readonly DependencyProperty CurrentThemeProperty =
+            DependencyProperty.Register("CurrentTheme", typeof(ApplicationTheme), typeof(SettingsPage), new PropertyMetadata(null));
+
         #endregion
 
-        private void UnreleasedCharacterToggled(object sender, RoutedEventArgs e)
+        private void UnreleasedCInfoToggled(object sender, RoutedEventArgs e)
         {
-            SettingService.Instance[Setting.ShowUnreleasedCharacter] = IsUnreleasedCharacterPresent;
+            SettingService.Instance[Setting.ShowUnreleasedData] = IsUnreleasedDataPresent;
         }
         private void TravelerPresentSwitched(object sender, RoutedEventArgs e)
         {
@@ -112,18 +129,17 @@ namespace DGP.Genshin.Pages
         {
             UpdateService.Instance.CancelUpdate();
         }
-    }
-    public class ElementHelper
-    {
-        public static Element GetElement(RadioButton item)
+
+        private void ThemeChangeRequested(object sender, SelectionChangedEventArgs e)
         {
-            return (Element)item.GetValue(ElementProperty);
+            SettingService.Instance[Setting.AppTheme] = ((ComboBox)sender).SelectedIndex switch
+            {
+                0 => ApplicationTheme.Light,
+                1 => ApplicationTheme.Dark,
+                _ => null,
+            };
+            Func<object, ApplicationTheme?> converter = n => { if (n == null) { return null; } return (ApplicationTheme)Enum.Parse(typeof(ApplicationTheme), n.ToString()); };
+            ThemeManager.Current.ApplicationTheme = SettingService.Instance.GetOrDefault(Setting.AppTheme, null, converter);
         }
-        public static void SetElement(RadioButton item, Element value)
-        {
-            item.SetValue(ElementProperty, value);
-        }
-        public static readonly DependencyProperty ElementProperty =
-            DependencyProperty.RegisterAttached("Element", typeof(Element), typeof(ElementHelper), new PropertyMetadata(Element.Anemo));
     }
 }

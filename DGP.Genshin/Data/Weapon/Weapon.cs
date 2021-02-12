@@ -1,7 +1,5 @@
 ﻿using DGP.Genshin.Data.Weapon.Passives;
 using System;
-using System.Diagnostics;
-using System.Text;
 
 namespace DGP.Genshin.Data.Weapon
 {
@@ -22,15 +20,20 @@ namespace DGP.Genshin.Data.Weapon
         public Material EliteMaterial { get; set; }
         public Material MonsterMaterial { get; set; }
 
-        private int refineLevel=1;
+        private int refineLevel = 1;
         public int RefineLevel
         {
             get => refineLevel;
             set
             {
                 if (Passives != null)
+                {
                     foreach (Passive p in Passives)
+                    {
                         p.RefineLevel = value;
+                    }
+                }
+
                 refineLevel = value;
             }
         }

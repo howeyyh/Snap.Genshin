@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DGP.Genshin.Controls"
+             xmlns:local="clr-namespace:DGP.Genshin.Controls" 
+             xmlns:converters="clr-namespace:DGP.Genshin.Controls.Converters"
              mc:Ignorable="d" 
              Height="35" Width="55">
     <UserControl.Resources>
-        <local:TalentMaterialToNameConverter x:Key="TalentMaterialToNameConverter"/>
-        
-        <local:TalentMaterialToGuideConverter x:Key="TalentMaterialToGuideConverter"/>
-        <local:TalentMaterialToTeachingConverter x:Key="TalentMaterialToTeachingConverter"/>
-        <local:TalentMaterialToPhilosophiesConverter x:Key="TalentMaterialToPhilosophiesConverter"/>
+        <converters:TalentMaterialToNameConverter x:Key="TalentMaterialToNameConverter"/>
+
+        <converters:TalentMaterialToGuideConverter x:Key="TalentMaterialToGuideConverter"/>
+        <converters:TalentMaterialToTeachingConverter x:Key="TalentMaterialToTeachingConverter"/>
+        <converters:TalentMaterialToPhilosophiesConverter x:Key="TalentMaterialToPhilosophiesConverter"/>
     </UserControl.Resources>
     <Grid Height="35" Width="55">
         <Image Height="35" Width="35" Margin="0,0,0,0" HorizontalAlignment="Left" Stretch="UniformToFill" Source="{Binding TalentMaterial,Converter={StaticResource TalentMaterialToGuideConverter}}"/>

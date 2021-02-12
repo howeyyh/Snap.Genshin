@@ -2,7 +2,7 @@
 {
     public class PlumeofDeath : Artifact
     {
-        public PlumeofDeath() :base(Stat.ATK)
+        public PlumeofDeath() : base(Stat.ATK)
         {
         }
     }
