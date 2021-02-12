@@ -5,12 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DGP.Genshin.DataViewer"
         mc:Ignorable="d"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:ui="http://schemas.modernwpf.com/2019" 
+        xmlns:views="clr-namespace:DGP.Genshin.DataViewer.Views"
         ui:WindowHelper.UseModernWindowStyle="True"
         Title="DataViewer" 
         Height="450" 
         Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <views:ExcelSplitView x:Name="ExcelDataView" Grid.Row="1"/>
+        <TextBlock Margin="4" Text="1.选择包含Excel与TextMap的文件夹 2.选择一个语言 3.开始浏览数据"/>
+        <ui:CommandBar HorizontalAlignment="Right" Background="Transparent">
+            <ui:AppBarElementContainer>
+                <ComboBox Margin="4" ui:ControlHelper.PlaceholderText="选择语言" ItemsSource="{Binding TextMapCollection}" SelectedItem="{Binding SelectedTextMap,Mode=TwoWay}"/>
+            </ui:AppBarElementContainer>
+            <ui:AppBarButton Label="选择文件夹" Click="OpenFolderRequested">
+                <ui:AppBarButton.Icon>
+                    <ui:FontIcon Glyph="&#xED25;"/>
+                </ui:AppBarButton.Icon>
+            </ui:AppBarButton>
+        </ui:CommandBar>
     </Grid>
 </Window>
